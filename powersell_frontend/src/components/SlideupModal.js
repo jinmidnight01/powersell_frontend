@@ -1,35 +1,10 @@
-import React, { useRef, useState } from 'react';
-import '../css/modal.css'
+import React, { useState } from 'react';
 
 function SlideUpModal(props) {
-    const modalRef = useRef(null);
-    const [startY, setStartY] = useState(0);
-
-  const handleDrag = (e) => {
-    const modalElem = modalRef.current;
-    modalElem.style.transition = 'none';
-    let movedY = e.clientY - startY;
-    modalElem.style.transform = `translateY(${movedY}px)`;
-  };
-  const handleDragStart = (e) => {
-    e.preventDefault();
-    setStartY(e.clientY);
-  };
-  const handleDragEnd = () => {
-    const modalElem = modalRef.current;
-    modalElem.style.transition = 'transform 0.3s ease-out';
-    modalElem.style.transform = 'translateY(0)';
-    setStartY(0);  // 드래그가 끝났으므로 초기화
-  };
-  
   return (
     <div className={`modal-overlay ${props.show ? 'active' : ''}`}>
-      <div className="modal" ref={modalRef}>
-        <div className="slider-bar" 
-          onDragStart={handleDragStart}
-          onDrag={handleDrag} 
-          onDragEnd={handleDragEnd}
-          draggable="true"></div>
+      <div className="modal">
+        <div className="slider-bar"></div>
         <div className="modal-content">
           <h2>{props.productName}</h2>
           <div className="price-section">
