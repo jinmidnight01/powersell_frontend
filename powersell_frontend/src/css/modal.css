@@ -1,86 +1,156 @@
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: none;
-    justify-content: flex-end;
-    z-index: 1000;
-    pointer-events: none;
-  }
-  
-  .modal-overlay.active {
-    display: flex;
-  }
-  
-  .modal {
-    background-color: #ffffff;
-    top: 30%;
-    width: 100%;
-    height: 70%;
-    position: relative;
-    transition: transform 0.3s ease-out;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-  
-  .slider-bar {
-    width: 40px;
-    height: 5px;
-    background-color: #ccc;
-    margin: 10px auto;
-    border-radius: 2.5px;
-    cursor: grab;
-    pointer-events: auto;
-  }
-  .slider-bar:active {
-    cursor: grabbing;
-  }
-  .discounted-price {
-    text-decoration: line-through;
-  }
-  
-  .input-group {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .input-group input,
-  .input-group select {
-    border: 1.5px solid #d9d9d9;
-    background-color: white;
-    border-radius: 2px;
-    padding: 5px;
-  }
-  
-  .quantity-selector {
-    display: flex;
-    align-items: center;
-    border: 1px solid #d9d9d9;
-    gap: 10px;
-    padding: 5px;
-    border-radius: 2px;
-  }
-  
-  h3 {
-    font-size: 15px;
-  }
-  
-  label {
-    font-size: 12px;
-    opacity: 0.5;
-  }
-  
-  .buy-button {
-    margin-top: 20px;
-    background-color: #f39c12;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 2px;
-    cursor: pointer;
-  }
-  
+/* modal창 외부화면 */
+.Modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+ 
+.slider-bar {
+  background-color: #A5A5A5;
+  width: 38px;
+  height: 3px;
+  margin-bottom: 20px;
+}
+
+/* modal창 */
+.modalBody {
+  height: 55%;
+  position: absolute;
+  bottom: 0px;
+  width: 95%;
+  padding-left: 50px;
+  padding-right: 50px;
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+  border-top-left-radius: 10px;    /* 왼쪽 상단 모서리 */
+  border-top-right-radius: 10px;  /* 오른쪽 상단 모서리 */  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+  transition: transform 0.3s ease-out;
+}
+
+.modal-content {
+  width: 100%;
+}
+
+.first-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 0;
+}
+
+.product-name {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.current-price-small {
+  font-size: 16px;
+  text-align: left;
+  margin-bottom: 5px;
+}
+.original-price {
+  text-decoration: line-through;
+}
+
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d9d9d9;
+  gap: 10px;
+  padding: 5px;
+  border-radius: 2px;
+  height: 1rem
+}
+
+.quantity-button {
+  background-color: #ffffff;
+  border: none;
+  font-size: 20px;
+}
+
+hr {
+  margin: 20px 0;
+}
+
+.second-content, .third-content {
+  padding: 0 15px;
+}
+.order-title {
+  text-align: left;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+}
+
+.input-group input,
+.input-group select {
+  border: 1.5px solid #d9d9d9;
+  background-color: white;
+  border-radius: 2px;
+  padding: 5px;
+  font-size: 12px;
+  margin-top: 0px;
+}
+.input-group label {
+  margin-top: 13px;
+  flex: 0 0 65px;  /* 예시값: 실제로 필요한 너비에 따라 조정하세요. */
+  text-align: left;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+
+.input-group input {
+  flex: 1;  /* 나머지 공간을 input 및 select 요소에 할당합니다. */
+}
+.input-group select {
+  width: 17%;
+}
+.search_add {
+  margin-top: 0px;
+  background-color: #FFFFFF;
+  color: #fa7979;
+  border: 2px solid #fa7979;
+  padding: 4px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+
+
+h3 {
+  font-size: 15px;
+}
+
+label {
+  font-size: 12px;
+  opacity: 0.5;
+}
+
+
+.submit_button {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  background-color: #fa7979;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}

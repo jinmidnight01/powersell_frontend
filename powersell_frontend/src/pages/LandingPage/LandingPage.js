@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import '../../../css/style.css';
+import '../../css/style.css';
 
-import mypage from '../../../images/icons/mypage.jpg';
-import banner from '../../../images/home/banner.jpg';
-import products from '../../../data/product';
+import mypage from '../../images/icons/mypage.jpg';
+import banner from '../../images/home/banner.jpg';
+import products from '../../data/product';
 import { Link } from 'react-router-dom';
 
 
