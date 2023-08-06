@@ -1,6 +1,8 @@
 // Modal.js
 import React, {useState} from "react";
-import "../css/modal.css";
+import "../css/modal-mobile.css";
+import "../css/modal-pc.css";
+
 import Button from "./Button";
 function Modal(props) {
   const [dragging, setDragging] = useState(false);
@@ -67,6 +69,7 @@ function Modal(props) {
   }
 
   return (
+    
     <div className="Modal" onClick={closeModal}>
       <div
         className="modalBody"
@@ -148,6 +151,7 @@ function Modal(props) {
 
       </div>
     </div>
+  
   );
 }
 

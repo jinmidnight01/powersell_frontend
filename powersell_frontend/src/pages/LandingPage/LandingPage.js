@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import '../../css/style.css';
+import '../../css/style-mobile.css';
+import '../../css/style-pc.css';
 
 import mypage from '../../images/icons/mypage.jpg';
 import banner from '../../images/home/banner.jpg';
 import products from '../../data/product';
 import { Link } from 'react-router-dom';
+import Header from '../../components/Header';
 
 
 function LandingPage() {
@@ -15,13 +17,11 @@ function LandingPage() {
 
 
   return (
+    <div className='app-container'>
     <div className="app">
 
       {/* Header */}
-      <header className="header">
-        <p className='title'>싸다9</p>
-        <img className='mypage-button' src={mypage}></img>
-      </header>
+      <Header img2={mypage}/>
 
       {/* Banner */}
       <div className="banner">
@@ -32,11 +32,14 @@ function LandingPage() {
       <div className="products">
         {products.map(product => (
           <div key={product.id} className="product">
-            <Link to={`/product/${product.id}`}>
+            <Link className='product-link' to={`/product/${product.id}`}>
+              
             <img className='product-img' src={product.thumbnail} alt={product.name} />
-            <p className='product-name' >{product.name}</p>
-            <p className="original-price">{product.originalPrice}원</p>
-            <h2 className="discount">{product.discountRate}% {product.salePrice}원</h2>
+            <div className='description'>
+              <p className='product-name' >{product.name}</p>
+              <p className="original-price">{product.originalPrice}원</p>
+              <h2 className="discount">{product.discountRate}% {product.salePrice}원</h2>
+            </div>
             </Link>
           </div>
         ))}
@@ -51,6 +54,7 @@ function LandingPage() {
         <input type="submit" className='submit-button' value='제출하기'/>
       </form>
 
+    </div>
     </div>
   )
 }
