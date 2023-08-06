@@ -1,7 +1,6 @@
 import React from 'react'
 import '../css/style-mobile.css'
-import '../css/style-pc.css'
-
+import { Link } from 'react-router-dom'
 
 function HomeHeader(props) {
   return (
@@ -13,7 +12,10 @@ function HomeHeader(props) {
           <p className='title'>싸다9</p>
         </div>
         <div>
-          <img className='mypage-button' src={props.img2}></img>
+          <Link to={`authentication`}>
+
+            <img className='mypage-button' src={props.img2}></img>
+          </Link>
         </div>
       </header>
   )

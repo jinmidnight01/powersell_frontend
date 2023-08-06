@@ -1,230 +1,341 @@
-@media all and (max-width: 600px) {
-    @font-face {
-        font-family: 'PyeongChangPeace-Bold';
-        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2') format('woff2');
-        font-weight: 700;
-        font-style: normal;
-      }
-      
-      :root {
-        --point-color: #eb3c3c;
-      }
-      
-      
-      /* App.css */
-      .header {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          position: relative;
-          margin-top: 7%;         
-        margin-bottom: 1%;
-        }
-        .header :nth-child(1) {
-          flex: 1;
-        }
-        .header :nth-child(2) {
-          flex: 6;
-        }
-        .header :nth-child(3) {
-          flex: 1;
-          
-        }
+@media all and (min-width: 601px) {
+  #pc-width {
+      width: 400px;
+      margin: 0 auto;
+  }
+}
 
-      
-        .title {
-          text-align: center;
-          font-family: 'PyeongChangPeace-Bold', sans-serif; 
-          font-size: 50px;
-          color: #EC6464;
-        }
-      
-        .mypage-button {
-          width: 75%;
-        }
-        
-        .banner img {
-          width: 100%;
-        }
-        
-        .products {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: space-between;
-          padding-left: 7%;
-          padding-right: 7%;
-          margin-top: 13px;
-          text-decoration: none;
-        }
-        .product {
-          margin-bottom: 10px;
-        }
-        .product-link, 
-        .product-link * {  /* 모든 자식 요소에 적용 */
-          text-decoration: none;
-        }
-        .product-img {
-          width: 100%;
-        }
-        p {
-          margin: 0;
-        }
-        
-        .description {
-          padding-left: 2%;
-        }
-        .product-name {
-          font-size: 14px;
-          color: black;
-        }
-        
-      
-        .original-price {
-          font-size: 13px;
-          color: #a19c9c;
-          text-decoration: line-through; /* 취소선 적용 */ 
-        }
-        .discount {
-          margin: 0;
-          font-size: 18px;
-          color: var(--point-color); /* 커스텀 변수 사용 */
-        }
-      
-        .product {
-          width: calc(50% - 1rem);
-          margin-bottom: 1rem;
-        }
-        
-        hr {
-          border: 1px dotted rgba(209, 209, 209, 0.671);
-          margin: 30px 0;
-        }
-      
-        .footer {
-          padding: 1rem;
-          background-color: #eeebeb;
-          margin: 15px;
-          border-radius: 20px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-        .footerMessage {
-          margin-top: 0;
-          margin-bottom: 15px;
-          font-size: 15px;
-        }
-        .feedback-input {
-          width: 85%;
-          height: 50px;
-          border-radius: 20px;
-          padding: 10px 15px;
-          border: none;
-          font-size: 14px;
-        }
-        .submit-button {
-          background-color: #fa7979;
-          border: none;
-          color: #FFFFFF;
-          margin-top: 15px;
-          width: 80%;
-          padding: 8px;
-          font-size: 16px;
-          border-radius: 10px;
-        }
-      
-      
-      /* ====================================== */
-      /* detail */
-      .detail-header {
-        margin-top: 8%;
-        display: flex;
-        justify-content: center;
-        position: relative;
-      }
-      
-      .header-title {
-        margin-top: 8%;
-        text-align: center;
-        width: 100%;
-        font-size: 15pt;
-        font-weight: 500;
-        margin: 0 auto; /* 중앙 정렬 */
-      }
-      
-      .back-icon {
-        position: absolute;
-        left: 3%;
-        width: 9%;
-        margin-right: 0;
-        top: -3px;
-      }
-      
-        .nameNshare {
-          display: flex;
-          position: relative;
-        }
-        .share-icon {
-          position: absolute;
-          right: 8%;
-          width: 8%;
-        }
-        .product-image {
-          width: 100%;
-          display: block;
-          margin-top: 20px;
-        }
-        
-        .product-details {
-          padding: 10px;
-          padding-left: 30px;
-        }
-        
-        .product-name {
-          font-size: 16px;
-          margin-bottom: 10px;
-        }
-        
-        .discounted-price {
-          font-size: 14px;
-          color: #a19c9c;
-        }
-        
-        .discount-rate {
-          font-size: 14px;
-          color: var(--point-color);
-          font-weight: 500;
-        }
-        
-        .original-price {
-          text-decoration: line-through;
-        }
-        
-        .current-price {
-          font-size: 21px;
-          font-weight: 500;
-        }
-        
-        
-        .product-description {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-        .purchase-button {
-          bottom: 10px;
-          position: fixed;
-          text-align: center;
-          background-color: #fa7979;
-          border: none;
-          color: #FFFFFF;
-          margin-top: 20px;
-          width: 95%;
-          padding: 13px;
-          font-size: 16px;
-        }
-        
-          
-      /* 원하는 추가 스타일링이 필요한 경우 아래에 추가하세요. */
-      
-   }
+@font-face {
+  font-family: 'PyeongChangPeace-Bold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+:root {
+  --point-color: #eb3c3c;
+}
+
+
+/* App.css */
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-top: 7%;
+  margin-bottom: 1%;
+}
+
+.header :nth-child(1) {
+  flex: 1;
+}
+
+.header :nth-child(2) {
+  flex: 6;
+}
+
+.header :nth-child(3) {
+  flex: 1;
+
+}
+
+
+.title {
+  text-align: center;
+  font-family: 'PyeongChangPeace-Bold', sans-serif;
+  font-size: 50px;
+  color: #EC6464;
+}
+
+.mypage-button {
+  width: 75%;
+}
+
+.banner img {
+  width: 100%;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-left: 7%;
+  padding-right: 7%;
+  margin-top: 13px;
+  text-decoration: none;
+}
+
+.product {
+  margin-bottom: 10px;
+}
+
+.product-link,
+.product-link * {
+  /* 모든 자식 요소에 적용 */
+  text-decoration: none;
+}
+
+.product-img {
+  width: 100%;
+}
+
+p {
+  margin: 0;
+}
+
+.description {
+  padding-left: 2%;
+}
+
+.soldout {
+  background-color: #757575;
+  color: white;
+  padding: 5px;
+  text-align: center;
+  border-radius: 10px;
+  display: inline;
+  font-size: 12px;
+  margin-right: 3px;
+  margin-bottom: 3px;
+  vertical-align: middle;
+
+}
+.product-name {
+  line-height: 30px;
+  font-size: 15px;
+  color: black;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+
+.original-price {
+  font-size: 13px;
+  color: #a19c9c;
+  text-decoration: line-through;
+  /* 취소선 적용 */
+}
+
+.discount {
+  margin: 0;
+  font-size: 18px;
+  color: var(--point-color);
+  /* 커스텀 변수 사용 */
+}
+
+.product {
+  width: calc(50% - 1rem);
+  margin-bottom: 2rem;
+}
+
+hr {
+  border: 1px dotted rgba(209, 209, 209, 0.671);
+  margin: 30px 0;
+}
+
+.footer {
+  padding: 1rem;
+  background-color: #eeebeb;
+  margin: 15px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footerMessage {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 15px;
+}
+
+.feedback-input {
+  width: 85%;
+  height: 50px;
+  border-radius: 20px;
+  padding: 10px 15px;
+  border: none;
+  font-size: 14px;
+  resize: none;
+}
+
+.submit-button {
+  background-color: #fa7979;
+  border: none;
+  color: #FFFFFF;
+  margin-top: 15px;
+  width: 80%;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 10px;
+}
+
+
+/* ====================================== */
+/* detail */
+.detail-header {
+  margin-top: 8%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.header-title {
+  margin-top: 8%;
+  text-align: center;
+  width: 100%;
+  font-size: 15pt;
+  font-weight: 500;
+  margin: 0 auto;
+  /* 중앙 정렬 */
+}
+
+.back-icon {
+  position: absolute;
+  left: 3%;
+  width: 9%;
+  margin-right: 0;
+  top: -3px;
+}
+
+.nameNshare {
+  display: flex;
+  position: relative;
+}
+
+.share-icon {
+  position: absolute;
+  right: 8%;
+  width: 8%;
+}
+
+.product-image {
+  width: 100%;
+  display: block;
+  margin-top: 20px;
+}
+
+.product-details {
+  padding: 10px;
+  padding-left: 30px;
+
+  
+}
+
+.product-name {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.discounted-price {
+  font-size: 14px;
+  color: #a19c9c;
+}
+
+.discount-rate {
+  font-size: 14px;
+  color: var(--point-color);
+  font-weight: 500;
+}
+
+.original-price {
+  text-decoration: line-through;
+}
+
+.current-price {
+  font-size: 21px;
+  font-weight: 500;
+}
+
+
+.product-description {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+}
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px; /* 화면 아래에서 10px 띄우기 */
+    margin-top: auto;
+}
+.positive_button {
+  text-align: center;
+  background-color: #fa7979;
+  border: none;
+  border-radius: 8px;
+  color: #FFFFFF;
+  width: 98%;
+  padding: 13px;
+  font-size: 16px;
+}
+.negative_button {
+  background-color: #757575;
+}
+
+
+
+
+.modal-div {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* 충분히 높은 z-index 값을 설정하여 다른 요소 위에 위치하도록 함 */
+}
+
+
+
+
+.modal-div:nth-child(1) {
+  background-color: rgba(0, 0, 0, 0.5);
+
+}
+
+.modal-div:nth-child(2) {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+@media all and (min-width: 601px) {
+  #pc-width {
+    width: 400px;
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+}
+@media all and (min-width: 601px) {
+  #pc-width {
+    width: 400px;
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+}
+.borderText {
+  font-weight: bolder;
+}
+.noticeTitle {
+  font-size: larger;
+}
+.noticeContent {
+  margin: 0 20px;
+  text-align: justify;
+}
+@media all and (min-width: 601px) {
+  #pc-width {
+    width: 400px;
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+  }
+  
+}

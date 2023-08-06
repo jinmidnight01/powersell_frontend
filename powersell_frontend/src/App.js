@@ -7,12 +7,14 @@ import AuthenticationPage from './pages/OrderConfirmPage/AuthenticationPage';
 import OrderConfirmPage from './pages/OrderConfirmPage/OrderConfirmPage';
 
 import Grow1 from './api/Grow1';
+import OrderSuccessPage from './pages/OrderSuccessPage/OrderSuccessPage';
 
 function App() {
   return (
     <Routes>
       <Route path='/' element={<LandingPage />} />
       <Route path='/product/:productId' element={<DetailProductPage />} />
+      <Route path='/ordersuccess' element={<OrderSuccessPage/>} />
       <Route path='/authentication' element={<AuthenticationPage />} />
       <Route path='/orderconfirm' element={<OrderConfirmPage/>} />
       

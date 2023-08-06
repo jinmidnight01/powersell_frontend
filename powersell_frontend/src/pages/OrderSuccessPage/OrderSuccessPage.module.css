@@ -1,0 +1,154 @@
+@media all and (min-width: 601px) {
+    #pc-width {
+        width: 400px;
+        margin: 0 auto;
+        overflow: auto;
+    }
+}
+
+  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+
+/* main */
+.main {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-left: 40px;
+    margin-right: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.main:nth-child(1), .main:nth-child(2), .main:nth-child(3) {
+    flex: 1;
+    margin-bottom: 10px;
+}
+.success_noti {
+    font-weight: 600;
+
+}
+/* receipt */
+.receipt_Title {
+    display: flex;
+    font-size:17px;
+    font-weight: 700;
+    align-items: center;
+    margin: 0;
+    margin-top: 40px;
+}
+.receipt_Title img {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+}
+
+.line {
+    border: 1px solid black;
+    margin: 8px auto;
+}
+ul {
+    margin-left: 0px;
+}
+ul > li {
+    font-size: 15px;
+    font-weight: 400;
+    text-align: left;
+}
+ul > p {
+    color: #FF0000;
+    text-align: left;
+    margin-left: 0px;
+    margin-top: 5px;
+}
+
+/* item title */
+.order_itemTitle {
+    display: flex;
+    margin-top: 15px;
+}
+
+.order_itemTitle > div:nth-child(1) img {
+    width: 70px;
+    height: 70px;
+    margin: auto 0;
+}
+
+.order_itemTitle > div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 20px;
+    margin-left: 15px;
+    text-align: left;
+}
+
+.order_itemTitle > div:nth-child(2) div:nth-child(1) {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.order_itemTitle > div:nth-child(2) div:nth-child(2) {
+    color: grey;
+    font-size: 13px;
+    font-weight: lighter;
+}
+
+/* payment */
+
+.order_payment {
+    background-color: #F0F0F0;
+    padding: 8px 15px 8px 15px;
+    border-top: 1px solid #c8c8c8;
+}
+.order_payment hr {
+    width: 100%;
+    margin: 15px 0 10px 0;
+    border: 0.5px solid #c8c8c8;
+}
+
+.order_payment > div {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.order_payment > div > div {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    line-height: 23px;
+    font-weight: lighter;
+    
+}
+
+.borderText {
+    font-weight: bolder;
+}
+
+
+
+
+
+
+/* confirm button */  
+.auth_buttonBox {
+    margin: 50px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.auth_buttonBox button {
+    background-color: #fa7979;
+    border-color: transparent;
+    border-radius: 7px;
+    color: #FFFFFF;
+    padding: 8px;
+    width: 300px;
+    font-size: 18px;
+    cursor: pointer;
+}
