@@ -43,15 +43,17 @@
 .auth-phoneBox hr {
     width: 8px;
     height: 1px;
-    margin-top: 17px;
+    margin-top: 16px;
     background-color: rgb(176, 173, 173);
 }
 
 .auth-phoneBox input {
     border-radius: 7px;
     width: 60px;
-    height: 13px;
+    height: 10px;
     margin-top: 0;
+    text-align: center;
+    font-size: 15px;
 }
 
 /* password */  
@@ -75,13 +77,14 @@
     margin-bottom: 20px;
     justify-content: space-between;
     padding-left: 30px;
-    padding-right: 30px;
 }
 
 .auth-pwBox input {
     border-radius: 7px;
-    width: fit-content;
-    height: 13px;
+    width: 60px;
+    height: 10px;
+    font-size: 15px;
+    text-align: center;
 }
 
 /* kakaotalk */  
@@ -110,8 +113,10 @@
     border-color: transparent;
     border-radius: 7px;
     color: #FFFFFF;
-    padding: 8px 35%;
+    padding: 8px;
+    width: 300px;
     font-size: 18px;
+    cursor: pointer;
 }
 
 /* 주문 조회: 승인 후 */
@@ -155,13 +160,16 @@
 }
 
 .order-list {
-    margin-top: 15px;
+    margin-top: 16px;
 }
 
 /* item */  
+.order-box {
+    margin-bottom: 35px;
+}
+
 .order-item {
     margin-top: 15px;
-    margin-bottom: 25px;
     border: 1px rgb(181, 181, 181) solid;
     border-radius: 10px;
     padding: 15px;
@@ -291,5 +299,53 @@
 }
 
 .order-cancel span {
+    font-weight: bold;
+}
+
+/* payment notification */
+.order-noti {
+    margin-top: 17px;
+    margin-left: 5px;
+    font-size: 15px;
+    display: flex;
+}
+
+.order-noti hr {
+    margin: 0 10px 0 0;
+    border: 2.5px solid #a3a3a3;
+    border-radius: 10px;
+}
+
+.order-noti > div > div:nth-child(1){
+    line-height: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.order-noti > div > div:nth-child(2) {
+    font-size: 13px;
+    color: grey;
+    margin-bottom: 5px;
+}
+
+.order-noti > div > div:nth-child(3) span,
+.order-noti > div > div:nth-child(4) span {
+    line-height: 20px;
+    color: black;
+}
+
+.order-noti > div > div:nth-child(4) span:nth-child(3) {
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.order-noti > div > div:nth-child(5) {
+    margin-top: 5px;
+    margin-bottom: 12px;
+}
+
+.order-noti span {
+    color: red;
     font-weight: bold;
 }
