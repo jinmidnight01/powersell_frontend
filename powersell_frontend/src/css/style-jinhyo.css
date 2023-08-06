@@ -1,0 +1,295 @@
+@media all and (min-width: 601px) {
+    #pc-width {
+        width: 400px;
+        margin: 0 auto;
+    }
+}
+
+/* 주문 조회: 승인 전 */
+
+/* header */
+
+/* main */
+.auth-noti {
+    text-align: center;
+    margin-top: 60px;
+    font-size: 15px;
+}
+
+/* phoneNumber */
+.auth-phoneTitle {
+    margin-top: 50px;
+    display: flex;
+    margin-left: 35px;
+    font-size:17px;
+}
+
+.auth-phoneTitle img {
+    width: 17px;
+    height: 20px;
+    margin-top: 2px;
+    margin-right: 8px;
+}
+
+.auth-phoneBox {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    justify-content: space-between;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.auth-phoneBox hr {
+    width: 8px;
+    height: 1px;
+    margin-top: 17px;
+    background-color: rgb(176, 173, 173);
+}
+
+.auth-phoneBox input {
+    border-radius: 7px;
+    width: 60px;
+    height: 13px;
+    margin-top: 0;
+}
+
+/* password */  
+.auth-pwTitle {
+    margin-top: 40px;
+    display: flex;
+    margin-left: 35px;
+    font-size:17px;
+}
+
+.auth-pwTitle img {
+    width: 17px;
+    height: 18px;
+    margin-top: 4px;
+    margin-right: 8px;
+}
+
+.auth-pwBox {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    justify-content: space-between;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.auth-pwBox input {
+    border-radius: 7px;
+    width: fit-content;
+    height: 13px;
+}
+
+/* kakaotalk */  
+.kakaoTitle {
+    margin-top: 55px;
+    margin-left: 30px;
+    font-size: 12px;
+}
+
+.kakaoImg {
+    width: 50px;
+    height: 50px;
+    margin-top: 15px;
+    margin-left:30px;
+}
+
+/* confirm button */  
+.auth-buttonBox {
+    margin: 50px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.auth-buttonBox button {
+    background-color: #fa7979;
+    border-color: transparent;
+    border-radius: 7px;
+    color: #FFFFFF;
+    padding: 8px 35%;
+    font-size: 18px;
+}
+
+/* 주문 조회: 승인 후 */
+
+/* header */  
+.order-header {
+    margin-top: 8%;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.order-header img {
+    position: absolute;
+    left: 3%;
+    width: 9%;
+    margin-right: 0;
+    top: -3px;
+}
+
+.order-header p {
+    margin-top: 8%;
+    text-align: center;
+    width: 100%;
+    font-size: 15pt;
+    font-weight: 500;
+    margin: 0 auto; /* 중앙 정렬 */
+}
+
+/* main */  
+.order-main {
+    margin-top: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 50px;
+}
+
+.order-main > div:nth-child(1) {
+    margin-left: 10px;
+}
+
+.order-list {
+    margin-top: 15px;
+}
+
+/* item */  
+.order-item {
+    margin-top: 15px;
+    margin-bottom: 25px;
+    border: 1px rgb(181, 181, 181) solid;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+/* item title */
+.order-itemTitle {
+    display: flex;
+    margin-bottom: 2px;
+}
+
+.order-itemTitle > div:nth-child(1) {
+    height: 90px;
+    width: 90px;
+    display: flex;
+    justify-content: center;
+    border: 1px rgb(181, 181, 181) solid;
+    border-radius: 10px;
+}
+
+.order-itemTitle > div:nth-child(1) img {
+    width: 80px;
+    height: 80px;
+    margin: auto 0;
+}
+
+.order-itemTitle > div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 25px;
+    margin-left: 15px;
+}
+
+.order-itemTitle > div:nth-child(2) div:nth-child(1) {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.order-itemTitle > div:nth-child(2) div:nth-child(2) {
+    color: grey;
+    font-size: 13px;
+}
+
+/* delivery */
+.order-delivery progress {
+    appearance: none;
+    width: 100%;
+    height: 5px;
+}
+
+.order-delivery progress::-webkit-progress-bar {
+    background:#f0f0f0;
+    border-radius:5px;
+    box-shadow: inset 3px 3px 10px #e0e0e0;
+}
+
+.order-delivery progress::-webkit-progress-value {
+    border-radius:10px;
+    background: #fa7979;
+    background: -webkit-linear-gradient(to right, #fdd9d9, #fa7979);
+    background: linear-gradient(to right, #fdd9d9, #fa7979);
+}
+
+.order-delivery > div {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* payment */
+.order-payment hr {
+    margin: 15px 0 10px 0;
+    border: 0.5px solid rgb(181, 181, 181);
+}
+
+.order-payment > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.order-payment p {
+    font-weight: bold;
+}
+
+.order-payment > div > div {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+.order-payment > div > div:nth-child(3) {
+    font-weight: bold;
+}
+
+/* order information */
+.order-information hr {
+    margin: 10px 0;
+    border: 0.5px solid rgb(181, 181, 181);
+}
+
+.order-information > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.order-information span {
+    font-weight: bold;
+}
+
+.order-information > div > div {
+    font-size: 12px;
+    line-height: 20px;
+}
+
+/* order cancel */
+.order-cancel {
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+.order-cancel div {
+    margin-top: 5px;
+    text-align: center;
+}
+
+.order-cancel span {
+    font-weight: bold;
+}

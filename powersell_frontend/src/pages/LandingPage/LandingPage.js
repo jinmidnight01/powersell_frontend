@@ -15,12 +15,14 @@ function LandingPage() {
 
 
   return (
-    <div className="app">
+    <div id="pc-width" className="app">
 
       {/* Header */}
       <header className="header">
         <p className='title'>싸다9</p>
+        <Link to={`/authentication`}>
         <img className='mypage-button' src={mypage}></img>
+        </Link>
       </header>
 
       {/* Banner */}

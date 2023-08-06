@@ -7,6 +7,7 @@ import "../../css/style.css";
 import backIcon from "../../images/icons/left.png";
 import share from "../../images/detail/share.jpg";
 
+import Header from "../../components/Header";
 import Modal from './../../components/Modal';
 import Button from "../../components/Button";
 
@@ -17,9 +18,7 @@ function DetailProductPage(props) {
   const product = products.find(
     (product) => product.id === parseInt(productId)
   );
-  if (!product) {
-    return <p>상품을 찾을 수 없습니다</p>;
-  }
+
   const [item, setItem] = useState([]);
   const [isClicked, setClicked] = useState(false);
 
@@ -28,15 +27,13 @@ function DetailProductPage(props) {
     return () => document.body.style = `overflow: auto`
   }, [])
 
+  if (!product) {
+    return <p>상품을 찾을 수 없습니다</p>;
+  }
   
   return (
-    <div className="product-detail">
-      <header className="detail-header">
-        <Link to={"/"}>
-          <img src={backIcon} alt="뒤로가기" className="back-icon" />
-        </Link>
-        <p className="header-title">상세 페이지</p>
-      </header>
+    <div id="pc-width" className="product-detail">
+      <Header text="상품 내용"></Header>
 
       <img
         src={product.thumbnail}

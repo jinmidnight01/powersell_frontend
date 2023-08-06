@@ -1,3 +1,10 @@
+@media all and (min-width: 601px) {
+  #pc-width {
+    width: 400px;
+    margin: 0 auto;
+  }
+}
+
 /* modal창 외부화면 */
 .Modal {
   position: fixed;
