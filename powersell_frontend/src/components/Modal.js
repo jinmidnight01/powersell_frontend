@@ -1,6 +1,8 @@
 // Modal.js
 import React, {useState} from "react";
-import "../css/modal.css";
+import "../css/modal-mobile.css";
+import "../css/modal-pc.css";
+
 import Button from "./Button";
 function Modal(props) {
   const [dragging, setDragging] = useState(false);
@@ -74,79 +76,109 @@ function Modal(props) {
           style={{ transform: `translateY(${transformY}px)` }}
           onClick={(e) => e.stopPropagation()}
         >
-          <div onMouseDown={handleDragStart}
+          <div
+            onMouseDown={handleDragStart}
             onMouseMove={handleDragMove}
             onMouseUp={handleDragEnd}
             onMouseLeave={handleDragEnd}
             onTouchStart={handleDragStart}
             onTouchMove={handleDragMove}
-            onTouchEnd={handleDragEnd}>
-          <div
-            className="slider-bar"
-            
-          ></div>
+            onTouchEnd={handleDragEnd}
+          >
+            <div
+              className="modalBody"
+              style={{ transform: `translateY(${transformY}px)` }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div
+                onMouseDown={handleDragStart}
+                onMouseMove={handleDragMove}
+                onMouseUp={handleDragEnd}
+                onMouseLeave={handleDragEnd}
+                onTouchStart={handleDragStart}
+                onTouchMove={handleDragMove}
+                onTouchEnd={handleDragEnd}
+              >
+                <div className="slider-bar"></div>
+              </div>
+              <div className="modal-content">
+                {/* 첫 컨텐츠: 상품 정보, 수량 선택 */}
+                <div className="first-content">
+                  <div className="product-info">
+                    <p className="current-price-small">{props.productName}</p>
+                    <p className="current-price-small">
+                      {props.salePrice}{" "}
+                      <span className="original-price">
+                        {props.originalPrice}
+                      </span>
+                    </p>
+                  </div>
+
+                  <div className="quantity-selector">
+                    <button
+                      className="quantity-button"
+                      onClick={decreaseQuantity}
+                    >
+                      -
+                    </button>
+                    <span>{quantity}</span>
+                    <button
+                      className="quantity-button"
+                      onClick={increaseQuantity}
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+
+                <hr />
+                {/* 둘 컨텐츠: 배송지 정보 */}
+                <div className="second-content">
+                  <h3 className="order-title">배송지</h3>
+                  <form>
+                    <div className="input-group">
+                      <label>받는 사람</label>
+                      <input type="text" />
+                    </div>
+                    <div className="input-group">
+                      <label>연락처</label>
+                      <select>
+                        <option>010</option>
+                        <option>011</option>
+                        <option>02</option>
+                        <option>033</option>
+                      </select>
+                      <input type="text" />
+                    </div>
+                    <div className="input-group">
+                      <label>주소</label>
+                      <button className="search_add">주소찾기</button>
+                      <input type="text" disabled />
+                    </div>
+                    <div className="input-group">
+                      <label> </label>
+                      <input type="text" placeholder="상세주소 입력" />
+                    </div>
+                  </form>
+                </div>
+
+                <br />
+
+                <div className="third-content">
+                  <h3 className="order-title">주문 확인용</h3>
+                  <div className="input-group">
+                    <label>비밀번호</label>
+                    <input type="password" />
+                  </div>
+                </div>
+              </div>
+              <input
+                className="submit_button"
+                type="submit"
+                value="구매하기"
+              ></input>
+            </div>
           </div>
-          <div className="modal-content">
-            {/* 첫 컨텐츠: 상품 정보, 수량 선택 */}
-            <div className="first-content">
-              <div className="product-info">
-                <p className="current-price-small">{props.productName}</p>
-                <p className="current-price-small">
-                  {props.salePrice}{" "}
-                  <span className="original-price">{props.originalPrice}</span>
-                </p>
-              </div>
-
-              <div className="quantity-selector">
-                <button className="quantity-button" onClick={decreaseQuantity}>-</button>
-                <span>{quantity}</span>
-                <button className="quantity-button" onClick={increaseQuantity}>+</button>
-              </div>
-            </div>
-
-            <hr />
-            {/* 둘 컨텐츠: 배송지 정보 */}
-            <div className="second-content">
-              <h3 className="order-title">배송지</h3>
-              <form>
-                <div className="input-group">
-                  <label>받는 사람</label>
-                  <input type="text" />
-                </div>
-                <div className="input-group">
-                  <label>연락처</label>
-                  <select>
-                    <option>010</option>
-                    <option>011</option>
-                    <option>02</option>
-                    <option>033</option>
-                  </select>
-                  <input type="text" />
-                </div>
-                <div className="input-group">
-                  <label>주소</label>
-                  <button className="search_add">주소찾기</button>
-                  <input type="text" disabled />
-                </div>
-                <div className="input-group">
-                  <label> </label>
-                  <input type="text" placeholder="상세주소 입력" />
-                </div>
-              </form>
-            </div>
-
-            <br />
-
-            <div className="third-content">
-              <h3 className="order-title">주문 확인용</h3>
-              <div className="input-group">
-                <label>비밀번호</label>
-                <input type="password" />
-              </div>
-            </div>
-          </div>
-          <input className="submit_button" type="submit" value="구매하기"></input>
-
         </div>
       </div>
     </div>

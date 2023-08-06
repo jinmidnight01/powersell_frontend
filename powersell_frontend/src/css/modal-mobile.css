@@ -4,6 +4,7 @@
     margin: 0 auto;
   }
 }
+@media all and (max-width: 600px) {
 
 /* modal창 외부화면 */
 .Modal {
@@ -160,4 +161,5 @@ label {
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+}
 }
