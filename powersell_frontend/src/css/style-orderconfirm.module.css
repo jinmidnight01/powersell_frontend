@@ -10,81 +10,117 @@
 /* header */
 
 /* main */
-.auth-noti {
+.auth_form {
+    padding: 0 2.5px;
+}
+
+.auth_noti {
     text-align: center;
     margin-top: 60px;
     font-size: 15px;
 }
 
 /* phoneNumber */
-.auth-phoneTitle {
+.auth_phoneTitle {
     margin-top: 50px;
     display: flex;
-    margin-left: 35px;
     font-size:17px;
+    margin-left: 30px;
 }
 
-.auth-phoneTitle img {
+.auth_phoneTitle img {
     width: 17px;
     height: 20px;
     margin-top: 2px;
     margin-right: 8px;
 }
 
-.auth-phoneBox {
+.auth_phoneBox {
     display: flex;
-    margin-top: 20px;
+    margin-top: 13px;
     margin-bottom: 20px;
-    justify-content: space-between;
+    justify-content: space-around;
     padding-left: 30px;
     padding-right: 30px;
 }
 
-.auth-phoneBox hr {
-    width: 8px;
+.auth_phoneBox hr {
+    width: 10px;
     height: 1px;
-    margin-top: 16px;
-    background-color: rgb(176, 173, 173);
+    margin-top: 17px;
+    background-color: rgb(205, 205, 205);
+    border-color: rgb(205, 205, 205);
+    border-style: solid;
 }
 
-.auth-phoneBox input {
+.auth_phoneBox select {
     border-radius: 7px;
-    width: 60px;
-    height: 10px;
-    margin-top: 0;
+    width: 23%;
+    height: 33px;
+    margin-top: 3px;
     text-align: center;
     font-size: 15px;
+    border: 1.5px solid rgb(205, 205, 205);
+    padding: 0;
+}
+
+.auth_phoneBox option {
+    margin-top: 50px;
+}
+
+.auth_phoneBox input {
+    border-radius: 7px;
+    width: 21%;
+    height: 27px;
+    margin-top: 3px;
+    text-align: center;
+    font-size: 15px;
+    border: 1.5px solid rgb(205, 205, 205);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input::placeholder {
+  color: rgb(205, 205, 205);
+  font-style: italic;
 }
 
 /* password */  
-.auth-pwTitle {
+.auth_pwTitle {
     margin-top: 40px;
     display: flex;
     margin-left: 35px;
     font-size:17px;
 }
 
-.auth-pwTitle img {
+.auth_pwTitle img {
     width: 17px;
     height: 18px;
     margin-top: 4px;
     margin-right: 8px;
 }
 
-.auth-pwBox {
+.auth_pwBox {
     display: flex;
-    margin-top: 10px;
+    margin-top: 13px;
     margin-bottom: 20px;
     justify-content: space-between;
-    padding-left: 30px;
+    padding-left: 10%;
 }
 
-.auth-pwBox input {
+.auth_pwBox input {
     border-radius: 7px;
-    width: 60px;
-    height: 10px;
-    font-size: 15px;
+    width: 21%;
+    height: 27px;
+    margin-top: 3px;
     text-align: center;
+    font-size: 15px;
+    border: 1.5px solid rgb(205, 205, 205);
+    -webkit-text-security: disc;
 }
 
 /* kakaotalk */  
@@ -102,19 +138,19 @@
 }
 
 /* confirm button */  
-.auth-buttonBox {
+.auth_buttonBox {
     margin: 50px 0;
     display: flex;
     justify-content: center;
 }
 
-.auth-buttonBox button {
+.auth_buttonBox button {
     background-color: #fa7979;
     border-color: transparent;
     border-radius: 7px;
     color: #FFFFFF;
     padding: 8px;
-    width: 300px;
+    width: 280px;
     font-size: 18px;
     cursor: pointer;
 }
@@ -122,7 +158,7 @@
 /* 주문 조회: 승인 후 */
 
 /* header */  
-.order-header {
+.order_header {
     margin-top: 8%;
     margin-bottom: 25px;
     display: flex;
@@ -130,7 +166,7 @@
     position: relative;
 }
 
-.order-header img {
+.order_header img {
     position: absolute;
     left: 3%;
     width: 9%;
@@ -138,7 +174,7 @@
     top: -3px;
 }
 
-.order-header p {
+.order_header p {
     margin-top: 8%;
     text-align: center;
     width: 100%;
@@ -148,27 +184,27 @@
 }
 
 /* main */  
-.order-main {
+.order_main {
     margin-top: 30px;
     padding-left: 20px;
     padding-right: 20px;
     margin-bottom: 50px;
 }
 
-.order-main > div:nth-child(1) {
+.order_main > div:nth-child(1) {
     margin-left: 10px;
 }
 
-.order-list {
+.order_list {
     margin-top: 16px;
 }
 
 /* item */  
-.order-box {
+.order_box {
     margin-bottom: 35px;
 }
 
-.order-item {
+.order_item {
     margin-top: 15px;
     border: 1px rgb(181, 181, 181) solid;
     border-radius: 10px;
@@ -176,12 +212,12 @@
 }
 
 /* item title */
-.order-itemTitle {
+.order_itemTitle {
     display: flex;
     margin-bottom: 2px;
 }
 
-.order-itemTitle > div:nth-child(1) {
+.order_itemTitle > div:nth-child(1) {
     height: 90px;
     width: 90px;
     display: flex;
@@ -190,13 +226,13 @@
     border-radius: 10px;
 }
 
-.order-itemTitle > div:nth-child(1) img {
+.order_itemTitle > div:nth-child(1) img {
     width: 80px;
     height: 80px;
     margin: auto 0;
 }
 
-.order-itemTitle > div:nth-child(2) {
+.order_itemTitle > div:nth-child(2) {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -204,37 +240,37 @@
     margin-left: 15px;
 }
 
-.order-itemTitle > div:nth-child(2) div:nth-child(1) {
+.order_itemTitle > div:nth-child(2) div:nth-child(1) {
     font-size: 14px;
     font-weight: bold;
 }
 
-.order-itemTitle > div:nth-child(2) div:nth-child(2) {
+.order_itemTitle > div:nth-child(2) div:nth-child(2) {
     color: grey;
     font-size: 13px;
 }
 
 /* delivery */
-.order-delivery progress {
+.order_delivery progress {
     appearance: none;
     width: 100%;
     height: 5px;
 }
 
-.order-delivery progress::-webkit-progress-bar {
+.order_delivery progress::-webkit-progress-bar {
     background:#f0f0f0;
     border-radius:5px;
     box-shadow: inset 3px 3px 10px #e0e0e0;
 }
 
-.order-delivery progress::-webkit-progress-value {
+.order_delivery progress::-webkit-progress-value {
     border-radius:10px;
     background: #fa7979;
     background: -webkit-linear-gradient(to right, #fdd9d9, #fa7979);
     background: linear-gradient(to right, #fdd9d9, #fa7979);
 }
 
-.order-delivery > div {
+.order_delivery > div {
     display: flex;
     justify-content: space-between;
     font-size: 12px;
@@ -242,110 +278,110 @@
 }
 
 /* payment */
-.order-payment hr {
+.order_payment hr {
     margin: 15px 0 10px 0;
     border: 0.5px solid rgb(181, 181, 181);
 }
 
-.order-payment > div {
+.order_payment > div {
     display: flex;
     flex-direction: column;
 }
 
-.order-payment p {
+.order_payment p {
     font-weight: bold;
 }
 
-.order-payment > div > div {
+.order_payment > div > div {
     display: flex;
     justify-content: space-between;
     font-size: 13px;
     line-height: 20px;
 }
 
-.order-payment > div > div:nth-child(3) {
+.order_payment > div > div:nth-child(3) {
     font-weight: bold;
 }
 
 /* order information */
-.order-information hr {
+.order_information hr {
     margin: 10px 0;
     border: 0.5px solid rgb(181, 181, 181);
 }
 
-.order-information > div {
+.order_information > div {
     display: flex;
     flex-direction: column;
 }
 
-.order-information span {
+.order_information span {
     font-weight: bold;
 }
 
-.order-information > div > div {
+.order_information > div > div {
     font-size: 12px;
     line-height: 20px;
 }
 
 /* order cancel */
-.order-cancel {
+.order_cancel {
     margin-top: 15px;
     font-size: 13px;
 }
 
-.order-cancel div {
+.order_cancel div {
     margin-top: 5px;
     text-align: center;
 }
 
-.order-cancel span {
+.order_cancel span {
     font-weight: bold;
 }
 
 /* payment notification */
-.order-noti {
+.order_noti {
     margin-top: 17px;
     margin-left: 5px;
     font-size: 15px;
     display: flex;
 }
 
-.order-noti hr {
+.order_noti hr {
     margin: 0 10px 0 0;
     border: 2.5px solid #a3a3a3;
     border-radius: 10px;
 }
 
-.order-noti > div > div:nth-child(1){
+.order_noti > div > div:nth-child(1){
     line-height: 30px;
     font-size: 18px;
     font-weight: bold;
     margin-top: 5px;
 }
 
-.order-noti > div > div:nth-child(2) {
+.order_noti > div > div:nth-child(2) {
     font-size: 13px;
     color: grey;
     margin-bottom: 5px;
 }
 
-.order-noti > div > div:nth-child(3) span,
-.order-noti > div > div:nth-child(4) span {
+.order_noti > div > div:nth-child(3) span,
+.order_noti > div > div:nth-child(4) span {
     line-height: 20px;
     color: black;
 }
 
-.order-noti > div > div:nth-child(4) span:nth-child(3) {
+.order_noti > div > div:nth-child(4) span:nth-child(3) {
     cursor: pointer;
     font-size: 16px;
 }
 
-.order-noti > div > div:nth-child(5) {
+.order_noti > div > div:nth-child(5) {
     margin-top: 5px;
     margin-bottom: 12px;
 }
 
-.order-noti span {
+.order_noti span {
     color: red;
     font-weight: bold;
 }
