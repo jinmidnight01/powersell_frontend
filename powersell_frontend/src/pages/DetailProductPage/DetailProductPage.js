@@ -22,11 +22,12 @@ function DetailProductPage(props) {
 
   useEffect(() => {
     if (isClicked) {
-      document.body.style.overflow = "hidden";
+        document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = "auto";
+        document.body.style.overflow = 'auto';
     }
-  }, [isClicked]);
+}, [isClicked]);
+
 
   if (!product) {
     return <p>상품을 찾을 수 없습니다</p>;
@@ -65,39 +66,30 @@ function DetailProductPage(props) {
             🛒 1인당 최대 구매 수량은 <span className="borderText">2개</span>
             입니다
           </p>
-          <br></br>
-          <br></br>
-
-          <p>
-            <i className="borderText">✔️ Agreement.</i>
-          </p>
-          <br></br>
-          <p>
-            - 할인 상품은 교환/환불이 불가합니다. 입금 및 재고 확인 직후 품절
-            표기되므로 발송 전이라도 변경/취소가 불가합니다{" "}
-          </p>
+          <br></br>          
           <br></br>
 
-          <p>
-            - 주문 시각으로부터 <span className="borderText">30분</span> 내
-            미입금 시 주문이 자동 취소됩니다.
-          </p>
+          <p><i className="borderText">✔️ Agreement.</i></p>
+          <br></br>
+          <p>- 할인 상품은 교환/환불이 불가합니다. 입금 및 재고 확인 직후 품절
+            표기되므로 발송 전이라도 변경/취소가 불가합니다 </p>
+          <br></br>
 
+          <p>- 주문 시각으로부터 <span className="borderText">30분</span> 내 미입금 시 주문이 자동 취소됩니다.
+          </p>
+          
           <br></br>
           <p>
             - 미리 공지사항에 고지해 둔 내용을 소비자가 충분히 숙지하지 않아
             발생되는 일에 대해 판매자가 책임지지 않습니다.
           </p>
-          <br></br>
+          <br></br>          
           <br></br>
 
-          <p>
-            <i className="borderText">🛻 Delivery.</i>
-          </p>
+          <p><i className="borderText">🛻 Delivery.</i></p>
           <br></br>
-          <p>
-            -배송지 변경은 주문 시각으로부터 24시간 이내에만 가능합니다.
-            카카오톡 채널로 문의를 남겨주세요.
+          <p>-배송지 변경은 주문 시각으로부터 24시간 이내에만 가능합니다. 카카오톡
+            채널로 문의를 남겨주세요.
           </p>
           <br></br>
           <br></br>
@@ -115,10 +107,7 @@ function DetailProductPage(props) {
         <div className="modal-div">
           <div className="modal-background"> </div>
           <Modal
-            closeModal={() => {
-              setClicked(!isClicked);
-              document.body.style.overflow = "auto";
-            }}
+            closeModal={() => {setClicked(!isClicked); document.body.style.overflow = 'auto';}}
             productName={product.name}
             salePrice={product.salePrice}
             originalPrice={product.originalPrice}

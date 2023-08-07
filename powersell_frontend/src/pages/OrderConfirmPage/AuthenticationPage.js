@@ -82,7 +82,7 @@ const AuthenticationPage = () => {
   };
 
   return (
-    <div id="pc-width">
+    <div id={styles.pcWidth}>
       {/* header */}
       <Header text="주문 조회"></Header>
 

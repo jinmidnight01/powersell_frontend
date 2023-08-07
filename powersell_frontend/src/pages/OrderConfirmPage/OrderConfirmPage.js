@@ -45,7 +45,7 @@ const OrderConfirmPage = () => {
   };
 
   return (
-    <div id="pc-width">
+    <div id={styles.pcWidth}>
       {/* Header */}
       <Header text="주문 조회"></Header>
 
