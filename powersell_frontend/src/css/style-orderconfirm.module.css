@@ -35,9 +35,13 @@
     margin-right: 8px;
 }
 
+/* .auth_form div:nth-child(3) {
+    display: none;
+} */
+
 .auth_phoneBox {
     display: flex;
-    margin-top: 13px;
+    margin-top: 8px;
     margin-bottom: 20px;
     justify-content: space-around;
     padding-left: 30px;
@@ -78,15 +82,19 @@
     border: 1.5px solid rgb(205, 205, 205);
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+.auth_form input::-webkit-outer-spin-button,
+.auth_form input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-input::placeholder {
+.auth_form input::placeholder {
   color: rgb(205, 205, 205);
   font-style: italic;
+}
+
+.auth_form input:focus {
+    outline: rgb(205, 205, 205);
 }
 
 /* password */  
@@ -106,7 +114,7 @@ input::placeholder {
 
 .auth_pwBox {
     display: flex;
-    margin-top: 13px;
+    margin-top: 8px;
     margin-bottom: 20px;
     justify-content: space-between;
     padding-left: 10%;
@@ -114,7 +122,7 @@ input::placeholder {
 
 .auth_pwBox input {
     border-radius: 7px;
-    width: 21%;
+    width: 30%;
     height: 27px;
     margin-top: 3px;
     text-align: center;

@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -12,55 +12,114 @@ import styles from "../../css/style-orderconfirm.module.css";
 
 // Authentication function
 const AuthenticationPage = () => {
-  const [number1, setNum1Value] = useState("010");
-  const [number2, setNum2Value] = useState("");
-  const [number3, setNum3Value] = useState("");
-  const [pw, setPwValue] = useState("");
+  const refNum2 = useRef(); const refNum3 = useRef(); const refPw = useRef();
+  const reg = /^[0-9]{4}$/;
   const [isPending, setIsPending] = useState(false);
   const navigate = useNavigate();
+  const inputNoti = {
+    display: "none",
+    fontSize: "11px",
+    marginLeft: "30px",
+    marginTop: "7px",
+    color: "#fa7979",
+    fontWeight: "bold",
+  };
 
-  // input box
-  const onChange = (e) => {
-    switch (e.target.name) {
-      case "number1":
-        setNum1Value(e.target.value);
-        return;
-      case "number2":
-        setNum2Value(e.target.value);
-        return;
-      case "number3":
-        setNum3Value(e.target.value);
-        return;
-      case "password":
-        setPwValue(e.target.value);
-        return;
-      default:
-        return;
+  useEffect(() => {
+    refNum2.current.focus();
+  }, []);
+
+  // function: input focus (1)
+  const num2ToNum3 = () => {
+    const number2 = document.getElementById("number2");
+    const number3 = document.getElementById("number3");
+    const pw = document.getElementById("pw");
+
+    if (reg.test(number2.value)) {
+      if (reg.test(number3.value)) {
+        if (!reg.test(pw.value)) {
+          refPw.current.focus();
+        }
+      }
+      else {
+        refNum3.current.focus();
+      }
     }
   };
 
-  // submit button
-  const handleSubmit = async (e) => {
-    // prevent input value reset
+  // function: input focus (2)
+  const num3ToPw = () => {
+    const number3 = document.getElementById("number3");
+    const pw = document.getElementById("pw");
+
+    if (reg.test(number3.value)) {
+      if (!reg.test(pw.value)) {
+        refPw.current.focus();
+      }
+    }
+  }
+
+  // function: submit
+  const handleSubmit = (e) => {
+    const number1 = document.getElementById("number1");
+    const number2 = document.getElementById("number2");
+    const number3 = document.getElementById("number3");
+    const pw = document.getElementById("pw");
+
+    const flagNum2 = /^[0-9]{3,4}$/.test(number2.value);
+    const flagNum3 = reg.test(number3.value);
+    const flagPw = reg.test(pw.value);
+
+    // prevent page reset
     e.preventDefault();
 
     // change button from 조회 to 조회 중...
     setIsPending(true);
 
-    // input requirements
-    const flag1 = number2.length !== 3 && number2.length !== 4;
-    const flag2 = number3.length !== 4;
-    const flag3 = pw.length !== 4;
+    // urge input change
+    if (!flagNum2 || !flagNum3 || !flagPw) {
+      // password noti, password change
+      if (!flagPw) {
+        document.getElementById("pwNoti").style.display = "block";
+        pw.style.borderColor = "#fa7979";
+        pw.style.borderWidth = "2px";
+        refPw.current.focus();
+      } else {
+        document.getElementById("pwNoti").style.display = "none";
+        pw.style.borderColor = "rgb(205, 205, 205)";
+      }
 
-    if (flag1 || flag2 || flag3) {
-      alert(
-        "※ 아래 양식을 지켜주세요\n\nㆍ전화번호 중간자리: 3~4자리\nㆍ전화번호 끝자리: 4자리\nㆍ비밀번호: 4자리"
-      );
+      // number noti change
+      if (!flagNum2 || !flagNum3) {
+        document.getElementById("numberNoti").style.display = "block";
+      } else {
+        document.getElementById("numberNoti").style.display = "none";
+      }
+      // number3 change
+      if (!flagNum3) {
+        number3.style.borderColor = "#fa7979";
+        number3.style.borderWidth = "2px";
+        refNum3.current.focus();
+      } else {
+        number3.style.borderColor = "rgb(205, 205, 205)";
+      }
+      // number2 change
+      if (!flagNum2) {
+        number2.style.borderColor = "#fa7979";
+        number2.style.borderWidth = "2px";
+        refNum2.current.focus();
+      } else {
+        number2.style.borderColor = "rgb(205, 205, 205)";
+      }
+
       setIsPending(false);
       return;
     }
+    postRequest(number1.value, number2.value, number3.value, pw.value);
+  };
 
-    // POST request
+  // function: POST request
+  const postRequest = async (number1, number2, number3, pw) => {
     const number = number1 + number2 + number3;
     const inputs = { number: number, pw: pw };
     const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -74,7 +133,7 @@ const AuthenticationPage = () => {
           setIsPending(false);
           return;
         }
-        navigate("/orderconfirm", { state : response.data });
+        navigate("/orderconfirm", { state: response.data });
       })
       .catch((error) => {
         console.log(error);
@@ -97,8 +156,11 @@ const AuthenticationPage = () => {
           <img src={phoneNumber} alt=""></img>
           <div>전화번호</div>
         </div>
+        <div id="numberNoti" style={inputNoti}>
+          ※ 중간은 3~4자리, 끝은 4자리 숫자로 입력해주세요
+        </div>
         <div className={styles.auth_phoneBox}>
-          <select name="number1" value={number1} onChange={onChange}>
+          <select id="number1" name="number1" defaultValue="010">
             <option value="010">010</option>
             <option value="070">070</option>
             <option value="011">011</option>
@@ -107,23 +169,27 @@ const AuthenticationPage = () => {
           </select>
           <hr></hr>
           <input
+            id="number2"
             name="number2"
-            value={number2}
-            onChange={onChange}
-            type="number"
+            onInput={num2ToNum3}
+            type="text"
             required
             placeholder="0000"
             inputMode="numeric"
+            ref={refNum2}
+            maxLength={4}
           ></input>
           <hr></hr>
           <input
+            id="number3"
             name="number3"
-            value={number3}
-            onChange={onChange}
-            type="number"
+            onInput={num3ToPw}
+            type="text"
             required
             placeholder="0000"
             inputMode="numeric"
+            ref={refNum3}
+            maxLength={4}
           ></input>
         </div>
 
@@ -132,14 +198,18 @@ const AuthenticationPage = () => {
           <img src={key} alt=""></img>
           <div>비밀번호 (4자리 숫자)</div>
         </div>
+        <div id="pwNoti" style={inputNoti}>
+          ※ 4자리 숫자로 입력해주세요
+        </div>
         <div className={styles.auth_pwBox}>
           <input
-            name="password"
-            value={pw}
-            onChange={onChange}
-            type="number"
+            id="pw"
+            name="pw"
+            type="text"
             inputMode="numeric"
             required
+            ref={refPw}
+            maxLength={4}
           ></input>
         </div>
 
@@ -168,6 +238,35 @@ const AuthenticationPage = () => {
 };
 
 export default AuthenticationPage;
+
+// input box
+// const onChange = (e) => {
+//   switch (e.target.name) {
+//     // case "number1":
+//     //   number1 = document.getElementById('number1').value;
+//     //   console.log(number1)
+//     //   return;
+//     case "number2":
+//       if (number2.length === 3) {
+//         refNum3.current.focus();
+//       }
+//       let value = document.getElementById('number2').value;
+
+//       setNum2Value(document.getElementById('number2').value);
+//       return;
+//     case "number3":
+//       if (number3.length === 3) {
+//         refPw.current.focus();
+//       }
+//       setNum3Value(e.target.value);
+//       return;
+//     case "pw":
+//       setPwValue(e.target.value);
+//       return;
+//     default:
+//       return;
+//   }
+// };
 
 // REST API: fetch
 // fetch('http://localhost:8080/test/', {
