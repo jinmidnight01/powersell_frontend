@@ -1,5 +1,4 @@
 import { React, useEffect, useState } from "react";
-import axios from "axios";
 import { useLocation } from "react-router-dom";
 
 import Header from "../../components/Header";
@@ -12,30 +11,39 @@ import styles from "./OrderSuccessPage.module.css";
 import Button from "../../components/Button";
 import { Link } from "react-router-dom";
 
-import orderData from "../../data/orderData";
+import order_info from '../../data/order_info.json'
+
+import 삼다수 from "../../images/home/삼다수.jpg";
+import 신라면 from "../../images/home/신라면.jpg";
+import 컵밥 from "../../images/home/컵밥.jpg";
+import 햇반 from "../../images/home/햇반.jpg";
+import 구운란 from "../../images/home/구운란.jpg";
 
 // Authentication function
 const OrderSuccessPage = () => {
   const location = useLocation();
-  const { product, quantity } = location.state;
-  const [number1, setNum1Value] = useState("");
-  const [number2, setNum2Value] = useState("");
-  const [number3, setNum3Value] = useState("");
-  const [pw, setPwValue] = useState("");
-  const [isPending, setIsPending] = useState(false);
 
-  const onChange = (e) => {
-    if (e.target.name === "number1") {
-      setNum1Value(e.target.value);
-    } else if (e.target.name === "number2") {
-      setNum2Value(e.target.value);
-    } else if (e.target.name === "number3") {
-      setNum3Value(e.target.value);
-    } else if (e.target.name === "password") {
-      setPwValue(e.target.value);
+  // 나중의 혜은 파이팅 ~! 
+  const {successData, pw} = location.state;
+   
+
+  // item image
+  const itemImage = (order) => {
+    switch (order.item.name) {
+      case "제주 삼다수 2L (6개입)":
+        return 삼다수;
+      case "농심 신라면 (5개입)":
+        return 신라면;
+      case "오뚜기 컵밥 오삼불고기덮밥 310g":
+        return 컵밥;
+      case "햇반 백미밥 210g (3개입)":
+        return 햇반;
+      case "곰곰 구운란 10구":
+        return 구운란;
+      default:
+        return null;
     }
   };
-
 
   return (
     <div id="pc-width">
@@ -74,14 +82,14 @@ const OrderSuccessPage = () => {
               <div style={{marginBottom: '10px'}}>
                 <div className={styles.order_itemTitle}>
                   <div>
-                    <img src={product.thumbnail} alt={product.Name} />
+                    <img src={itemImage(order_info[0])} alt={order_info[0].item.name} />
                   </div>
                   <div>
                     <div className={styles.order_itemInfo_title}>
-                      {product.name}
+                      {order_info[0].item.name}
                     </div>
                     <div className={styles.order_itemInfo_number}>
-                      {product.salePrice}원 / {quantity}개
+                      {order_info[0].item.price}원 / {order_info[0].count}개
                     </div>
                   </div>
                 </div>
@@ -89,13 +97,13 @@ const OrderSuccessPage = () => {
                   <div>
                     <div>
                       <p>총 상품 금액</p>
-                      <div>{(product.originalPrice * quantity).toLocaleString()}원</div>
+                      <div>{(order_info[0].item.originalPrice * order_info[0].count).toLocaleString()}원</div>
                     </div>
                     <div>
                       <p>할인 금액</p>
                       <div>
-                        {(product.originalPrice * quantity -
-                          product.salePrice * quantity).toLocaleString()}
+                        {(order_info[0].item.originalPrice * order_info[0].count -
+                          order_info[0].item.price * order_info[0].count).toLocaleString()}
                         원
                       </div>
                     </div>
@@ -106,7 +114,7 @@ const OrderSuccessPage = () => {
                     <div>
                       <div>
                         <p className={styles.borderText}>최종 결제금액</p>
-                        <div className={styles.borderText}>{(product.salePrice * quantity).toLocaleString()}원</div>
+                        <div className={styles.borderText}>{(order_info[0].item.price * order_info[0].count).toLocaleString()}원</div>
                       </div>
                     </div>
                   </div>
@@ -121,15 +129,13 @@ const OrderSuccessPage = () => {
             <div>주문 정보</div>
           </div>
           <hr />
-          {orderData.map((datum) => (
-            <ul key={datum.id}>
-              <li>주문일시: {datum.orderTime}</li>
-              <li>주문자: {datum.name}</li>
-              <li>전화번호: {datum.phoneNumber}</li>
-              <li>주소: {datum.address}</li>
-              <li>비밀번호: {datum.password}</li>
+            <ul>
+              <li>주문일시: {order_info[0].orderDate}</li>
+              <li>주문자: {order_info[0].name}</li>
+              <li>전화번호: {order_info[0].number}</li>
+              <li>주소: {order_info[0].address}</li>
+              <li>비밀번호: {pw.slice(0,2)}xx</li>
             </ul>
-          ))}
         </div>
 
         {/* confirm button (REST API) */}

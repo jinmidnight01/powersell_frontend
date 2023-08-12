@@ -1,0 +1,21 @@
+[{
+    "orderId": 1,
+    "item": {
+        "id": 1,
+        "name": "제주 삼다수 2L (6개입)",
+        "originalPrice": 6600,
+        "price": 1400,
+        "discountRate": 80,
+        "stockQuantity": 10
+    },
+    "orderPrice": 1400,
+    "count": 1,
+    "name": "박진효",
+    "number": "010-1111-1111",
+    "zipcode": "10101",
+    "address": "서울특별시 서대문구 연희로 oo",
+    "dongho": "101동 2호",
+    "orderDate": "2023-08-03 21:00:04",
+    "orderStatus": "WAITING"
+}
+]

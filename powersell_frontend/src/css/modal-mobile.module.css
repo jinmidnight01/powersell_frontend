@@ -10,11 +10,11 @@
   align-items: flex-start;
 }
 
-.slider-bar-div {
+.slider_bar_div {
   display: flex;
   justify-content: center;
 }
-.slider-bar {
+.slider_bar {
   background-color: #A5A5A5;
   width: 38px;
   height: 3px;
@@ -38,38 +38,41 @@
   margin-top: auto;
 }
 
-.modal-content {
+.modal_content {
   width: 100%;
 }
 
-.first-content {
+.first_content {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 15px;
 }
 
-.product-info {
+.product_info {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   margin-bottom: 0;
 }
 
-.product-name {
+.product_name {
   font-size: 16px;
   margin-bottom: 10px;
 }
-.current-price-small {
+.current_price_small {
   font-size: 16px;
   text-align: left;
   margin-bottom: 5px;
 }
-.original-price {
+.original_price {
+  font-size: 13px;
+  color: #a19c9c;
+
   text-decoration: line-through;
 }
 
-.quantity-selector {
+.quantity_selector {
   display: flex;
   align-items: center;
   border: 1px solid #d9d9d9;
@@ -79,7 +82,7 @@
   height: 1rem
 }
 
-.quantity-button {
+.quantity_button {
   background-color: #ffffff;
   border: none;
   font-size: 20px;
@@ -89,22 +92,22 @@ hr {
   margin: 20px 0;
 }
 
-.second-content, .third-content {
+.second_content, .third_content {
   padding: 0 15px;
 }
-.order-title {
+.order_title {
   text-align: left;
 }
 
-.input-group {
+.input_group {
   display: flex;
   align-items: center;
   gap: 10px;
   font-size: 12px;
 }
 
-.input-group input,
-.input-group select {
+.input_group input,
+.input_group select {
   border: 1.5px solid #d9d9d9;
   background-color: white;
   border-radius: 2px;
@@ -112,7 +115,7 @@ hr {
   font-size: 12px;
   margin-top: 8px;
 }
-.input-group label {
+.input_group label {
   margin-top: 8px;
   flex: 0 0 65px;  /* 예시값: 실제로 필요한 너비에 따라 조정하세요. */
   text-align: left;
@@ -121,10 +124,10 @@ hr {
 
 
 
-.input-group input {
+.input_group input {
   flex: 1;  /* 나머지 공간을 input 및 select 요소에 할당합니다. */
 }
-.input-group select {
+.input_group select {
   width: 17%;
 }
 .search_add {
@@ -168,10 +171,28 @@ input[type="number"]::-webkit-inner-spin-button {
     margin: 0;
 }
 
+h3 span {
+  font-size: 12px;
+  color: red;
+  margin-left: 10px;
+}
+
+.closeButton {
+  z-index: 1000;
+  position: absolute;
+  right: 5%;
+  top: 41vh;
+  height: 30px;
+  cursor: pointer;
+  text-align: center;
+  width: 50px;
+  background-color: #cdcccc;
+  border: none;
+}
 
 @media all and (min-width: 601px) {
   #pc-width {
     width: 400px;
-    margin: 0 10px;
+    margin: 0 auto;
   }
 }

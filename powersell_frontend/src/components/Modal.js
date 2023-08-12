@@ -1,65 +1,131 @@
 // Modal.js
-import React, { useState } from "react";
-import "../css/modal-mobile.css";
+import React, { useState, useEffect } from "react";
+import styles from "../css/modal-mobile.module.css";
 import DaumPostcode from "react-daum-postcode";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import Button from "./Button";
+
 function Modal(props) {
-  function handlePurchaseAndNavigate(e) {
-    e.preventDefault(); // prevents the default form submit action
-    document.body.style.overflow = 'auto';
-    navigate('/ordersuccess', { state: { product: props.product, quantity: quantity } });
-  }
   const navigate = useNavigate();
   // 모달 오픈 여부
   const [modalState, setModalState] = useState("");
 
-
+  // 수량
+  const [quantity, setQuantity] = useState(1); // 상태 변수 설정
+  // 주문자명
+  const [name, setName] = useState("");
+  // 지역번호
+  const [preNum, setPreNum] = useState("010");
+  // 전화번호
+  const [phoneNumber, setPhoneNumber] = useState("");
   // 우편 번호
-  const [inputZipCodeValue, setInputZipCodeValue] = useState("");
-
+  const [zipCode, setZipCode] = useState("");
   // 주소
-  const [inputAddressValue, setInputAddressValue] = useState("");
+  const [address, setAddress] = useState("");
+  // 상세 주소
+  const [dongho, setDongho] = useState("");
+  // 비밀번호
+  const [pw, setPw] = useState("");
+
+  // input box
+  const onChange = (e) => {
+    let value = e.target.value;
+    switch (e.target.name) {
+      case "name":
+        setName(value); // 문자와 공백만 허용
+        return;
+      case "preNum":
+        setPreNum(value);
+        return;
+      case "phoneNumber":
+        value = value.replace(/[^0-9]/g, "");
+        setPhoneNumber(value);
+        return;
+      case "dongho":
+        setDongho(value);
+        return;
+      case "pw":
+        value = value.replace(/[^0-9]/g, "");
+        setPw(value);
+        return;
+      default:
+        return;
+    }
+  };
+
+  // 구매하기 버튼
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const flag1 = phoneNumber.length !== 7 && phoneNumber.length !== 8;
+    const flag2 = pw.length !== 4;
+
+
+    if (!name || !preNum || !phoneNumber || !zipCode || !address || !dongho || !pw) {
+      alert("※ 모든 정보를 입력해주세요.") 
+      return;
+    } 
+    else if (flag1 || flag2) {
+      alert("※ 아래 양식을 지켜주세요\n\nㆍ전화번호: 7~8자리ㆍ비밀번호: 4자리");
+      return;
+    }
+    else {
+    const number = preNum + phoneNumber;
+    const totalAdd = address + dongho;
+    const inputs = {
+      itemId: props.product.itemId,
+      count: quantity,
+      name: name,
+      number: number,
+      zipcode: zipCode,
+      address: totalAdd,
+      dongho: dongho,
+      pw: pw,
+    };
+
+    axios
+      .post("/api/orders", inputs)
+      .then((response) => {
+        document.body.style.overflow = "auto";
+        const successData = response.data;
+        console.log(successData);
+        navigate("/ordersuccess", {
+          state: { successData: successData, pw: pw },
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });}
+  }
+
+  // 스타일 정의 code
+  const postCodeStyle = {
+    position: "fixed",
+    top: "75%",
+    bottom: 0,
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "400px",
+    height: "61vh",
+    display: "block",
+  };
 
   // 팝업창 열기
   const openPostCode = () => {
     setModalState(true);
   };
 
-  function handleZipCode(e) {
-    setInputZipCodeValue(e.target.value)
-  }
-  function handleAddress(e) {
-    setInputAddressValue(e.target.value);
-  }
-
-  // 스타일 정의 code
-  const postCodeStyle = {
-    position: "fixed",
-    top:"75%",
-    bottom: 0,
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: "400px",
-    height: "50vh",
-    display: "block",
-  };
-  const onChangeOpenPost = () => {
-    setIsOpenPost(!isOpenPost);
-  };
   // onCompletePost 함수
   const onCompletePost = (data) => {
-    setInputAddressValue(data.address);
-    setInputZipCodeValue(data.zonecode);
+    setAddress(data.address);
+    setZipCode(data.zonecode);
     setModalState(false);
-
   };
 
   const [dragging, setDragging] = useState(false);
   const [dragStartY, setDragStartY] = useState(0);
   const [transformY, setTransformY] = useState(0);
-  const [quantity, setQuantity] = useState(1); // 상태 변수 설정
 
   // 수량 증가 함수
   function increaseQuantity(e) {
@@ -109,16 +175,17 @@ function Modal(props) {
     }
   }
 
+  const product = props.product;
   return (
     <>
-      <div id="pc-width" className="Modal" onClick={closeModal}>
+      <div id={styles.pc_width} className={styles.Modal} onClick={closeModal}>
         <form
-          className="modalBody"
+          className={styles.modalBody}
           style={{ transform: `translateY(${transformY}px)` }}
           onClick={(e) => e.stopPropagation()}
         >
           <div
-            className="slider-bar-div"
+            className={styles.slider_bar_div}
             onMouseDown={handleDragStart}
             onMouseMove={handleDragMove}
             onMouseUp={handleDragEnd}
@@ -127,29 +194,35 @@ function Modal(props) {
             onTouchMove={handleDragMove}
             onTouchEnd={handleDragEnd}
           >
-            <div className="slider-bar"></div>
+            <div className={styles.slider_bar}></div>
           </div>
-          <div className="modal-content">
+          <div className={styles.modal_content}>
             {/* 첫 컨텐츠: 상품 정보, 수량 선택 */}
-            <div className="first-content">
-              <div className="product-info">
-                <p className="current-price-small">{props.productName}</p>
-                <p className="current-price-small">
-                  {props.salePrice}
+            <div className={styles.first_content}>
+              <div className={styles.product_info}>
+                <p className={styles.current_price_small}>{product.name}</p>
+                <p className={styles.current_price_small}>
+                  {product.price}
                   {"원 "}
-                  <span className="original-price">
-                    {props.originalPrice}
+                  <span className={styles.original_price}>
+                    {product.originalPrice}
                     {""}
                   </span>
                 </p>
               </div>
 
-              <div className="quantity-selector">
-                <button className="quantity-button" onClick={decreaseQuantity}>
+              <div className={styles.quantity_selector}>
+                <button
+                  className={styles.quantity_button}
+                  onClick={decreaseQuantity}
+                >
                   -
                 </button>
                 <span>{quantity}</span>
-                <button className="quantity-button" onClick={increaseQuantity}>
+                <button
+                  className={styles.quantity_button}
+                  onClick={increaseQuantity}
+                >
                   +
                 </button>
               </div>
@@ -157,80 +230,118 @@ function Modal(props) {
 
             <hr />
             {/* 둘 컨텐츠: 배송지 정보 */}
-            <div className="second-content">
-              <h3 className="order-title">배송지</h3>
-              <div className="input-group">
+            <div className={styles.second_content}>
+              <h3 className={styles.order_title}>배송지</h3>
+
+              {/* <p style={{ color: "red", textAlign: "left" }}>
+                  {errorMessage}
+                </p> */}
+
+              <div className={styles.input_group}>
                 <label>받는 사람</label>
-                <input type="text" />
+                <input
+                  type="text"
+                  name="name"
+                  value={name}
+                  onChange={onChange}
+                />
               </div>
-              <div className="input-group">
+              <div className={styles.input_group}>
                 <label>연락처</label>
-                <select>
-                  <option>010</option>
-                  <option>011</option>
-                  <option>02</option>
-                  <option>033</option>
+                <select name="preNum" value={preNum} onChange={onChange}>
+                  <option value="010">010</option>
+                  <option value="070">070</option>
+                  <option value="011">011</option>
+                  <option value="02">02</option>
+                  <option value="031">031</option>
                 </select>
-                <input type="number" />
+                <input
+                  type="text"
+                  name="phoneNumber"
+                  value={phoneNumber}
+                  onChange={onChange}
+                  placeholder="(-) 없이 숫자만 입력해주세요"
+                />
               </div>
-              <div className="input-group">
+              <div className={styles.input_group}>
                 <label>주소</label>
                 <button
                   type="button"
                   onClick={openPostCode}
-                  className="search_add"
+                  className={styles.search_add}
                 >
                   주소찾기
                 </button>
                 <input
-                  onChange={handleZipCode}
-                  value={inputZipCodeValue}
-                  placeholder="우편번호"
+                  onChange={onChange}
+                  value={zipCode}
                   type="text"
+                  name="inputZipCodeValue"
+                  disabled
                 />
               </div>
-              <div className="input-group last">
+              <div className={`${styles.input_group} ${styles.last}`}>
                 <label> </label>
                 <input
-                  onChange={handleAddress}
-                  value={inputAddressValue}
-                  placeholder="주소"
+                  onChange={onChange}
+                  value={address}
                   type="text"
+                  name="inputAddressValue"
+                  disabled
                 />
               </div>
-              <div className="input-group last">
+              <div className={`${styles.input_group} ${styles.last}`}>
                 <label> </label>
-                <input type="text" placeholder="상세주소 입력" />
+                <input
+                  type="text"
+                  placeholder="상세주소 입력"
+                  name="dongho"
+                  value={dongho}
+                  onChange={onChange}
+                />
               </div>
             </div>
 
             <br />
 
-            <div className="third-content">
-              <h3 className="order-title">주문 확인용</h3>
-              <div className="input-group">
+            <div className={styles.third_content}>
+              <h3 className={styles.order_title}>주문 확인용{" "}
+              {/* <span>*4자리 숫자로 설정해 주세요</span> */}
+              </h3>
+              <div className={styles.input_group}>
                 <label>비밀번호</label>
-                <input type="password" />
+                <input
+                  type="password"
+                  name="pw"
+                  value={pw}
+                  onChange={onChange}
+                  placeholder="4자리 숫자로 설정해 주세"
+                />
               </div>
             </div>
           </div>
           <input
-            onClick={handlePurchaseAndNavigate} 
-            className="submit_button"
+            onClick={handleSubmit}
+            className={styles.submit_button}
             type="submit"
             value="구매하기"
+            // disabled={!isValid} // 유효성 검사로 버튼 활성화 상태 조절
           ></input>
         </form>
       </div>
       {/* 우편주소 code */}
-      
-      <div className="postCode">
-        {modalState ? (<DaumPostcode
-          style={postCodeStyle}
-          autoClose={false}
-          onComplete={onCompletePost}
-          onChange={onChangeOpenPost}
-        ></DaumPostcode>) : null}
+
+      <div className={styles.postCode}>
+        {modalState ? (
+          <>
+          <button className={styles.closeButton} title="닫기" onClick={() => setModalState(false)} >닫기</button> 
+          <DaumPostcode
+            style={postCodeStyle}
+            autoClose={false}
+            onComplete={onCompletePost}
+          ></DaumPostcode>
+          </>
+        ) : null}
       </div>
     </>
   );

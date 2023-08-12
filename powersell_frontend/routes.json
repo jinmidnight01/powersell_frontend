@@ -1,3 +1,7 @@
 {
-    "/api/orders/detail": "/api_orders_detail"
+    "/api/orders": "/api_orders",
+    "/api/orders/detail": "/api_orders_detail",
+    "/api/items": "/api_items",
+    "/api/items/:id": "/api_items/:id",
+    "/api/admin/feedbacks": "/api_admin_feedbacks"
 }
