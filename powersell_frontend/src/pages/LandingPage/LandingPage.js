@@ -4,7 +4,6 @@ import "../../css/style-mobile.css";
 
 import mypage from "../../images/icons/mypage.jpg";
 import banner from "../../images/home/banner.jpg";
-import products from "../../data/product";
 import { Link } from "react-router-dom";
 import HomeHeader from "./../../components/HomeHeader";
 import 삼다수 from "../../images/home/삼다수.jpg";

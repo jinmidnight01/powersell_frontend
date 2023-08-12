@@ -131,6 +131,7 @@ hr {
   width: 17%;
 }
 .search_add {
+  cursor: pointer;
   margin-top: 8px;
   background-color: #FFFFFF;
   color: #fa7979;
@@ -138,6 +139,10 @@ hr {
   padding: 4px;
   font-size: 10px;
   font-weight: 600;
+}
+.search_add:hover {
+  background-color: #fa7979;
+  color: #ffffff;
 }
 .last input {
   margin-top: 4px;
@@ -177,21 +182,9 @@ h3 span {
   margin-left: 10px;
 }
 
-.closeButton {
-  z-index: 1000;
-  position: absolute;
-  right: 5%;
-  top: 41vh;
-  height: 30px;
-  cursor: pointer;
-  text-align: center;
-  width: 50px;
-  background-color: #cdcccc;
-  border: none;
-}
 
 @media all and (min-width: 601px) {
-  #pc-width {
+  #pc_width {
     width: 400px;
     margin: 0 auto;
   }

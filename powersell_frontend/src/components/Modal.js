@@ -107,7 +107,7 @@ function Modal(props) {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: "400px",
-    height: "61vh",
+    height: "60vh",
     display: "block",
   };
 
@@ -206,7 +206,7 @@ function Modal(props) {
                   {"원 "}
                   <span className={styles.original_price}>
                     {product.originalPrice}
-                    {""}
+                    {"원"}
                   </span>
                 </p>
               </div>
@@ -315,7 +315,7 @@ function Modal(props) {
                   name="pw"
                   value={pw}
                   onChange={onChange}
-                  placeholder="4자리 숫자로 설정해 주세"
+                  placeholder="4자리 숫자로 설정해 주세요"
                 />
               </div>
             </div>
@@ -333,14 +333,11 @@ function Modal(props) {
 
       <div className={styles.postCode}>
         {modalState ? (
-          <>
-          <button className={styles.closeButton} title="닫기" onClick={() => setModalState(false)} >닫기</button> 
           <DaumPostcode
             style={postCodeStyle}
             autoClose={false}
             onComplete={onCompletePost}
           ></DaumPostcode>
-          </>
         ) : null}
       </div>
     </>

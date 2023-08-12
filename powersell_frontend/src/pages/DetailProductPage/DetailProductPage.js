@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-import products from "../../data/product";
 import "../../css/style-mobile.css";
 
 // import share from "../../images/detail/share.jpg";
