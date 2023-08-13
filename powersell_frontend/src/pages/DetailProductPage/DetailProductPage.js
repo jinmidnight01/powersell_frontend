@@ -69,7 +69,7 @@ function DetailProductPage() {
   const isOutOfStock = product.stockQuantity === 0;
 
   return (
-    <div id="pc-width">
+    <div id="pcWidth">
       <Header text="상품 내용"></Header>
 
       <img
