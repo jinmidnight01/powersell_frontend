@@ -1,5 +1,5 @@
 @media all and (min-width: 601px) {
-    #pc-width {
+    #pcWidth {
         width: 400px;
         margin: 0 auto;
         overflow: auto;

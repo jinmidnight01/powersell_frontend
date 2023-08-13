@@ -38,7 +38,7 @@ const OrderSuccessPage = () => {
 
 
   return (
-    <div id="pc-width">
+    <div id="pcWidth">
       {/* header */}
       <Header text="주문 완료"></Header>
 

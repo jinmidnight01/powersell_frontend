@@ -6,6 +6,7 @@ import DetailProductPage from './pages/DetailProductPage/DetailProductPage';
 import AuthenticationPage from './pages/OrderConfirmPage/AuthenticationPage';
 import OrderConfirmPage from './pages/OrderConfirmPage/OrderConfirmPage';
 import OrderSuccessPage from './pages/OrderSuccessPage/OrderSuccessPage';
+import AdminPage from './pages/AdminPage/AdminPage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path='/ordersuccess' element={<OrderSuccessPage/>} />
       <Route path='/authentication' element={<AuthenticationPage />} />
       <Route path='/orderconfirm' element={<OrderConfirmPage />} />
+      <Route path='/admin/*' element={<AdminPage />} />
     </Routes>
   );
 }

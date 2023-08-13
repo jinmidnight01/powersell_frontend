@@ -15,7 +15,7 @@ function LandingPage() {
   const [isSoldout, SetSoldout] = useState(false);
 
   return (
-    <div id="pc-width" className="app">
+    <div id="pcWidth" className="app">
       {/* Header */}
       <HomeHeader img2={mypage} />
 

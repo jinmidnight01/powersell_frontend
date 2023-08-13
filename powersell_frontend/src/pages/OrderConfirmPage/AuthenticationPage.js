@@ -8,7 +8,7 @@ import phoneNumber from "../../images/orderConfirm/phoneNumber.png";
 import key from "../../images/orderConfirm/key.png";
 import kakaotalk from "../../images/orderConfirm/kakaotalk.png";
 
-import styles from "../../css/style-orderconfirm.module.css";
+import styles from "./orderconfirm.module.css";
 
 // Authentication function
 const AuthenticationPage = () => {
@@ -125,14 +125,16 @@ const AuthenticationPage = () => {
     const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
     await sleep(500);
 
+    // REST API 1-3
     axios
-      .post("/api/orders/detail", inputs)
+      .post(`/api/orders/detail`, inputs)
       .then((response) => {
         if (response.data.length === 0) {
           alert("해당 주문 내역이 없습니다");
           setIsPending(false);
           return;
         }
+        console.log("1")
         navigate("/orderconfirm", { state: response.data });
       })
       .catch((error) => {

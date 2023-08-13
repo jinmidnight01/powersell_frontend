@@ -45,9 +45,9 @@ function Modal(props) {
     height: "50vh",
     display: "block",
   };
-  const onChangeOpenPost = () => {
-    setIsOpenPost(!isOpenPost);
-  };
+  // const onChangeOpenPost = () => {
+  //   setIsOpenPost(!isOpenPost);
+  // };
   // onCompletePost 함수
   const onCompletePost = (data) => {
     setInputAddressValue(data.address);
@@ -229,7 +229,7 @@ function Modal(props) {
           style={postCodeStyle}
           autoClose={false}
           onComplete={onCompletePost}
-          onChange={onChangeOpenPost}
+          // onChange={onChangeOpenPost}
         ></DaumPostcode>) : null}
       </div>
     </>
