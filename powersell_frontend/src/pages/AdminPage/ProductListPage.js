@@ -63,7 +63,7 @@ const ProductListPage = () => {
   // REST API 2-2
   const handleClick = () => {
     const inputs = {
-      itemId: 6,
+    //   itemId: 6,
       name: name,
       originalPrice: originalPrice,
       price: price,
