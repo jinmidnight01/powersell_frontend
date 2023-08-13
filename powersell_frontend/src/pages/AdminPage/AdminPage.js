@@ -1,6 +1,5 @@
 import { React, useState, useEffect } from 'react';
 import { Route, Routes, Link, useNavigate } from 'react-router-dom';
-import axios from "axios"
 
 import ProductListPage from './ProductListPage';
 import OrderListPage from './OrderListPage';
