@@ -161,9 +161,29 @@ label > input:checked + .slider:before {
 
 /* delivery */
 
+/* order information */
+.order_information hr {
+  margin: 16px 0 10px 0;
+  border: 0.5px solid rgb(181, 181, 181);
+}
+
+.order_information > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.order_information span {
+  font-weight: bold;
+}
+
+.order_information > div > div {
+  font-size: 13px;
+  line-height: 20px;
+}
+
 /* payment */
 .order_payment hr {
-  margin: 15px 0 10px 0;
+  margin: 9px 0 9px 0;
   border: 0.5px solid rgb(181, 181, 181);
 }
 
@@ -179,32 +199,12 @@ label > input:checked + .slider:before {
 .order_payment > div > div {
   display: flex;
   justify-content: space-between;
-  font-size: 13px;
+  font-size: 12px;
   line-height: 20px;
 }
 
 .order_payment > div > div:nth-child(3) {
   font-weight: bold;
-}
-
-/* order information */
-.order_information hr {
-  margin: 10px 0;
-  border: 0.5px solid rgb(181, 181, 181);
-}
-
-.order_information > div {
-  display: flex;
-  flex-direction: column;
-}
-
-.order_information span {
-  font-weight: bold;
-}
-
-.order_information > div > div {
-  font-size: 12px;
-  line-height: 20px;
 }
 
 /* Product List Page */

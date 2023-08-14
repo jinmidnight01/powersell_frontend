@@ -83,6 +83,25 @@ const OrderListPage = () => {
                   setReloadFlag={setReloadFlag}
                 />
 
+                {/* order information */}
+                <div className={styles.order_information}>
+                  <hr></hr>
+                  <div>
+                    <div>
+                      <span>주문자</span>: {order.name}
+                    </div>
+                    <div>
+                      <span>전화번호</span>: {order.number}
+                    </div>
+                    <div>
+                      <span>주문 일시</span>: {order.orderDate}
+                    </div>
+                    <div>
+                      <span>주소</span>: {order.address} {order.dongho}
+                    </div>
+                  </div>
+                </div>
+
                 {/* payment */}
                 <div className={styles.order_payment}>
                   <hr></hr>
@@ -102,25 +121,6 @@ const OrderListPage = () => {
                     <div>
                       <p>최종 결제금액</p>
                       <div>{order.orderPrice}원</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* order information */}
-                <div className={styles.order_information}>
-                  <hr></hr>
-                  <div>
-                    <div>
-                      <span>주문자</span>: {order.name}
-                    </div>
-                    <div>
-                      <span>전화번호</span>: {order.number}
-                    </div>
-                    <div>
-                      <span>주문 일시</span>: {order.orderDate}
-                    </div>
-                    <div>
-                      <span>주소</span>: {order.address} {order.dongho}
                     </div>
                   </div>
                 </div>
