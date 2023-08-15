@@ -89,7 +89,6 @@ function Modal(props) {
       .then((response) => {
         document.body.style.overflow = "auto";
         const successData = response.data;
-        console.log(successData);
         navigate("/ordersuccess", {
           state: { successData: successData, pw: pw },
         });

@@ -130,7 +130,6 @@ const AuthenticationPage = () => {
     axios
       .post(`${hostURL}/api/orders/detail`, inputs)
       .then((response) => {
-        console.log(response);
         if (response.data.length === 0) {
           alert("해당 주문 내역이 없습니다");
           setIsPending(false);

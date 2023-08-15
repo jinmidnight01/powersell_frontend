@@ -44,7 +44,6 @@ function LandingPage() {
     async function rendering_item() {
     axios.get(`${hostURL}/api/items`)
     .then((response) => {
-      console.log(response.data)
       setItemList(response.data)
     })
     .catch((error) => {
@@ -62,7 +61,6 @@ function LandingPage() {
     const inputs = {content: feedback}
     axios.post(`${hostURL}/api/admin/feedbacks`, inputs)
     .then((response) => {
-      console.log("피드백이 전송되었습니다. 감사합니다 :-)")
     })
     .catch((error) => {
       console.log(error);

@@ -191,6 +191,23 @@
     }
   ],
   "api_admin_items": [],
-  "api_admin_feedbacks": [],
+  "api_admin_feedbacks": [
+    {
+      "content": "ㅎㅇ",
+      "id": 1
+    },
+    {
+      "content": "ㅎㅇ",
+      "id": 2
+    },
+    {
+      "content": "ㅁㅎㅁㅎ",
+      "id": 3
+    },
+    {
+      "content": "ㅁㅎ",
+      "id": 4
+    }
+  ],
   "api_feedbacks": []
 }

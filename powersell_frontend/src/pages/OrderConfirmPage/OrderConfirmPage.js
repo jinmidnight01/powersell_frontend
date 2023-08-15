@@ -19,11 +19,11 @@ const OrderConfirmPage = () => {
   const navigate = useNavigate();
 
   // prevent direct URL access
-  // useEffect(() => {
-  //   if (output === null) {
-  //     navigate("/authentication");
-  //   }
-  // });
+  useEffect(() => {
+    if (output === null) {
+      navigate("/authentication");
+    }
+  });
 
   // item image
   const itemImage = (order) => {
