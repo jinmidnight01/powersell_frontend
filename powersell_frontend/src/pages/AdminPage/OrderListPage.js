@@ -2,6 +2,8 @@ import { React, useState, useEffect } from "react";
 import axios from "axios";
 
 import StatusButton from "./StatusButton";
+import hostURL from "../../hostURL";
+
 import styles from "./admin.module.css";
 
 const OrderListPage = () => {
@@ -24,7 +26,7 @@ const OrderListPage = () => {
   const [reloadFlag, setReloadFlag] = useState(0);
   useEffect(() => {
     axios
-      .get(`/api/admin/orders`)
+      .get(`${hostURL}/api/admin/orders`)
       .then((response) => {
         setResult(response.data);
       })

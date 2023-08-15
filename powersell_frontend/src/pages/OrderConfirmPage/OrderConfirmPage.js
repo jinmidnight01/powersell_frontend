@@ -17,14 +17,13 @@ import res_orderConfirm from "../../data/res_orderConfirm.json";
 const OrderConfirmPage = () => {
   const output = useLocation().state;
   const navigate = useNavigate();
-  console.log(output);
 
   // prevent direct URL access
-  useEffect(() => {
-    if (output === null) {
-      navigate("/authentication");
-    }
-  });
+  // useEffect(() => {
+  //   if (output === null) {
+  //     navigate("/authentication");
+  //   }
+  // });
 
   // item image
   const itemImage = (order) => {
@@ -183,159 +182,3 @@ const OrderConfirmPage = () => {
 };
 
 export default OrderConfirmPage;
-
-// REST API: axios
-// useEffect(() => {
-//   axios.post("api/orders/detail", {
-//     "number": number,
-//     "pw": pw
-//   })
-//   .then((response) => {
-//     console.log(response.data);
-//   }).catch((error) => {
-//     console.log(error);
-//   });
-// }, []);
-
-// REST API
-// const [hi, setPosts] = useState([]); // posts = [
-// const getPosts = async() => {
-//     const posts = await axios.get("https://jsonplaceholder.typicode.com/posts/1");
-//     setPosts(posts.data);
-// };
-
-// useEffect(() => {
-//     getPosts();
-//     // let reqOptions = {
-//     //     url: "https://jsonplaceholder.typicode.com/posts/1",
-//     //     method: "POST",
-//     //     data: [
-//     //         {
-//     //         "number":"hi",
-//     //         "pw":12
-//     //         },
-//     //     ]
-//     // }
-
-//     // async function get() {
-//     //     const result = await axios.get(reqOptions.url);
-//     //     console.log(result.data);
-//     // }
-//     // get();
-// }, []);
-
-// console.log(hi);
-
-// let reqOptions = {
-//     url: "https://jsonplaceholder.typicode.com/posts/",
-//     method: "POST",
-//     data: [
-//         {
-//         "number":"hi",
-//         "pw":12
-//         },
-//     ]
-// }
-
-// let response = async function() {await axios.request(reqOptions)};
-// console.log(response.data);
-
-// const [texts, setTexts] = useState([]);
-
-// let reqOptions = {
-//   url: "https://jsonplaceholder.typicode.com/posts/",
-//   method: "POST",
-//   data: [
-//     {
-//       "userId": 1,
-//       "id":1,
-//       "title":"jin",
-//       "body":12
-//     },
-//     {
-//       "userId": 1,
-//       "id":2,
-//       "title": "sang",
-//       "body":13
-//     }
-//   ],
-// }
-
-// let response = await axios.request(reqOptions);
-// console.log(response.data);
-
-// useEffect(() => {
-//   // REST API: axios
-//   axios.post("api/test", {
-//     "number": number,
-//     "pw": pw
-//   })
-//   .then((response) => {
-//     console.log(response.data);
-//   }).catch((error) => {
-//     console.log(error);
-//   });
-// }, [number, pw]);
-
-// useEffect(() => {
-
-//     let reqOptions = {
-//         url: "https://jsonplaceholder.typicode.com/posts/",
-//         method: "GET",
-//         data: [
-//             {
-//             "number":"hi",
-//             "pw":12
-//             },
-//         ]
-//     }
-
-//     async function get() {
-//         const result = await axios.get(reqOptions.url);
-//         console.log(result.data);
-//     }
-//     get();
-// }, []);
-
-// let [mydata, setData] = useState([]);
-
-// useEffect(() => {
-//   axios
-//     .get("https://de4ff32e-dfa6-43ed-91ca-c66d483f5068.mock.pstmn.io/list")
-//     .then((result) => {
-//       setData(result.data);
-//     })
-//     .catch(() => {});
-// }, []);
-
-// async function postData() {
-//     try {
-//         //응답 성공
-//         const response = await axios.post('https://de4ff32e-dfa6-43ed-91ca-c66d483f5068.mock.pstmn.io/orderconfirm',{
-//             //보내고자 하는 데이터
-//             number: "01055664630",
-//             pw: "1234"
-//         });
-//         console.log(response);
-//     } catch (error) {
-//         //응답 실패
-//         console.error(error);
-//     }
-// }
-
-// postData();
-
-// console.log(mydata);
-
-// return (
-//   <div className={styles.App">
-//     {/* {mydata.map((i) => {
-//       return (
-//         <>
-//           <p>이름 : {i.name}</p>
-//           <p>나이 : {i.age}</p>
-//         </>
-//       );
-//     })} */}
-//   </div>
-// );

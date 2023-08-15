@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import Header from "../../components/Header";
+import hostURL from "../../hostURL";
 
 import phoneNumber from "../../images/orderConfirm/phoneNumber.png";
 import key from "../../images/orderConfirm/key.png";
@@ -127,14 +128,14 @@ const AuthenticationPage = () => {
 
     // REST API 1-3
     axios
-      .post(`/api/orders/detail`, inputs)
+      .post(`${hostURL}/api/orders/detail`, inputs)
       .then((response) => {
+        console.log(response);
         if (response.data.length === 0) {
           alert("해당 주문 내역이 없습니다");
           setIsPending(false);
           return;
         }
-        console.log("1")
         navigate("/orderconfirm", { state: response.data });
       })
       .catch((error) => {
@@ -240,65 +241,3 @@ const AuthenticationPage = () => {
 };
 
 export default AuthenticationPage;
-
-// input box
-// const onChange = (e) => {
-//   switch (e.target.name) {
-//     // case "number1":
-//     //   number1 = document.getElementById('number1').value;
-//     //   console.log(number1)
-//     //   return;
-//     case "number2":
-//       if (number2.length === 3) {
-//         refNum3.current.focus();
-//       }
-//       let value = document.getElementById('number2').value;
-
-//       setNum2Value(document.getElementById('number2').value);
-//       return;
-//     case "number3":
-//       if (number3.length === 3) {
-//         refPw.current.focus();
-//       }
-//       setNum3Value(e.target.value);
-//       return;
-//     case "pw":
-//       setPwValue(e.target.value);
-//       return;
-//     default:
-//       return;
-//   }
-// };
-
-// REST API: fetch
-// fetch('http://localhost:8080/test/', {
-// method: 'POST',
-// headers: { "Content-Type": "application/json" },
-// body: JSON.stringify(inputs)
-// }).then(() => {
-// console.log('new order added');
-// })
-
-// <button onClick={() => {
-//     setIsPending(true);
-//     axios.post("https://jsonplaceholder.typicode.com/posts/", {
-//         // number: {number},
-//         // pw: {pw}
-//     }).then((response) => {
-//         console.log(response.data);
-//         setIsPending(false);
-//     }).catch((error) => {
-//         console.log(error);
-//     });
-// }}>
-
-// const handleClick = async(e) => {
-//     // prevent page refresh
-//     e.preventDefault();
-
-//     // change button from 조회 to 조회 중...
-//     setIsPending(true);
-//     await sleep(1000);
-
-//     navigate('/orderconfirm', {state: inputs});
-// }

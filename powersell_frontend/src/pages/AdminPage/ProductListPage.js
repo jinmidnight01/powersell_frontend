@@ -2,6 +2,8 @@ import { React, useState, useEffect } from "react";
 
 import axios from "axios";
 
+import hostURL from "../../hostURL";
+
 import styles from "./admin.module.css";
 
 const ProductListPage = () => {
@@ -17,7 +19,7 @@ const ProductListPage = () => {
   // REST API 2-1
   useEffect(() => {
     axios
-      .get(`/api/items`)
+      .get(`${hostURL}/api/items`)
       .then((response) => {
         setProducts(response.data);
       })
@@ -71,7 +73,7 @@ const ProductListPage = () => {
     };
 
     axios
-      .post(`/api/admin/items`, inputs)
+      .post(`${hostURL}/api/admin/items`, inputs)
       .then((response) => {
         setToggleStatus("-");
         if (isClicked === 0) {
@@ -88,7 +90,7 @@ const ProductListPage = () => {
   // REST API 3-1
   useEffect(() => {
     axios
-      .get(`/api/admin/feedbacks`)
+      .get(`${hostURL}/api/admin/feedbacks`)
       .then((response) => {
         setFeedbacks(response.data);
       })

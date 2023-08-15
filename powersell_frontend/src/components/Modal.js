@@ -5,6 +5,8 @@ import DaumPostcode from "react-daum-postcode";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import hostURL from "../hostURL";
+
 function Modal(props) {
   const navigate = useNavigate();
   // 모달 오픈 여부
@@ -83,7 +85,7 @@ function Modal(props) {
     };
 
     axios
-      .post("/api/orders", inputs)
+      .post(`${hostURL}/api/orders`, inputs)
       .then((response) => {
         document.body.style.overflow = "auto";
         const successData = response.data;

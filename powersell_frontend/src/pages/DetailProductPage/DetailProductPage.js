@@ -6,6 +6,8 @@ import "../../css/style-mobile.css";
 
 // import share from "../../images/detail/share.jpg";
 
+import hostURL from "../../hostURL";
+
 import Header from "../../components/Header";
 import Modal from "./../../components/Modal";
 import Button from "../../components/Button";
@@ -24,7 +26,7 @@ function DetailProductPage() {
   useEffect(() => {
     async function rendering_item_detail(id) {
       axios
-        .get(`/api/items/${id}`)
+        .get(`${hostURL}/api/items/${id}`)
         .then((response) => {
           setProduct(response.data);
         })

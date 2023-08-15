@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../../css/style-mobile.css";
 
+import hostURL from "../../hostURL";
+
 import mypage from "../../images/icons/mypage.jpg";
 import banner from "../../images/home/banner.jpg";
 import { Link } from "react-router-dom";
@@ -40,7 +42,7 @@ function LandingPage() {
 
   useEffect(() => { 
     async function rendering_item() {
-    axios.get("/api/items")
+    axios.get(`${hostURL}/api/items`)
     .then((response) => {
       console.log(response.data)
       setItemList(response.data)
@@ -58,7 +60,7 @@ function LandingPage() {
       return;
     }
     const inputs = {content: feedback}
-    axios.post("/api/admin/feedbacks", inputs)
+    axios.post(`${hostURL}/api/admin/feedbacks`, inputs)
     .then((response) => {
       console.log("피드백이 전송되었습니다. 감사합니다 :-)")
     })
