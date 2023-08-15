@@ -68,7 +68,7 @@ function LandingPage() {
     })
   }
   return (
-    <div id="pcWidth" className="app">
+    <div id="pc-width" className="app">
       {/* Header */}
       <HomeHeader img2={mypage} />
 
