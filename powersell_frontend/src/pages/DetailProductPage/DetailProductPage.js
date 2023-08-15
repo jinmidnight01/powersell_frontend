@@ -64,7 +64,7 @@ function DetailProductPage() {
   };
 
   if (!product) {
-    return <p>상품을 찾을 수 없습니다</p>;
+    return <p style={{marginTop: '10%', textAlign: 'center'}}>로딩 중...</p>;
   }
   const isOutOfStock = product.stockQuantity === 0;
 

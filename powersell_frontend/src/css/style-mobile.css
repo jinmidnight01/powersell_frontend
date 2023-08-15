@@ -84,9 +84,9 @@ p {
 .soldout {
   background-color: #757575;
   color: white;
-  padding: 5px;
+  padding: 4px 5px;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 8px;
   display: inline;
   font-size: 12px;
   margin-right: 3px;
@@ -95,11 +95,12 @@ p {
 
 }
 .product-name {
-  line-height: 30px;
+  line-height: 26px;
   font-size: 15px;
   color: black;
   display: inline-block;
   vertical-align: middle;
+  margin-bottom: 5px;
 }
 
 
@@ -217,10 +218,7 @@ hr {
   
 }
 
-.product-name {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
+
 
 .discounted-price {
   font-size: 14px;

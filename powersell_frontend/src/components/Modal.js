@@ -98,7 +98,19 @@ function Modal(props) {
         console.log(error);
       });}
   }
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  useEffect(() => {
+      const handleResize = () => {
+          setWindowWidth(window.innerWidth);
+      };
+
+      window.addEventListener('resize', handleResize);
+
+      return () => {
+          window.removeEventListener('resize', handleResize);
+      };
+  }, []);
   // 스타일 정의 code
   const postCodeStyle = {
     position: "fixed",
@@ -106,9 +118,9 @@ function Modal(props) {
     bottom: 0,
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: "400px",
-    height: "60vh",
-    display: "block",
+    width: windowWidth >= 400 ? "400px" : "100%",
+    height: "100%",
+    display: "block"   
   };
 
   // 팝업창 열기
@@ -334,6 +346,7 @@ function Modal(props) {
       <div className={styles.postCode}>
         {modalState ? (
           <DaumPostcode
+          className={styles.postCodeStyle}
             style={postCodeStyle}
             autoClose={false}
             onComplete={onCompletePost}
