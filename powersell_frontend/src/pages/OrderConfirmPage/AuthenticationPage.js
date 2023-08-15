@@ -142,10 +142,26 @@ const AuthenticationPage = () => {
       });
   };
 
+  //test
+  const [test, setTest] = useState([])
+  useEffect(()=> {
+    axios
+    .get(`https://jsonplaceholder.typicode.com/posts/1`)
+    .then((response) => {
+      console.log(response.data)
+      setTest(response.data)
+    })
+    .catch((error) => {
+      console.log(error);
+    });  
+  }, [])
+
   return (
     <div id={styles.pcWidth}>
       {/* header */}
       <Header text="주문 조회"></Header>
+
+      <div>{test.title}</div>
 
       {/* main */}
       <form className={styles.auth_form}>

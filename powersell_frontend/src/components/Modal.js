@@ -72,7 +72,7 @@ function Modal(props) {
     }
     else {
     const number = preNum + phoneNumber;
-    const totalAdd = address + dongho;
+    const totalAdd = address;
     const inputs = {
       itemId: props.product.itemId,
       count: quantity,

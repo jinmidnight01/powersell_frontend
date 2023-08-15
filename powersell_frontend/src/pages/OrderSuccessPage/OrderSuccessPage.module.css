@@ -22,15 +22,16 @@
     margin-right: 40px;
     display: flex;
     flex-direction: column;
+    margin-bottom: 40px;
 }
 
-.main:nth-child(1), .main:nth-child(2), .main:nth-child(3) {
-    flex: 1;
-    margin-bottom: 10px;
-}
 .success_noti {
     font-weight: 600;
+}
 
+.success_noti h2 {
+    font-size: 20px;
+    margin: 25px 0 10px 0;
 }
 /* receipt */
 .receipt_Title {
@@ -53,10 +54,12 @@
 }
 ul {
     margin-left: 0px;
+    padding-inline-start: 20px;
 }
 ul > li {
     font-size: 15px;
     font-weight: 400;
+    line-height: 22px;
     text-align: left;
 }
 ul > p {
@@ -64,6 +67,9 @@ ul > p {
     text-align: left;
     margin-left: 0px;
     margin-top: 5px;
+}
+li > span:nth-child(1) {
+    font-weight: bold;
 }
 
 /* item title */

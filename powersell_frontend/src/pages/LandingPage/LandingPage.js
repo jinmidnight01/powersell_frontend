@@ -81,7 +81,7 @@ function LandingPage() {
       <div className="products">
         {itemList.map((product) => (
           <div key={product.itemId} className="product">
-            <Link className="product-link" to={`/product/${product.id}`}>
+            <Link className="product-link" to={`/product/${product.itemId}`}>
               <img
                 className="product-img"
                 src={itemImage(product)}
