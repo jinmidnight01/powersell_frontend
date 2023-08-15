@@ -1,5 +1,5 @@
 // Modal.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../css/modal-mobile.module.css";
 import DaumPostcode from "react-daum-postcode";
 import { useNavigate } from "react-router-dom";
