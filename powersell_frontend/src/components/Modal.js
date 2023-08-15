@@ -1,11 +1,9 @@
 // Modal.js
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "../css/modal-mobile.module.css";
 import DaumPostcode from "react-daum-postcode";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
-import Button from "./Button";
 
 function Modal(props) {
   const navigate = useNavigate();
@@ -72,7 +70,7 @@ function Modal(props) {
     }
     else {
     const number = preNum + phoneNumber;
-    const totalAdd = address + dongho;
+    const totalAdd = address;
     const inputs = {
       itemId: props.product.itemId,
       count: quantity,
