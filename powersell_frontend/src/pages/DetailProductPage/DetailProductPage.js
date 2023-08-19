@@ -4,7 +4,7 @@ import axios from "axios";
 
 import "../../css/style-mobile.css";
 
-// import share from "../../images/detail/share.jpg";
+import share from "../../images/detail/share.jpg";
 
 import hostURL from "../../hostURL";
 
@@ -78,6 +78,17 @@ function DetailProductPage() {
   }
   const isOutOfStock = product.stockQuantity === 0;
 
+
+  const handleShare = () => {
+    if (navigator.share) {
+        navigator.share({
+            title: product.name,
+            url: 'https://www.naver.com'
+        });
+    }else{
+        alert("공유하기가 지원되지 않는 환경 입니다.")
+    }
+  }
   return (
     <div id="pc-width">
       <Header text="상품 내용"></Header>
@@ -91,7 +102,7 @@ function DetailProductPage() {
       <div className="product-details">
         <div className="nameNshare">
           <p className="product-name">{product.name}</p>
-          {/* <img className="share-icon" src={share}></img> */}
+          <img onClick={handleShare} className="share-icon" src={share}></img>
         </div>
         <p className="discounted-price">
           <span className="discount-rate">{product.discountRate}% </span>

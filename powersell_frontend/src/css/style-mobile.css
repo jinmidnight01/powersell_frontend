@@ -204,12 +204,18 @@ hr {
   position: absolute;
   right: 8%;
   width: 8%;
+  margin-top: 3%;
+}
+.share-icon:hover {
+  background-color: #99c6f5;
 }
 
 .product-image {
-  width: 100%;
+  width: 85%;
   display: block;
   margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .product-details {
@@ -251,8 +257,12 @@ hr {
 .button-container {
     display: flex;
     justify-content: center;
-    margin-bottom: 50px; /* 화면 아래에서 10px 띄우기 */
     margin-top: auto;
+    position: fixed;
+    bottom: 2vh;
+    width: 100vw;
+    margin-left: auto;
+    margin-right: auto;
 }
 .positive_button {
   text-align: center;
@@ -307,6 +317,7 @@ hr {
 }
 .noticeContent {
   margin: 0 20px;
+  margin-bottom: 30PX;
   text-align: justify;
 }
 @media all and (min-width: 601px) {
@@ -316,6 +327,9 @@ hr {
     display: flex;
     flex-direction: column;
     overflow: auto;
+  }
+  .button-container {
+    width: 400px;
   }
 }
 
