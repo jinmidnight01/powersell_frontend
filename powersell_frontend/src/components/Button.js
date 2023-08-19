@@ -1,12 +1,14 @@
-import React from 'react'
+import React from "react";
 
-function Button({className, onClick, text}) {
+function Button({ className, onClick, text }) {
   return (
-    <button className={`positive_button ${className}`}
-     onClick={onClick}>
-        {text}
+    <button
+      className={`positive_button ${className}`}
+      onClick={onClick}
+    >
+      {text}
     </button>
-  )
+  );
 }
 
-export default Button
+export default Button;
