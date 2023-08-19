@@ -155,8 +155,12 @@ const AuthenticationPage = () => {
 
         {/* phoneNumber */}
         <div className={styles.auth_phoneTitle}>
-          <img src={phoneNumber} alt=""></img>
-          <div>전화번호</div>
+          <div>
+            <img src={phoneNumber} alt=""></img>
+          </div>
+          <div>
+            <div>전화번호</div>
+          </div>
         </div>
         <div id="numberNoti" style={inputNoti}>
           ※ 중간은 3~4자리, 끝은 4자리 숫자로 입력해주세요
@@ -197,8 +201,12 @@ const AuthenticationPage = () => {
 
         {/* password */}
         <div className={styles.auth_pwTitle}>
-          <img src={key} alt=""></img>
-          <div>비밀번호 (4자리 숫자)</div>
+          <div>
+            <img src={key} alt=""></img>
+          </div>
+          <div>
+            <div>비밀번호 (4자리 숫자)</div>
+          </div>
         </div>
         <div id="pwNoti" style={inputNoti}>
           ※ 4자리 숫자로 입력해주세요

@@ -17,14 +17,11 @@ import 컵밥 from "../../images/home/컵밥.jpg";
 import 햇반 from "../../images/home/햇반.jpg";
 import 구운란 from "../../images/home/구운란.png";
 
-
-
 function DetailProductPage() {
   const params = useParams();
   const productId = params.productId;
   const [product, setProduct] = useState();
   const [isLoading, setLoading] = useState(true);
-
 
   useEffect(() => {
     async function rendering_item_detail(id) {
@@ -71,24 +68,42 @@ function DetailProductPage() {
     }
   };
   if (isLoading) {
-    return <p style={{marginTop: '10%', textAlign: 'center'}}>로딩 중...</p>;
+    return <p style={{ marginTop: "10%", textAlign: "center" }}>로딩 중...</p>;
   }
-  if (!product) {
-    return <p style={{marginTop: '10%', textAlign: 'center'}}>상품이 없습니다.</p>;
-  }
-  const isOutOfStock = product.stockQuantity === 0;
-
+  // if (!product) {
+  //   return <p style={{marginTop: '10%', textAlign: 'center'}}>상품이 없습니다.</p>;
+  // }
+  // const isOutOfStock = product.stockQuantity === 0;
 
   const handleShare = () => {
     if (navigator.share) {
-        navigator.share({
-            title: product.name,
-            url: 'https://www.naver.com'
-        });
-    }else{
-        alert("공유하기가 지원되지 않는 환경 입니다.")
+      navigator.share({
+        // title: product.name,
+        title: "hi",
+        url: "https://www.naver.com",
+      });
+    } else {
+      alert("공유하기가 지원되지 않는 환경 입니다.");
     }
+  };
+
+  if (!product) {
+    return (
+      <div>
+        <p style={{ marginTop: "10%", textAlign: "center" }}>
+          상품이 없습니다.
+        </p>
+        <img
+          onClick={handleShare}
+          className="share-icon"
+          src={share}
+          alt=""
+        ></img>
+      </div>
+    );
   }
+  const isOutOfStock = product.stockQuantity === 0;
+
   return (
     <div id="pc-width">
       <Header text="상품 내용"></Header>
@@ -102,7 +117,12 @@ function DetailProductPage() {
       <div className="product-details">
         <div className="nameNshare">
           <p className="product-name">{product.name}</p>
-          <img onClick={handleShare} className="share-icon" src={share}></img>
+          <img
+            onClick={handleShare}
+            className="share-icon"
+            src={share}
+            alt=""
+          ></img>
         </div>
         <p className="discounted-price">
           <span className="discount-rate">{product.discountRate}% </span>

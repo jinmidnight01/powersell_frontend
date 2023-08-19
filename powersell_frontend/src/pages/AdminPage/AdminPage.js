@@ -30,32 +30,29 @@ const AdminPage = () => {
     }
 
     return (
-        <div id={styles.pcWidth} >
-            {/* header */}
-            <header className={styles.adminHeader}>
-                <div>
-                    <Link to={"/"}>
-                        <img src={backIcon} alt="뒤로가기"></img>
-                    </Link>
-                </div>
-                <div>
-                    {title}
-                </div>
-                {/* toggle button */}
-                <label className={styles.switch}>
-                    <input type="checkbox" onClick={toggle}></input>
-                    <span className={styles.slider} id={styles.round}></span>
-                </label>
-            </header>  
+      <div id={styles.pcWidth}>
+        {/* header */}
+        <header className={styles.adminHeader}>
+          <Link to={"/"} className={styles.imgBox}>
+            <img src={backIcon} alt="뒤로가기"></img>
+          </Link>
 
-            {/* main */}
-            <Routes>
-                {/* Order List Page */}
-                <Route path="/orderlist" element={<OrderListPage />}></Route>
-                {/* Product List Page */}
-                <Route path="/productlist" element={<ProductListPage />}></Route>
-            </Routes>         
-        </div>
+          <div>{title}</div>
+          {/* toggle button */}
+          <label className={styles.switch}>
+            <input type="checkbox" onClick={toggle}></input>
+            <span className={styles.slider} id={styles.round}></span>
+          </label>
+        </header>
+
+        {/* main */}
+        <Routes>
+          {/* Order List Page */}
+          <Route path="/orderlist" element={<OrderListPage />}></Route>
+          {/* Product List Page */}
+          <Route path="/productlist" element={<ProductListPage />}></Route>
+        </Routes>
+      </div>
     );
 };
 
