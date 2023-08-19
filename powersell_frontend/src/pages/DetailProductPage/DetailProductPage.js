@@ -22,7 +22,10 @@ import 구운란 from "../../images/home/구운란.png";
 function DetailProductPage() {
   const params = useParams();
   const productId = params.productId;
-  const [product, setProduct] = useState()
+  const [product, setProduct] = useState();
+  const [isLoading, setLoading] = useState(true);
+
+
   useEffect(() => {
     async function rendering_item_detail(id) {
       axios
@@ -32,10 +35,13 @@ function DetailProductPage() {
         })
         .catch((error) => {
           console.log("Error fetching items: ", error.response.data);
+        })
+        .finally(() => {
+          setLoading(false); // 로딩 종료
         });
     }
     rendering_item_detail(productId);
-  }, []);
+  }, [productId]);
 
   const [isClicked, setClicked] = useState(false);
 
@@ -64,9 +70,11 @@ function DetailProductPage() {
         return null;
     }
   };
-
-  if (!product) {
+  if (isLoading) {
     return <p style={{marginTop: '10%', textAlign: 'center'}}>로딩 중...</p>;
+  }
+  if (!product) {
+    return <p style={{marginTop: '10%', textAlign: 'center'}}>상품이 없습니다.</p>;
   }
   const isOutOfStock = product.stockQuantity === 0;
 
