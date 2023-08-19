@@ -45,9 +45,13 @@
   width: 56.25%;
   margin-top: 2px;
 }
-
+.banner {
+  display: flex;
+  justify-content: center;
+  margin-top: 4%;
+}
 .banner img {
-  width: 100%;
+  width: 92%;
 }
 
 .products {
