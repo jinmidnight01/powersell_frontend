@@ -4,7 +4,7 @@ import "../../css/style-mobile.css";
 
 import hostURL from "../../hostURL";
 
-import mypage from "../../images/icons/mypage.jpg";
+import user from "../../images/icons/user.png";
 import banner from "../../images/home/banner.jpg";
 import { Link } from "react-router-dom";
 import HomeHeader from "./../../components/HomeHeader";
@@ -71,7 +71,7 @@ function LandingPage() {
   return (
     <div id="pc-width" className="app">
       {/* Header */}
-      <HomeHeader img2={mypage} />
+      <HomeHeader img2={user} />
 
       {/* Banner */}
       <div className="banner">
