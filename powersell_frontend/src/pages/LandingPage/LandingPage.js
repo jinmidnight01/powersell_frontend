@@ -74,9 +74,9 @@ function LandingPage() {
       <HomeHeader img2={user} />
 
       {/* Banner */}
-      <div className="banner">
+      <a href="https://jazzy-note-a6d.notion.site/15ce9c9fd951457d9da722eafc8c3131?pvs=4" className="banner">
         <img src={banner} alt="Promotion Banner" />
-      </div>
+      </a>
 
       {/* Products */}
       <div className="products">
