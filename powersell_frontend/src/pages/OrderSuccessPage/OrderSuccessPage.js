@@ -1,5 +1,5 @@
-import { React } from "react";
-import { useLocation } from "react-router-dom";
+import { React, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
 import Header from "../../components/Header";
@@ -23,10 +23,16 @@ import 구운란 from "../../images/home/구운란.jpg";
 // Authentication function
 const OrderSuccessPage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   // 나중의 혜은 파이팅 ~!
-  const { successData, pw } = location.state;
-
+  const { successData, pw } = location.state || {};  
+  useEffect(() => {
+    if (!successData) {
+      navigate('/');
+    }
+  }, [successData, navigate]);
+  
   // item image
   const itemImage = (order) => {
     switch (order.item.name) {
@@ -44,9 +50,13 @@ const OrderSuccessPage = () => {
         return null;
     }
   };
+  if (!successData) {
+    return <p style={{marginTop: '10%', textAlign: 'center'}}></p>;
+  }
 
   return (
     <div id={styles.pcWidth}>
+      
       {/* header */}
       <Header text="주문 완료"></Header>
 

@@ -38,33 +38,36 @@ function LandingPage() {
 
   const [itemList, setItemList] = useState([]);
 
-  useEffect(() => { 
+  useEffect(() => {
     async function rendering_item() {
-    axios.get("/api/items")
-    .then((response) => {
-      console.log(response.data)
-      setItemList(response.data)
-    })
-    .catch((error) => {
-      console.log("Error fetching items: ", error.response.data); 
-    });
-  }
-  rendering_item();
-}, []);
-  
-  async function submitFeedback() {
+      axios
+        .get("/api/items")
+        .then((response) => {
+          console.log(response.data);
+          setItemList(response.data);
+        })
+        .catch((error) => {
+          console.log("Error fetching items: ", error.response.data);
+        });
+    }
+    rendering_item();
+  }, []);
+
+  async function submitFeedback(event) {
     if (feedback.trim() === "") {
       alert("피드백을 입력해주세요!");
       return;
     }
-    const inputs = {content: feedback}
-    axios.post("/api/admin/feedbacks", inputs)
-    .then((response) => {
-      console.log("피드백이 전송되었습니다. 감사합니다 :-)")
-    })
-    .catch((error) => {
-      console.log(error);
-    })
+    const inputs = { content: feedback };
+    axios
+      .post("/api/admin/feedbacks", inputs)
+      .then((response) => {
+        alert("피드백이 전송되었습니다. 감사합니다 :-)");
+        setFeedback('')
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
   return (
     <div id="pc-width" className="app">
@@ -88,7 +91,9 @@ function LandingPage() {
               />
               <div className="description">
                 <p className="product-name">
-                  {product.stockQuantity===0 && <span className="soldout">품절</span>}
+                  {product.stockQuantity === 0 && (
+                    <span className="soldout">품절</span>
+                  )}
                   {product.name}
                 </p>
                 <p className="original-price">{product.originalPrice}원</p>
@@ -104,7 +109,7 @@ function LandingPage() {
         <hr />
       </div>
       {/* Footer */}
-      <form className="footer">
+      <div className="footer">
         <h3 className="footerMessage">💌powersell팀에게 남기고 싶은 말💌</h3>
         <textarea
           onChange={handleFeedbackChange}
@@ -113,8 +118,13 @@ function LandingPage() {
           type="text"
           placeholder="짧은 한 줄 소감도 큰 도움이 됩니다!"
         />
-        <input type="submit" className="submit-button" value="제출하기" onClick={submitFeedback}/>
-      </form>
+        <input
+          type="button"
+          className="submit-button"
+          value="제출하기"
+          onClick={submitFeedback}
+        />
+      </div>
     </div>
   );
 }
