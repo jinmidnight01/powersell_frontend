@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-
+import CopyToClipboard from "react-copy-to-clipboard";
 import "../../css/style-mobile.css";
-
 import share from "../../images/detail/share.jpg";
 
 import hostURL from "../../hostURL";
@@ -70,20 +69,57 @@ function DetailProductPage() {
   if (isLoading) {
     return <p style={{ marginTop: "10%", textAlign: "center" }}>로딩 중...</p>;
   }
-  // if (!product) {
-  //   return <p style={{marginTop: '10%', textAlign: 'center'}}>상품이 없습니다.</p>;
-  // }
-  // const isOutOfStock = product.stockQuantity === 0;
+  if (!product) {
+    return (
+      <>
+      <p style={{ marginTop: "10%", textAlign: "center" }}>상품이 없습니다.</p>
+      </>
 
-  const handleShare = () => {
-    if (navigator.share) {
-      navigator.share({
-        // title: product.name,
-        title: "hi",
-        url: "https://www.naver.com",
+    );
+  }
+  const isOutOfStock = product.stockQuantity === 0;
+  const kakaoButton = () => {
+    if (window.Kakao) {
+      const kakao = window.Kakao
+
+      if (!kakao.isInitialized()) {
+        kakao.init('92b357c41da16ab9f3e0fa7f98cfbc30')
+      }
+
+      kakao.Share.sendDefault({
+        objectType: 'feed',
+        content: {
+          title: '딸기 치즈 케익',
+          description: '#케익 #딸기 #삼평동 #카페 #분위기 #소개팅',
+          imageUrl:
+            'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+          link: {
+            mobileWebUrl: 'https://developers.kakao.com',
+            webUrl: 'https://developers.kakao.com',
+          },
+        },
+        social: {
+          likeCount: 286,
+          commentCount: 45,
+          sharedCount: 845,
+        },
+        buttons: [
+          {
+            title: '웹으로 보기',
+            link: {
+              mobileWebUrl: 'https://developers.kakao.com',
+              webUrl: 'https://developers.kakao.com',
+            },
+          },
+          {
+            title: '앱으로 보기',
+            link: {
+              mobileWebUrl: 'https://developers.kakao.com',
+              webUrl: 'https://developers.kakao.com',
+            },
+          },
+        ],
       });
-    } else {
-      alert("공유하기가 지원되지 않는 환경 입니다.");
     }
   };
 
@@ -102,7 +138,18 @@ function DetailProductPage() {
       </div>
     );
   }
-  const isOutOfStock = product.stockQuantity === 0;
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator.share({
+        // title: product.name,
+        title: '꾸꾸까까',
+        url: "https://www.naver.com",
+      });
+    } else {
+      kakaoButton();
+    }
+  };
+
 
   return (
     <div id="pc-width">

@@ -117,7 +117,7 @@ hr {
   background-color: white;
   border-radius: 2px;
   padding: 5px;
-  font-size: 12px;
+  font-size: 10px;
   margin-top: 8px;
 }
 
@@ -227,8 +227,8 @@ h3 span {
   /* .input_group input {
     flex: 1;
   } */
-  .input_group select {
-    font-size: 8px;
+  .input_group select, input {
+    font-size: 2px;
   }
 
   .input_group label {
