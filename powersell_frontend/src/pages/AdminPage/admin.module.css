@@ -218,7 +218,6 @@ label > input:checked + .slider:before {
 
 /* 상품 목록 */
 .productUpdate {
-  display: none;
   position: fixed;
   border: 1.5px solid rgba(196, 196, 196, 0.8);
   border-radius: 5px;
