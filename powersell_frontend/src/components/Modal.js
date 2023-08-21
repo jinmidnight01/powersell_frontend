@@ -61,58 +61,64 @@ function Modal(props) {
     const flag1 = phoneNumber.length !== 7 && phoneNumber.length !== 8;
     const flag2 = pw.length !== 4;
 
-
-    if (!name || !preNum || !phoneNumber || !zipCode || !address || !dongho || !pw) {
-      alert("※ 모든 정보를 입력해주세요.") 
+    if (
+      !name ||
+      !preNum ||
+      !phoneNumber ||
+      !zipCode ||
+      !address ||
+      !dongho ||
+      !pw
+    ) {
+      alert("※ 모든 정보를 입력해주세요.");
       return;
-    } 
-    else if (flag1 || flag2) {
+    } else if (flag1 || flag2) {
       alert("※ 아래 양식을 지켜주세요\n\nㆍ전화번호: 7~8자리ㆍ비밀번호: 4자리");
       return;
-    }
-    else {
-    const number = preNum + phoneNumber;
-    const totalAdd = address;
-    const inputs = {
-      itemId: props.product.itemId,
-      count: quantity,
-      name: name,
-      number: number,
-      zipcode: zipCode,
-      address: totalAdd,
-      dongho: dongho,
-      pw: pw,
-    };
-
-    axios
-  .post(`${hostURL}/api/orders`, inputs)
-  .then((response) => {
-    document.body.style.overflow = "auto";
-    const successData = response.data;
-    navigate("/ordersuccess", {
-      state: { successData: successData, pw: pw },
-    });
-  })
-  .catch((error) => {
-    if (error.response && error.response.status === 400) {
-      navigate("/orderfail");
     } else {
-      console.log(error);
+      const number = preNum + phoneNumber;
+      const totalAdd = address;
+      const inputs = {
+        itemId: props.product.itemId,
+        count: quantity,
+        name: name,
+        number: number,
+        zipcode: zipCode,
+        address: totalAdd,
+        dongho: dongho,
+        pw: pw,
+      };
+
+      axios
+        .post(`${hostURL}/api/orders`, inputs)
+        .then((response) => {
+          document.body.style.overflow = "auto";
+          const successData = response.data;
+          navigate("/ordersuccess", {
+            state: { successData: successData, pw: pw },
+          });
+        })
+        .catch((error) => {
+          if (error.response && error.response.status === 400) {
+            navigate("/orderfail");
+          } else {
+            console.log(error);
+          }
+        });
     }
-  });}
   }
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
-      const handleResize = () => {
-          setWindowWidth(window.innerWidth);
-      };
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
 
-      window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
-      return () => {
-          window.removeEventListener('resize', handleResize);
-      };
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
   // 스타일 정의 code
   const postCodeStyle = {
@@ -123,7 +129,7 @@ function Modal(props) {
     transform: "translate(-50%, -50%)",
     width: windowWidth >= 400 ? "400px" : "100%",
     height: "100%",
-    display: "block"   
+    display: "block",
   };
 
   // 팝업창 열기
@@ -320,8 +326,8 @@ function Modal(props) {
             <br />
 
             <div className={styles.third_content}>
-              <h3 className={styles.order_title}>주문 확인용{" "}
-              {/* <span>*4자리 숫자로 설정해 주세요</span> */}
+              <h3 className={styles.order_title}>
+                주문 확인용 {/* <span>*4자리 숫자로 설정해 주세요</span> */}
               </h3>
               <div className={styles.input_group}>
                 <label>비밀번호</label>
@@ -349,7 +355,7 @@ function Modal(props) {
       <div className={styles.postCode}>
         {modalState ? (
           <DaumPostcode
-          className={styles.postCodeStyle}
+            className={styles.postCodeStyle}
             style={postCodeStyle}
             autoClose={false}
             onComplete={onCompletePost}
