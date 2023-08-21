@@ -20,6 +20,7 @@ const ProductListPage = (props) => {
   const [isClicked, setIsClicked] = useState(0);
   const [toggleStatus, setToggleStatus] = useState("+");
   const [changeStatus, setChangeStatus] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   // REST API 2-1
   useEffect(() => {
@@ -55,12 +56,10 @@ const ProductListPage = (props) => {
 
     if (changeStatus === false) {
       formChange.style.display = "block";
-
     } else {
       formChange.style.display = "none";
     }
-  }
-
+  };
 
   // function: input value update
   const handleOnChange = (e) => {
@@ -85,19 +84,6 @@ const ProductListPage = (props) => {
         break;
       default:
         break;
-    }
-  };
-
-  // function: update product
-  const updateProduct = (e) => {
-    const productUpdate = document.getElementById("productUpdate");
-
-    if (changeStatus === false) {
-      productUpdate.style.display = "block";
-      setChangeStatus(true);
-    } else {
-      productUpdate.style.display = "none";
-      setChangeStatus(false);
     }
   };
 
@@ -142,12 +128,31 @@ const ProductListPage = (props) => {
     }
   }, []);
 
+  const handleProductClick = (product) => {
+    setSelectedProduct(product);
+  };
+  const combinedClickHandler = (product) => {
+    handleProductClick(product);
+  };
+  const handleSave = (updatedProduct) => {
+    setProducts((prevProducts) => {
+      return prevProducts.map((product) =>
+        product.itemId === updatedProduct.itemId ? updatedProduct : product
+      );
+    });
+  };
+
   return (
     <div className={styles.product_main}>
-      <div id="productUpdate" className={styles.productUpdate}>
-        <ProductModal product={products} />
-      </div>
-
+      {selectedProduct && (
+        <div className={styles.productUpdate}>
+          <ProductModal
+            product={selectedProduct}
+            onClose={() => setSelectedProduct(null)}
+            onSave={handleSave}
+          />
+        </div>
+      )}
       <h2>1. 상품 목록</h2>
       <div className={styles.productTitle}>
         <div>ID</div>
@@ -155,6 +160,8 @@ const ProductListPage = (props) => {
         <div>원가</div>
         <div>정가</div>
         <div>재고</div>
+        <div>오픈</div>
+        <div>마감</div>
       </div>
 
       {/* 상품 */}
@@ -182,13 +189,18 @@ const ProductListPage = (props) => {
         }
 
         return (
-          <div onClick={updateProduct} key={product.itemId}>
+          <div
+            onClick={() => combinedClickHandler(product)}
+            key={product.itemId}
+          >
             <div className={styles.productStyle}>
               <div>{product.itemId}</div>
               <div>{productNewName}</div>
               <div>{product.originalPrice}</div>
               <div>{product.price}</div>
               <div>{product.stockQuantity}</div>
+              <div>{product.startDate}</div>
+              <div>{product.endDate}</div>
             </div>
             <div id={product.itemId} className={styles.productChange}>
               <button>-</button>
@@ -252,7 +264,9 @@ const ProductListPage = (props) => {
                   value={product.endDate}
                 ></input>
               </div>
-              <button onClick={handleClick} className={styles.changeButton}>수정</button>
+              <button onClick={handleClick} className={styles.changeButton}>
+                수정
+              </button>
             </div>
           </div>
         );
