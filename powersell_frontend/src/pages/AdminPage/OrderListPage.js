@@ -35,7 +35,7 @@ const OrderListPage = (props) => {
           console.log(error);
         });
     }
-  }, [reloadFlag]);
+  }, [props.status, reloadFlag]);
 
   return (
     <div className={styles.order_main}>

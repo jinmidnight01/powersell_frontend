@@ -251,7 +251,7 @@ label > input:checked + .slider:before {
   margin-bottom: 35px;
 }
 
-/* 상품 목록 */
+/* 상품 수정 Modal */
 .productUpdate {
   position: fixed;
   border: 1.5px solid rgba(196, 196, 196, 0.8);
@@ -265,6 +265,56 @@ label > input:checked + .slider:before {
   right: 0;
 }
 
+.productModal {
+  padding-left: 13px;
+  padding-top: 6px;
+}
+
+.productModal section {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.shutDown {
+  background-color: #fa7979;
+  color: white;
+  border: transparent;
+  border-radius: 100%;
+  width: 22px;
+  height: 22px;
+  font-size: 13px;
+  position: absolute;
+  margin: 5px 14px;
+  cursor: pointer;
+}
+
+.productModal > div {
+  margin-top: 8px;
+}
+
+.productModal > div:nth-child(2) {
+  margin-top: 15px
+}
+
+.productModal > div > div {
+  font-size: 15px;
+  margin-bottom: 3px;
+}
+
+.productModal > .saveButton {
+  margin-top: 15px;
+  background-color: #fa7979;
+  color: white;
+  border: transparent;
+  height: 24px;
+  font-size: 14px;
+  width: 50px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+/* 상품 목록 */
 .product_main h2 {
   font-size: 20px;
   margin-bottom: 11px;
@@ -299,66 +349,6 @@ label > input:checked + .slider:before {
   text-align: center;
   line-height: 30px;
   border-bottom: 1px double rgb(196, 196, 196);
-}
-
-.productChange {
-  display: none;
-  padding-top: 9px;
-  padding-bottom: 10px;
-  background-color: rgb(241, 240, 240);
-  padding-left: 7px;
-  border-bottom: 1px double rgb(196, 196, 196);
-}
-
-.productChange > div {
-  display: flex;
-  width: 100%;
-}
-
-.productChange > div > div {
-  line-height: 25px;
-  font-size: 15px;
-}
-
-.productChange > div > input {
-  width: 200px;
-  height: 15px;
-  margin: auto 0 auto 7px;
-}
-
-.productChange > div > div:nth-child(3) {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: row-reverse;
-}
-
-.productChange > button:nth-child(1) {
-  background-color: #fa7979;
-  color: white;
-  border: transparent;
-  border-radius: 100%;
-  width: 28px;
-  height: 28px;
-  font-size: 22px;
-  cursor: pointer;
-  margin: 0px 0 5px 7px;
-}
-
-.productChange > .changeButton {
-  background-color: #fa7979;
-  color: white;
-  border: transparent;
-  height: 24px;
-  font-size: 14px;
-  width: 55px;
-  border-radius: 7px;
-  margin-top: 3px;
-  margin-left: 5px;
-  cursor: pointer;
-}
-
-.productChange > div > button:nth-child(2) {
-  margin-left: 12px;
 }
 
 /* 상품 추가 */

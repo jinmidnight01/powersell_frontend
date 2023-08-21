@@ -1,10 +1,15 @@
-import { React } from "react";
+import { React, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import styles from "./admin.module.css";
 
 const LoginPage = (e) => {
+  const focus = useRef();
   const navigator = useNavigate();
+
+  useEffect(() => {
+    focus.current.focus();
+  }, []);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -29,6 +34,7 @@ const LoginPage = (e) => {
             name="username"
             placeholder=" Username"
             required
+            ref={focus}
           />
         </p>
         <p>

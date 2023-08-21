@@ -3,12 +3,22 @@ import axios from "axios";
 
 import hostURL from "../../hostURL";
 
+import styles from "./admin.module.css";
+
 const ProductModal = ({ product, onClose, onSave }) => {
   const [updatedProduct, setUpdatedProduct] = useState(product);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setUpdatedProduct((prev) => ({ ...prev, [name]: value }));
+    const tempValue = value.replace("T", " ");
+    if (name === "originalPrice" || name === "price" || name === "stockQuantity") {
+      const finalValue = Number(value);
+      setUpdatedProduct((prev) => ({ ...prev, [name]: finalValue }));
+    }
+    else {
+      const finalValue = tempValue;
+      setUpdatedProduct((prev) => ({ ...prev, [name]: finalValue }));
+    }
   };
 
   const handleSave = () => {
@@ -17,26 +27,75 @@ const ProductModal = ({ product, onClose, onSave }) => {
   };
 
   return (
-    <div>
-      {/* ... 모달의 다른 부분 ... */}
-      <input name="name" value={updatedProduct.name} onChange={handleInputChange} />
-      <input name="originalPrice" value={updatedProduct.originalPrice} onChange={handleInputChange} />
-      <input name="price" value={updatedProduct.price} onChange={handleInputChange} />
-      <input name="stockQuantity" value={updatedProduct.stockQuantity} onChange={handleInputChange} />
-      <input name="startDate" value={updatedProduct.startDate} onChange={handleInputChange} />
-      <input name="endDate" value={updatedProduct.endDate} onChange={handleInputChange} />
-
-
-
-
-      {/* ... 다른 input 필드들 ... */}
+    <div className={styles.productModal}>
+      <section>
+        <button className={styles.shutDown} onClick={onClose}>✖</button>
+      </section>
       <div>
-      <button onClick={handleSave}>저장</button>
-      <button onClick={onClose}>닫기</button>
+        <div>ㆍ품명:</div>
+        <input
+          name="name"
+          onChange={handleInputChange}
+          type="text"
+          placeholder=" ex. 제주 삼다수 2L (6개입)"
+          value={updatedProduct.name}
+        ></input>
       </div>
+      <div>
+        <div>ㆍ원가:</div>
+        <input
+          name="originalPrice"
+          onChange={handleInputChange}
+          type="number"
+          placeholder=" ex. 6600"
+          value={updatedProduct.originalPrice}
+        ></input>
+      </div>
+      <div>
+        <div>ㆍ정가:</div>
+        <input
+          name="price"
+          onChange={handleInputChange}
+          type="number"
+          placeholder=" ex. 1400"
+          value={updatedProduct.price}
+        ></input>
+      </div>
+      <div>
+        <div>ㆍ재고:</div>
+        <input
+          name="stockQuantity"
+          onChange={handleInputChange}
+          type="number"
+          placeholder=" ex. 25"
+          value={updatedProduct.stockQuantity}
+        ></input>
+      </div>
+      <div>
+        <div>ㆍ오픈:</div>
+        <input
+          name="startDate"
+          onChange={handleInputChange}
+          type="datetime-local"
+          step="1"
+          value={updatedProduct.startDate}
+        ></input>
+      </div>
+      <div>
+        <div>ㆍ마감:</div>
+        <input
+          name="endDate"
+          onChange={handleInputChange}
+          type="datetime-local"
+          step="1"
+          value={updatedProduct.endDate}
+        ></input>
+      </div>
+      <button className={styles.saveButton} onClick={handleSave}>
+        수정
+      </button>
     </div>
   );
 };
-
 
 export default ProductModal;

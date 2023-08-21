@@ -1,5 +1,4 @@
 import { React, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 
 import axios from "axios";
 
@@ -9,7 +8,6 @@ import styles from "./admin.module.css";
 import ProductModal from "./ProductModal";
 
 const ProductListPage = (props) => {
-  const [products, setProducts] = useState([]);
   const [feedbacks, setFeedbacks] = useState([]);
   const [name, setName] = useState("");
   const [originalPrice, setOriginalPrice] = useState(0);
@@ -19,22 +17,22 @@ const ProductListPage = (props) => {
   const [endDate, setEndDate] = useState("");
   const [isClicked, setIsClicked] = useState(0);
   const [toggleStatus, setToggleStatus] = useState("+");
-  const [changeStatus, setChangeStatus] = useState(false);
+  const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   // REST API 2-1
   useEffect(() => {
     if (props.status === 200) {
       axios
-      .get(`${hostURL}/api/items`)
-      .then((response) => {
-        setProducts(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        .get(`${hostURL}/api/items`)
+        .then((response) => {
+          setProducts(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
-  }, [isClicked]);
+  }, [props.status, isClicked]);
 
   // function: toggle button
   const toggle = () => {
@@ -47,17 +45,6 @@ const ProductListPage = (props) => {
     } else {
       setToggleStatus("+");
       form.style.display = "none";
-    }
-  };
-
-  const toggleChange = () => {
-    const formChange = document.getElementById("1");
-    console.log(formChange);
-
-    if (changeStatus === false) {
-      formChange.style.display = "block";
-    } else {
-      formChange.style.display = "none";
     }
   };
 
@@ -87,21 +74,54 @@ const ProductListPage = (props) => {
     }
   };
 
+  // function: product update
+  const handleProductClick = (product) => {
+    setSelectedProduct(product);
+  };
+  const combinedClickHandler = (product) => {
+    handleProductClick(product);
+  };
+  const handleSave = (updatedProduct) => {
+    axios
+      .put(`${hostURL}/api/items/${updatedProduct.itemId}`, updatedProduct)
+      .then((response) => {
+        if (isClicked === 0) {
+          setIsClicked(1);
+        } else {
+          setIsClicked(0);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   // REST API 2-2
   const handleClick = () => {
+    if (name.length === 0 || startDate.length === 0 || endDate.length === 0) {
+      alert("모든 항목을 입력해주세요")
+      return;
+    }
     const inputs = {
-      //   itemId: 6,
+      // itemId: 6,
       name: name,
-      originalPrice: originalPrice,
-      price: price,
-      stockQuantity: stockQuantity,
-      startDate: startDate.slice(0, 10) + " " + startDate.slice(11),
-      endDate: endDate.slice(0, 10) + " " + endDate.slice(11),
+      originalPrice: Number(originalPrice),
+      price: Number(price),
+      stockQuantity: Number(stockQuantity),
+      startDate: startDate.replace("T", " "),
+      endDate: endDate.replace("T", " "),
     };
+    console.log(typeof(inputs.originalPrice))
 
     axios
       .post(`${hostURL}/api/admin/items`, inputs)
       .then((response) => {
+        setName("");
+        setOriginalPrice(0);
+        setPrice(0);
+        setStockQuantity(0);
+        setStartDate("");
+        setEndDate("");
         setToggleStatus("-");
         if (isClicked === 0) {
           setIsClicked(1);
@@ -118,41 +138,31 @@ const ProductListPage = (props) => {
   useEffect(() => {
     if (props.status === 200) {
       axios
-      .get(`${hostURL}/api/admin/feedbacks`)
-      .then((response) => {
-        setFeedbacks(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        .get(`${hostURL}/api/admin/feedbacks`)
+        .then((response) => {
+          setFeedbacks(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
-  }, []);
-
-  const handleProductClick = (product) => {
-    setSelectedProduct(product);
-  };
-  const combinedClickHandler = (product) => {
-    handleProductClick(product);
-  };
-  const handleSave = (updatedProduct) => {
-    setProducts((prevProducts) => {
-      return prevProducts.map((product) =>
-        product.itemId === updatedProduct.itemId ? updatedProduct : product
-      );
-    });
-  };
+  }, [props.status]);
 
   return (
     <div className={styles.product_main}>
+      {/* 상품 수정 Modal */}
       {selectedProduct && (
         <div className={styles.productUpdate}>
           <ProductModal
             product={selectedProduct}
             onClose={() => setSelectedProduct(null)}
             onSave={handleSave}
+            onChange={handleOnChange}
           />
         </div>
       )}
+
+      {/* 상품 목록 */}
       <h2>1. 상품 목록</h2>
       <div className={styles.productTitle}>
         <div>ID</div>
@@ -160,8 +170,6 @@ const ProductListPage = (props) => {
         <div>원가</div>
         <div>정가</div>
         <div>재고</div>
-        <div>오픈</div>
-        <div>마감</div>
       </div>
 
       {/* 상품 */}
@@ -199,74 +207,6 @@ const ProductListPage = (props) => {
               <div>{product.originalPrice}</div>
               <div>{product.price}</div>
               <div>{product.stockQuantity}</div>
-              <div>{product.startDate}</div>
-              <div>{product.endDate}</div>
-            </div>
-            <div id={product.itemId} className={styles.productChange}>
-              <button>-</button>
-              <div>
-                <div>ㆍ품명:</div>
-                <input
-                  name="name"
-                  onChange={handleOnChange}
-                  type="text"
-                  placeholder=" ex. 제주 삼다수 2L (6개입)"
-                  value={product.name}
-                ></input>
-              </div>
-              <div>
-                <div>ㆍ원가:</div>
-                <input
-                  name="originalPrice"
-                  onChange={handleOnChange}
-                  type="number"
-                  placeholder=" ex. 6600"
-                  value={product.originalPrice}
-                ></input>
-              </div>
-              <div>
-                <div>ㆍ정가:</div>
-                <input
-                  name="price"
-                  onChange={handleOnChange}
-                  type="number"
-                  placeholder=" ex. 1400"
-                  value={product.price}
-                ></input>
-              </div>
-              <div>
-                <div>ㆍ재고:</div>
-                <input
-                  name="stockQuantity"
-                  onChange={handleOnChange}
-                  type="number"
-                  placeholder=" ex. 25"
-                  value={product.stockQuantity}
-                ></input>
-              </div>
-              <div>
-                <div>ㆍ오픈:</div>
-                <input
-                  name="startDate"
-                  onChange={handleOnChange}
-                  type="datetime-local"
-                  step="1"
-                  value={product.startDate}
-                ></input>
-              </div>
-              <div>
-                <div>ㆍ마감:</div>
-                <input
-                  name="endDate"
-                  onChange={handleOnChange}
-                  type="datetime-local"
-                  step="1"
-                  value={product.endDate}
-                ></input>
-              </div>
-              <button onClick={handleClick} className={styles.changeButton}>
-                수정
-              </button>
             </div>
           </div>
         );
@@ -288,6 +228,7 @@ const ProductListPage = (props) => {
             onChange={handleOnChange}
             type="text"
             placeholder=" ex. 제주 삼다수 2L (6개입)"
+            value={name}
           ></input>
         </div>
         <div>
@@ -297,6 +238,7 @@ const ProductListPage = (props) => {
             onChange={handleOnChange}
             type="number"
             placeholder=" ex. 6600"
+            value={originalPrice}
           ></input>
         </div>
         <div>
@@ -306,6 +248,7 @@ const ProductListPage = (props) => {
             onChange={handleOnChange}
             type="number"
             placeholder=" ex. 1400"
+            value={price}
           ></input>
         </div>
         <div>
@@ -315,6 +258,7 @@ const ProductListPage = (props) => {
             onChange={handleOnChange}
             type="number"
             placeholder=" ex. 25"
+            value={stockQuantity}
           ></input>
         </div>
         <div>
@@ -324,6 +268,7 @@ const ProductListPage = (props) => {
             onChange={handleOnChange}
             type="datetime-local"
             step="1"
+            value={startDate}
           ></input>
         </div>
         <div>
@@ -333,6 +278,7 @@ const ProductListPage = (props) => {
             onChange={handleOnChange}
             type="datetime-local"
             step="1"
+            value={endDate}
           ></input>
         </div>
         <button onClick={handleClick}>등록</button>
