@@ -8,7 +8,7 @@ import hostURL from "../../hostURL";
 import styles from "./admin.module.css";
 import ProductModal from "./ProductModal";
 
-const ProductListPage = () => {
+const ProductListPage = (props) => {
   const [products, setProducts] = useState([]);
   const [feedbacks, setFeedbacks] = useState([]);
   const [name, setName] = useState("");
@@ -23,7 +23,8 @@ const ProductListPage = () => {
 
   // REST API 2-1
   useEffect(() => {
-    axios
+    if (props.status === 200) {
+      axios
       .get(`${hostURL}/api/items`)
       .then((response) => {
         setProducts(response.data);
@@ -31,6 +32,7 @@ const ProductListPage = () => {
       .catch((error) => {
         console.log(error);
       });
+    }
   }, [isClicked]);
 
   // function: toggle button
@@ -128,7 +130,8 @@ const ProductListPage = () => {
 
   // REST API 3-1
   useEffect(() => {
-    axios
+    if (props.status === 200) {
+      axios
       .get(`${hostURL}/api/admin/feedbacks`)
       .then((response) => {
         setFeedbacks(response.data);
@@ -136,6 +139,7 @@ const ProductListPage = () => {
       .catch((error) => {
         console.log(error);
       });
+    }
   }, []);
 
   return (

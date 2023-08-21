@@ -1,48 +1,106 @@
-import { React, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
+import { React } from "react";
+import { useNavigate } from "react-router-dom";
 
-import hostURL from "../../hostURL";
+import styles from "./admin.module.css";
 
 const LoginPage = (e) => {
-    const handleClick = (e) => {
-        const username = document.getElementById("username");
-        const password = document.getElementById("number2");
-        const inputs = { username: username, password: password };
-        const CircularJSON = require('circular-json');
+  const navigator = useNavigate();
 
-        axios
-        .post(`${hostURL}/login`, {
-            headers: {"Content-Type": "application/json"},
-            body: CircularJSON.stringify(inputs)
-        })
-        .then((response) => {
-            console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+  const handleClick = (e) => {
+    e.preventDefault();
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    if (username === "admin" && password === "1234") {
+      navigator("/admin", { state: 200 });
+    } else {
+      alert("아이디 또는 비밀번호가 일치하지 않습니다.");
     }
+  };
 
   return (
-    <div className="container">
-        <div className="form-signin">
-            <h2 className="form-signin-heading">Please sign in</h2>
-            <p>
-                <label htmlFor="username" className="sr-only">Username</label>
-                <input type="text" id="username" name="username" className="form-control" placeholder="Username" required="" autoFocus="" />
-            </p>
-            <p>
-                <label htmlFor="password" className="sr-only">Password</label>
-                <input type="password" id="password" name="password" className="form-control" placeholder="Password" required="" />
-            </p>
-            <button onClick={handleClick} className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        </div>
+    <div id={styles.pcWidth} className={styles.login_main}>
+      <div className={styles.login_box}>
+        <h2>로그인</h2>
+        <p>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder=" Username"
+            required
+          />
+        </p>
+        <p>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder=" Password"
+            required
+          />
+        </p>
+        <button onClick={handleClick}>제출</button>
+      </div>
     </div>
   );
 };
 
 export default LoginPage;
+
+//   const handleClick = (e) => {
+//     const username = document.getElementById("username");
+//     const password = document.getElementById("number2");
+//     const inputs = { username: username, password: password };
+//     const CircularJSON = require("circular-json");
+
+//     axios
+//       .post(`${hostURL}/login`, {
+//         headers: { "Content-Type": "application/json" },
+//         body: CircularJSON.stringify(inputs),
+//       })
+//       .then((response) => {
+//         console.log(response);
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//       });
+//   };
+
+//   const [loginPageHTML, setloginPageHTML] = useState("");
+
+//   axios.get(`${hostURL}/login`).then((response) => {
+//     setloginPageHTML(response.data);
+//   });
+
+//   const createMarkup = () => {
+//     const temp = loginPageHTML;
+//     console.log(temp);
+//     const form = temp.querySelector(".form-signin");
+//     form.setAttribute("action", `${hostURL}/login`);
+//     console.log(form);
+
+//     return { __html: loginPageHTML };
+//   };
+//   window.onload = function () {
+//     const form = document.querySelector(".form-signin");
+//     form.setAttribute("action", `${hostURL}/login`);
+//   };
+
+// var myForm = document.querySelector(".form-signin");
+// myForm.setAttribute("action", `${hostURL}/login`);
+
+// const navigator = useNavigate();
+// const handleClick = (e) => {
+//     navigator("/");
+// }
+
+// try {
+//     myForm.setAttribute("action", `${hostURL}/login`);
+// } catch (e) {
+//     myForm = document.querySelector(".form-signin");
+//     myForm.setAttribute("action", `${hostURL}/login`);
+// }
 
 //   const location = useLocation();
 //   const navigate = useNavigate();
@@ -89,4 +147,3 @@ export default LoginPage;
 //     console.log(error);
 //   });
 //   };
-

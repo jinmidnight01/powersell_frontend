@@ -5,6 +5,41 @@
   }
 }
 
+/* 로그인 페이지 */
+.login_main {
+  display: flex;
+  justify-content: center;
+}
+
+.login_box {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.login_box label {
+  margin-right: 6px;
+}
+
+.login_box input {
+  margin-bottom: 12px;
+  width: 150px;
+  height: 20px;
+  font-size: 13px;
+}
+
+.login_box button {
+  background-color: #fa7979;
+  color: white;
+  border: transparent;
+  height: 24px;
+  font-size: 14px;
+  width: 50px;
+  border-radius: 8px;
+  margin-top: 6px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
 /* 관리자 페이지 */
 
 /* header */

@@ -6,7 +6,7 @@ import hostURL from "../../hostURL";
 
 import styles from "./admin.module.css";
 
-const OrderListPage = () => {
+const OrderListPage = (props) => {
   const [result, setResult] = useState([]);
   const [selected, setSelected] = useState("전체");
   const selectDict = {
@@ -25,14 +25,16 @@ const OrderListPage = () => {
   // REST API 1-1
   const [reloadFlag, setReloadFlag] = useState(0);
   useEffect(() => {
-    axios
-      .get(`${hostURL}/api/admin/orders`)
-      .then((response) => {
-        setResult(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (props.status === 200) {
+      axios
+        .get(`${hostURL}/api/admin/orders`)
+        .then((response) => {
+          setResult(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }, [reloadFlag]);
 
   return (
