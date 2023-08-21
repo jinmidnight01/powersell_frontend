@@ -94,7 +94,7 @@ const OrderSuccessPage = () => {
           </div>
           <hr className={styles.line} />
           {/* item title */}
-
+          
           <div style={{ marginBottom: "10px", marginTop: "15px" }}>
             <div className={styles.order_itemTitle}>
               <div>

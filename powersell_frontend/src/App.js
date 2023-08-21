@@ -7,7 +7,11 @@ import AuthenticationPage from './pages/OrderConfirmPage/AuthenticationPage';
 import OrderConfirmPage from './pages/OrderConfirmPage/OrderConfirmPage';
 import OrderSuccessPage from './pages/OrderSuccessPage/OrderSuccessPage';
 import AdminPage from './pages/AdminPage/AdminPage';
+<<<<<<< HEAD
 import LoginPage from './pages/AdminPage/LoginPage';
+=======
+import OrderFailPage from './pages/OrderFailPage/OrderFailPage';
+>>>>>>> hyeeun
 
 function App() {
   return (
@@ -15,6 +19,7 @@ function App() {
       <Route path='/' element={<LandingPage />} />
       <Route path='/product/:productId' element={<DetailProductPage />} />
       <Route path='/ordersuccess' element={<OrderSuccessPage/>} />
+      <Route path='/orderfail' element={<OrderFailPage/>} />
       <Route path='/authentication' element={<AuthenticationPage />} />
       <Route path='/orderconfirm' element={<OrderConfirmPage />} />
       <Route path='/admin/*' element={<AdminPage />} />
