@@ -1,10 +1,12 @@
 import { React, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import axios from "axios";
 
 import hostURL from "../../hostURL";
 
 import styles from "./admin.module.css";
+import ProductModal from "./ProductModal";
 
 const ProductListPage = () => {
   const [products, setProducts] = useState([]);
@@ -13,8 +15,11 @@ const ProductListPage = () => {
   const [originalPrice, setOriginalPrice] = useState(0);
   const [price, setPrice] = useState(0);
   const [stockQuantity, setStockQuantity] = useState(0);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [isClicked, setIsClicked] = useState(0);
   const [toggleStatus, setToggleStatus] = useState("+");
+  const [changeStatus, setChangeStatus] = useState(false);
 
   // REST API 2-1
   useEffect(() => {
@@ -42,6 +47,19 @@ const ProductListPage = () => {
     }
   };
 
+  const toggleChange = () => {
+    const formChange = document.getElementById("1");
+    console.log(formChange);
+
+    if (changeStatus === false) {
+      formChange.style.display = "block";
+
+    } else {
+      formChange.style.display = "none";
+    }
+  }
+
+
   // function: input value update
   const handleOnChange = (e) => {
     switch (e.target.name) {
@@ -57,19 +75,40 @@ const ProductListPage = () => {
       case "stockQuantity":
         setStockQuantity(e.target.value);
         break;
+      case "startDate":
+        setStartDate(e.target.value);
+        break;
+      case "endDate":
+        setEndDate(e.target.value);
+        break;
       default:
         break;
+    }
+  };
+
+  // function: update product
+  const updateProduct = (e) => {
+    const productUpdate = document.getElementById("productUpdate");
+
+    if (changeStatus === false) {
+      productUpdate.style.display = "block";
+      setChangeStatus(true);
+    } else {
+      productUpdate.style.display = "none";
+      setChangeStatus(false);
     }
   };
 
   // REST API 2-2
   const handleClick = () => {
     const inputs = {
-    //   itemId: 6,
+      //   itemId: 6,
       name: name,
       originalPrice: originalPrice,
       price: price,
       stockQuantity: stockQuantity,
+      startDate: startDate.slice(0, 10) + " " + startDate.slice(11),
+      endDate: endDate.slice(0, 10) + " " + endDate.slice(11),
     };
 
     axios
@@ -101,6 +140,10 @@ const ProductListPage = () => {
 
   return (
     <div className={styles.product_main}>
+      <div id="productUpdate" className={styles.productUpdate}>
+        <ProductModal product={products} />
+      </div>
+
       <h2>1. 상품 목록</h2>
       <div className={styles.productTitle}>
         <div>ID</div>
@@ -133,13 +176,80 @@ const ProductListPage = () => {
             productNewName = product.name;
             break;
         }
+
         return (
-          <div key={product.itemId} className={styles.productStyle}>
-            <div>{product.itemId}</div>
-            <div>{productNewName}</div>
-            <div>{product.originalPrice}</div>
-            <div>{product.price}</div>
-            <div>{product.stockQuantity}</div>
+          <div onClick={updateProduct} key={product.itemId}>
+            <div className={styles.productStyle}>
+              <div>{product.itemId}</div>
+              <div>{productNewName}</div>
+              <div>{product.originalPrice}</div>
+              <div>{product.price}</div>
+              <div>{product.stockQuantity}</div>
+            </div>
+            <div id={product.itemId} className={styles.productChange}>
+              <button>-</button>
+              <div>
+                <div>ㆍ품명:</div>
+                <input
+                  name="name"
+                  onChange={handleOnChange}
+                  type="text"
+                  placeholder=" ex. 제주 삼다수 2L (6개입)"
+                  value={product.name}
+                ></input>
+              </div>
+              <div>
+                <div>ㆍ원가:</div>
+                <input
+                  name="originalPrice"
+                  onChange={handleOnChange}
+                  type="number"
+                  placeholder=" ex. 6600"
+                  value={product.originalPrice}
+                ></input>
+              </div>
+              <div>
+                <div>ㆍ정가:</div>
+                <input
+                  name="price"
+                  onChange={handleOnChange}
+                  type="number"
+                  placeholder=" ex. 1400"
+                  value={product.price}
+                ></input>
+              </div>
+              <div>
+                <div>ㆍ재고:</div>
+                <input
+                  name="stockQuantity"
+                  onChange={handleOnChange}
+                  type="number"
+                  placeholder=" ex. 25"
+                  value={product.stockQuantity}
+                ></input>
+              </div>
+              <div>
+                <div>ㆍ오픈:</div>
+                <input
+                  name="startDate"
+                  onChange={handleOnChange}
+                  type="datetime-local"
+                  step="1"
+                  value={product.startDate}
+                ></input>
+              </div>
+              <div>
+                <div>ㆍ마감:</div>
+                <input
+                  name="endDate"
+                  onChange={handleOnChange}
+                  type="datetime-local"
+                  step="1"
+                  value={product.endDate}
+                ></input>
+              </div>
+              <button onClick={handleClick} className={styles.changeButton}>수정</button>
+            </div>
           </div>
         );
       })}
@@ -154,12 +264,12 @@ const ProductListPage = () => {
       ></input>
       <div id="form" className={styles.addProduct}>
         <div>
-          <div>ㆍ상품명:</div>
+          <div>ㆍ품명:</div>
           <input
             name="name"
             onChange={handleOnChange}
             type="text"
-            placeholder=" ex. 삼다수"
+            placeholder=" ex. 제주 삼다수 2L (6개입)"
           ></input>
         </div>
         <div>
@@ -187,6 +297,24 @@ const ProductListPage = () => {
             onChange={handleOnChange}
             type="number"
             placeholder=" ex. 25"
+          ></input>
+        </div>
+        <div>
+          <div>ㆍ오픈:</div>
+          <input
+            name="startDate"
+            onChange={handleOnChange}
+            type="datetime-local"
+            step="1"
+          ></input>
+        </div>
+        <div>
+          <div>ㆍ마감:</div>
+          <input
+            name="endDate"
+            onChange={handleOnChange}
+            type="datetime-local"
+            step="1"
           ></input>
         </div>
         <button onClick={handleClick}>등록</button>

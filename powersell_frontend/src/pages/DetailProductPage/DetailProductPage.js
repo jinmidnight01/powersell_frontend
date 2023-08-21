@@ -4,6 +4,8 @@ import axios from "axios";
 import CopyToClipboard from "react-copy-to-clipboard";
 import "../../css/style-mobile.css";
 import share from "../../images/detail/share.jpg";
+import kakaotalk from "../../images/orderConfirm/kakaotalk.png";
+import notion from "../../images/icons/notion.png";
 
 import hostURL from "../../hostURL";
 
@@ -72,30 +74,31 @@ function DetailProductPage() {
   if (!product) {
     return (
       <>
-      <p style={{ marginTop: "10%", textAlign: "center" }}>상품이 없습니다.</p>
+        <p style={{ marginTop: "10%", textAlign: "center" }}>
+          상품이 없습니다.
+        </p>
       </>
-
     );
   }
   const isOutOfStock = product.stockQuantity === 0;
   const kakaoButton = () => {
     if (window.Kakao) {
-      const kakao = window.Kakao
+      const kakao = window.Kakao;
 
       if (!kakao.isInitialized()) {
-        kakao.init('92b357c41da16ab9f3e0fa7f98cfbc30')
+        kakao.init("92b357c41da16ab9f3e0fa7f98cfbc30");
       }
 
       kakao.Share.sendDefault({
-        objectType: 'feed',
+        objectType: "feed",
         content: {
-          title: '딸기 치즈 케익',
-          description: '#케익 #딸기 #삼평동 #카페 #분위기 #소개팅',
+          title: "딸기 치즈 케익",
+          description: "#케익 #딸기 #삼평동 #카페 #분위기 #소개팅",
           imageUrl:
-            'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+            "http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png",
           link: {
-            mobileWebUrl: 'https://developers.kakao.com',
-            webUrl: 'https://developers.kakao.com',
+            mobileWebUrl: "https://developers.kakao.com",
+            webUrl: "https://developers.kakao.com",
           },
         },
         social: {
@@ -105,17 +108,17 @@ function DetailProductPage() {
         },
         buttons: [
           {
-            title: '웹으로 보기',
+            title: "웹으로 보기",
             link: {
-              mobileWebUrl: 'https://developers.kakao.com',
-              webUrl: 'https://developers.kakao.com',
+              mobileWebUrl: "https://developers.kakao.com",
+              webUrl: "https://developers.kakao.com",
             },
           },
           {
-            title: '앱으로 보기',
+            title: "앱으로 보기",
             link: {
-              mobileWebUrl: 'https://developers.kakao.com',
-              webUrl: 'https://developers.kakao.com',
+              mobileWebUrl: "https://developers.kakao.com",
+              webUrl: "https://developers.kakao.com",
             },
           },
         ],
@@ -142,14 +145,13 @@ function DetailProductPage() {
     if (navigator.share) {
       navigator.share({
         // title: product.name,
-        title: '꾸꾸까까',
+        title: "꾸꾸까까",
         url: "https://www.naver.com",
       });
     } else {
       kakaoButton();
     }
   };
-
 
   return (
     <div id="pc-width">
@@ -186,45 +188,72 @@ function DetailProductPage() {
         <br></br>
         <div className="noticeContent">
           <p>
-            🛒 1인당 최대 구매 수량은 <span className="borderText">2개</span>
+            🛒 1회 최대 구매 수량은 <span className="borderText">2개</span>
             입니다
           </p>
           <br></br>
           <br></br>
 
           <p>
-            <i className="borderText">✔️ Agreement.</i>
-          </p>
-          <br></br>
-          <p>
-            - 할인 상품은 교환/환불이 불가합니다. 입금 및 재고 확인 직후 품절
-            표기되므로 발송 전이라도 변경/취소가 불가합니다{" "}
+            <i className="borderText">✔️ 주요 내용</i>
           </p>
           <br></br>
 
           <p>
-            - 주문 시각으로부터 <span className="borderText">30분</span> 내
-            미입금 시 주문이 자동 취소됩니다.
+            <span style={{ fontWeight: "bold" }}>1. 배송/주문 안내</span>
+            <br />- 모든 주문들을 취합하여, 매일{" "}
+            <span className="borderText">자정</span>에{" "}
+            <span className="borderText">쿠팡</span>을 통해 일괄 주문합니다
+            <br />- 마이페이지에서 주문조회를 통해{" "}
+            <span className="borderText">배송상황</span>을 확인하실 수 있습니다{" "}
           </p>
-
           <br></br>
+
           <p>
-            - 미리 공지사항에 고지해 둔 내용을 소비자가 충분히 숙지하지 않아
+            <span style={{ fontWeight: "bold" }}>2. 입금 안내</span>
+            <br />- 주문 시각으로부터 <span className="borderText">
+              30분
+            </span>{" "}
+            내 미입금 시 주문이 자동 취소됩니다.
+          </p>
+          <br></br>
+
+          <p>
+            <span style={{ fontWeight: "bold" }}>3. 교환/환불 안내</span>
+            <br />
+            - 단순 변심으로 인한 교환/환불은 <span style={{ fontWeight: "bold" }}>불가</span>합니다
+          </p>
+          <br></br>
+
+          <p style={{fontStyle: "italic", color: "grey"}}>
+            ※ 미리 공지사항에 고지해 둔 내용을 소비자가 충분히 숙지하지 않아
             발생되는 일에 대해 판매자가 책임지지 않습니다.
           </p>
           <br></br>
           <br></br>
 
           <p>
-            <i className="borderText">🛻 Delivery.</i>
+            <i className="borderText">⚠️ 추가 내용</i>
           </p>
           <br></br>
-          <p>
-            -배송지 변경은 주문 시각으로부터 24시간 이내에만 가능합니다.
-            카카오톡 채널로 문의를 남겨주세요.
-          </p>
+          <div>
+            문의 사항이 있을 시 아래{" "}
+            <span className="borderText">노션 링크</span>나{" "}
+            <span className="borderText">카카오톡 채널</span>을 통해 자세한
+            내용을 확인해주세요
+            <br />
+            <p style={{marginTop: "15px"}}>
+              <a href="https://www.notion.so/SALE-EVENT-15ce9c9fd951457d9da722eafc8c3131?pvs=4">
+                <img src={notion} style={{marginRight: "15px"}} width={42} alt=""></img>
+              </a>
+              <a href="https://google.com">
+                <img src={kakaotalk} width={42} alt=""></img>
+              </a>
+            </p>
+          </div>
           <br></br>
           <br></br>
+
           <br></br>
         </div>
       </div>

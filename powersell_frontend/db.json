@@ -18,7 +18,7 @@
       "address": "서울 서대문구 연희로 5길 16-13",
       "dongho": "101동 506호",
       "orderDate": "2023-08-03 21:00:01",
-      "orderStatus": "DELIVERING",
+      "orderStatus": "ARRIVED",
       "id": 1
     },
     {
@@ -60,7 +60,7 @@
       "address": "서울 서대문구 연희로 5길 16-13",
       "dongho": "101동 506호",
       "orderDate": "2023-08-03 21:00:03",
-      "orderStatus": "DELIVERING",
+      "orderStatus": "CANCELED",
       "id": 3
     },
     {
@@ -81,7 +81,7 @@
       "address": "서울 서대문구 연희로 5길 16-13",
       "dongho": "101동 506호",
       "orderDate": "2023-08-03 21:00:04",
-      "orderStatus": "ARRIVED",
+      "orderStatus": "WAITING",
       "id": 4
     }
   ],
@@ -189,7 +189,10 @@
       "originalPrice": 6600,
       "price": 1400,
       "discountRate": 80,
-      "stockQuantity": 14
+      "stockQuantity": 14,
+      "eventIng": true,
+      "startDate": "2023-08-20 09:19:20",
+      "endDate": "2023-08-21 17:19:20"
     },
     {
       "id": 2,
@@ -198,7 +201,10 @@
       "originalPrice": 5800,
       "price": 1200,
       "discountRate": 80,
-      "stockQuantity": 10
+      "stockQuantity": 10,
+      "eventIng": true,
+      "startDate": "2023-08-20 09:19:20",
+      "endDate": "2023-08-21 17:19:20"
     },
     {
       "id": 3,
@@ -207,7 +213,10 @@
       "originalPrice": 2500,
       "price": 600,
       "discountRate": 80,
-      "stockQuantity": 0
+      "stockQuantity": 0,
+      "eventIng": true,
+      "startDate": "2023-08-20 09:19:20",
+      "endDate": "2023-08-21 17:19:20"
     },
     {
       "id": 4,
@@ -216,7 +225,10 @@
       "originalPrice": 3900,
       "price": 800,
       "discountRate": 80,
-      "stockQuantity": 0
+      "stockQuantity": 0,
+      "eventIng": true,
+      "startDate": "2023-08-20 09:19:20",
+      "endDate": "2023-08-21 17:19:20"
     },
     {
       "id": 5,
@@ -225,10 +237,14 @@
       "originalPrice": 6290,
       "price": 1300,
       "discountRate": 80,
-      "stockQuantity": 13
+      "stockQuantity": 13,
+      "eventIng": true,
+      "startDate": "2023-08-20 09:19:20",
+      "endDate": "2023-08-21 17:19:20"
     }
   ],
-  "api_admin_items": [],
+  "api_admin_items": [
+  ],
   "api_admin_feedbacks": [
     {
       "id": 1,

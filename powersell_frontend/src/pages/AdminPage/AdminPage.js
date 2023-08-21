@@ -3,6 +3,7 @@ import { Route, Routes, Link, useNavigate } from 'react-router-dom';
 
 import ProductListPage from './ProductListPage';
 import OrderListPage from './OrderListPage';
+import ProductModal from './ProductModal';
 
 import backIcon from '../../images/icons/left.png';
 

@@ -7,6 +7,7 @@ import AuthenticationPage from './pages/OrderConfirmPage/AuthenticationPage';
 import OrderConfirmPage from './pages/OrderConfirmPage/OrderConfirmPage';
 import OrderSuccessPage from './pages/OrderSuccessPage/OrderSuccessPage';
 import AdminPage from './pages/AdminPage/AdminPage';
+import LoginPage from './pages/AdminPage/LoginPage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route path='/authentication' element={<AuthenticationPage />} />
       <Route path='/orderconfirm' element={<OrderConfirmPage />} />
       <Route path='/admin/*' element={<AdminPage />} />
+      <Route path='/login' element={<LoginPage />} />
     </Routes>
   );
 }

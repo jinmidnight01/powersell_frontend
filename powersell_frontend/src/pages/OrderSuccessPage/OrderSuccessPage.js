@@ -12,8 +12,6 @@ import styles from "./OrderSuccessPage.module.css";
 import Button from "../../components/Button";
 import { Link } from "react-router-dom";
 
-import order_info from "../../data/order_info.json";
-
 import 삼다수 from "../../images/home/삼다수.jpg";
 import 신라면 from "../../images/home/신라면.jpg";
 import 컵밥 from "../../images/home/컵밥.jpg";
@@ -25,8 +23,8 @@ const OrderSuccessPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // 나중의 혜은 파이팅 ~!
-  const { successData, pw } = location.state || {};  
+  // response data
+  const { successData, pw } = location.state;  
   useEffect(() => {
     if (!successData) {
       navigate('/');
@@ -101,16 +99,16 @@ const OrderSuccessPage = () => {
             <div className={styles.order_itemTitle}>
               <div>
                 <img
-                  src={itemImage(order_info[0])}
-                  alt={order_info[0].item.name}
+                  src={itemImage(successData)}
+                  alt={successData.item.name}
                 />
               </div>
               <div>
                 <div className={styles.order_itemInfo_title}>
-                  {order_info[0].item.name}
+                  {successData.item.name}
                 </div>
                 <div className={styles.order_itemInfo_number}>
-                  {order_info[0].item.price}원 / {order_info[0].count}개
+                  {successData.item.price}원 / {successData.count}개
                 </div>
               </div>
             </div>
@@ -120,7 +118,7 @@ const OrderSuccessPage = () => {
                   <p>총 상품 금액</p>
                   <div>
                     {(
-                      order_info[0].item.originalPrice * order_info[0].count
+                      successData.item.originalPrice * successData.count
                     ).toLocaleString()}
                     원
                   </div>
@@ -129,8 +127,8 @@ const OrderSuccessPage = () => {
                   <p>할인 금액</p>
                   <div>
                     {(
-                      order_info[0].item.originalPrice * order_info[0].count -
-                      order_info[0].item.price * order_info[0].count
+                      successData.item.originalPrice * successData.count -
+                      successData.item.price * successData.count
                     ).toLocaleString()}
                     원
                   </div>
@@ -143,7 +141,7 @@ const OrderSuccessPage = () => {
                   <p className={styles.borderText}>최종 결제금액</p>
                   <div className={styles.borderText}>
                     {(
-                      order_info[0].item.price * order_info[0].count
+                      successData.item.price * successData.count
                     ).toLocaleString()}
                     원
                   </div>
@@ -161,10 +159,10 @@ const OrderSuccessPage = () => {
           </div>
           <hr className={styles.line} />
           <ul>
-            <li><span>주문일시</span>: {order_info[0].orderDate}</li>
-            <li><span>주문자</span>: {order_info[0].name}</li>
-            <li><span>전화번호</span>: {order_info[0].number}</li>
-            <li><span>주소</span>: {order_info[0].address}</li>
+            <li><span>주문일시</span>: {successData.orderDate.slice(0,10) + " " + successData.orderDate.slice(11,19)}</li>
+            <li><span>주문자</span>: {successData.name}</li>
+            <li><span>전화번호</span>: {successData.number}</li>
+            <li><span>주소</span>: {successData.address}</li>
             <li><span>비밀번호</span>: {pw.slice(0, 2)}xx</li>
           </ul>
         </div>
