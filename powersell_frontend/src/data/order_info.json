@@ -6,7 +6,7 @@
         "originalPrice": 6600,
         "price": 1400,
         "discountRate": 80,
-        "stockQuantity": 10
+        "stockQuantity": 1
     },
     "orderPrice": 1400,
     "count": 1,

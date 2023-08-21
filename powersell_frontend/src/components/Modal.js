@@ -85,17 +85,21 @@ function Modal(props) {
     };
 
     axios
-      .post(`${hostURL}/api/orders`, inputs)
-      .then((response) => {
-        document.body.style.overflow = "auto";
-        const successData = response.data;
-        navigate("/ordersuccess", {
-          state: { successData: successData, pw: pw },
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });}
+  .post(`${hostURL}/api/orders`, inputs)
+  .then((response) => {
+    document.body.style.overflow = "auto";
+    const successData = response.data;
+    navigate("/ordersuccess", {
+      state: { successData: successData, pw: pw },
+    });
+  })
+  .catch((error) => {
+    if (error.response && error.response.status === 400) {
+      navigate("/orderfail");
+    } else {
+      console.log(error);
+    }
+  });}
   }
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
