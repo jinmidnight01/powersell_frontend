@@ -1,6 +1,7 @@
 import { React, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+import Header from "../../components/Header";
 import styles from "./admin.module.css";
 
 const LoginPage = (e) => {
@@ -24,29 +25,31 @@ const LoginPage = (e) => {
   };
 
   return (
-    <div id={styles.pcWidth} className={styles.login_main}>
-      <div className={styles.login_box}>
-        <h2>로그인</h2>
-        <p>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder=" Username"
-            required
-            ref={focus}
-          />
-        </p>
-        <p>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder=" Password"
-            required
-          />
-        </p>
-        <button onClick={handleClick}>제출</button>
+    <div id={styles.pcWidth}>
+      <Header text="로그인"></Header>
+      <div className={styles.login_main}>
+        <div className={styles.login_box}>
+          <p>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder=" Username"
+              required
+              ref={focus}
+            />
+          </p>
+          <p>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder=" Password"
+              required
+            />
+          </p>
+          <button onClick={handleClick}>제출</button>
+        </div>
       </div>
     </div>
   );
