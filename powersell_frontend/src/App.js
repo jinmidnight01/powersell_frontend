@@ -9,6 +9,7 @@ import OrderSuccessPage from './pages/OrderSuccessPage/OrderSuccessPage';
 import AdminPage from './pages/AdminPage/AdminPage';
 import LoginPage from './pages/AdminPage/LoginPage';
 import OrderFailPage from './pages/OrderFailPage/OrderFailPage';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Route path='/orderconfirm' element={<OrderConfirmPage />} />
       <Route path='/admin/*' element={<AdminPage />} />
       <Route path='/login' element={<LoginPage />} />
+      <Route path={"*"} element={<NotFoundPage />}/>
     </Routes>
   );
 }

@@ -1,0 +1,36 @@
+@media all and (min-width: 601px) {
+    #pcWidth {
+        width: 400px;
+        margin: 0 auto;
+    }
+}
+
+.main {
+    padding: 0 50px;
+}
+
+.content {
+    font-style: italic;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 80px;
+    line-height: 35px;
+}
+
+.buttonBox {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.buttonBox > button {
+    background-color: #fa7979;
+    color: white;
+    border: transparent;
+    height: 35px;
+    font-size: 18px;
+    width: 150px;
+    border-radius: 8px;
+    cursor: pointer;
+}
