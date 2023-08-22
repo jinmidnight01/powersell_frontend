@@ -173,6 +173,17 @@
       "dongho": "12동 도야ㅏ",
       "pw": "1234",
       "id": 8
+    },
+    {
+      "itemId": 1,
+      "count": 1,
+      "name": "김혜은",
+      "number": "01088686420",
+      "zipcode": "04080",
+      "address": "서울 마포구 서강로 19",
+      "dongho": "서울 마포구",
+      "pw": "1234",
+      "id": 9
     }
   ],
   "api_orders_detail": [
@@ -201,7 +212,7 @@
       "price": 1400,
       "discountRate": 80,
       "stockQuantity": 14,
-      "eventIng": true,
+      "eventIng": false,
       "startDate": "2023-08-20 09:19:20",
       "endDate": "2023-08-21 17:19:20"
     },

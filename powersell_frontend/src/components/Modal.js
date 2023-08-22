@@ -28,6 +28,8 @@ function Modal(props) {
   const [dongho, setDongho] = useState("");
   // 비밀번호
   const [pw, setPw] = useState("");
+  // 상품 판매 여부
+  const [eventIng, setEventIng] = useState(true);
 
   // input box
   const onChange = (e) => {
@@ -94,6 +96,10 @@ function Modal(props) {
         .then((response) => {
           document.body.style.overflow = "auto";
           const successData = response.data;
+          // eventIng 값을 업데이트
+          if (successData.eventIng !== undefined) {
+            setEventIng(successData.eventIng);
+          }
           navigate("/ordersuccess", {
             state: { successData: successData, pw: pw },
           });
@@ -197,6 +203,19 @@ function Modal(props) {
   }
 
   const product = props.product;
+  useEffect(() => {
+    axios.get(`${hostURL}/api/items/${props.product.itemId}`)
+      .then(response => {
+        const itemData = response.data;
+        if (itemData.eventIng !== undefined) {
+          setEventIng(itemData.eventIng);
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching item data:", error);
+      });
+  }, [props.product.itemId]);
+
   return (
     <>
       <div id={styles.pc_width} className={styles.Modal} onClick={closeModal}>
@@ -343,11 +362,13 @@ function Modal(props) {
           </div>
           <input
             onClick={handleSubmit}
-            className={styles.submit_button}
+            className={`${styles.submit_button} ${
+              !eventIng ? styles.negative_button : ""
+            }`}
             type="submit"
-            value="구매하기"
-            // disabled={!isValid} // 유효성 검사로 버튼 활성화 상태 조절
-          ></input>
+            value={eventIng ? "구매하기" : "오픈 준비 중입니다"}
+            disabled={!eventIng}
+          />
         </form>
       </div>
       {/* 우편주소 code */}
