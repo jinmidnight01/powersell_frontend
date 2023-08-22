@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import CopyToClipboard from "react-copy-to-clipboard";
 import "../../css/style-mobile.css";
 import share from "../../images/detail/share.jpg";
 import kakaotalk from "../../images/orderConfirm/kakaotalk.png";
@@ -23,6 +22,7 @@ function DetailProductPage() {
   const productId = params.productId;
   const [product, setProduct] = useState();
   const [isLoading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function rendering_item_detail(id) {
@@ -32,14 +32,15 @@ function DetailProductPage() {
           setProduct(response.data);
         })
         .catch((error) => {
-          console.log("Error fetching items: ", error.response.data);
+          navigate("/404");
+          // console.log("Error fetching items: ", error.response.data);
         })
         .finally(() => {
           setLoading(false); // 로딩 종료
         });
     }
     rendering_item_detail(productId);
-  }, [productId]);
+  }, [productId, navigate]);
 
   const [isClicked, setClicked] = useState(false);
 
@@ -126,6 +127,18 @@ function DetailProductPage() {
     }
   };
 
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator.share({
+        // title: product.name,
+        title: "꾸꾸까까",
+        url: "https://www.naver.com",
+      });
+    } else {
+      kakaoButton();
+    }
+  };
+
   if (!product) {
     return (
       <div>
@@ -141,17 +154,6 @@ function DetailProductPage() {
       </div>
     );
   }
-  const handleShare = () => {
-    if (navigator.share) {
-      navigator.share({
-        // title: product.name,
-        title: "꾸꾸까까",
-        url: "https://www.naver.com",
-      });
-    } else {
-      kakaoButton();
-    }
-  };
 
   return (
     <div id="pc-width">
