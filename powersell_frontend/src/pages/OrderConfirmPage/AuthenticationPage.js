@@ -8,6 +8,7 @@ import hostURL from "../../hostURL";
 import phoneNumber from "../../images/orderConfirm/phoneNumber.png";
 import key from "../../images/orderConfirm/key.png";
 import kakaotalk from "../../images/orderConfirm/kakaotalk.png";
+import spinner from "../../images/icons/spinner.gif";
 
 import styles from "./orderconfirm.module.css";
 
@@ -15,6 +16,7 @@ import styles from "./orderconfirm.module.css";
 const AuthenticationPage = () => {
   const refNum2 = useRef(); const refNum3 = useRef(); const refPw = useRef();
   const reg = /^[0-9]{4}$/;
+  const [isPosting, setIsPosting] = useState(false);
   const [isPending, setIsPending] = useState(false);
   const navigate = useNavigate();
   const inputNoti = {
@@ -123,8 +125,9 @@ const AuthenticationPage = () => {
   const postRequest = async (number1, number2, number3, pw) => {
     const number = number1 + number2 + number3;
     const inputs = { number: number, pw: pw };
-    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-    await sleep(500);
+    // const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+    // await sleep(500);
+    setIsPosting(true);
 
     // REST API 1-3
     axios
@@ -133,6 +136,7 @@ const AuthenticationPage = () => {
         if (response.data.length === 0) {
           alert("해당 주문 내역이 없습니다");
           setIsPending(false);
+          setIsPosting(false);
           return;
         }
         navigate("/orderconfirm", { state: response.data });
@@ -148,7 +152,7 @@ const AuthenticationPage = () => {
       <Header text="주문 조회"></Header>
 
       {/* main */}
-      <form className={styles.auth_form}>
+      <form style={isPosting ? {opacity: "0.5"} : {}} className={styles.auth_form}>
         <h3 className={styles.auth_noti}>
           주문 조회를 위해 본인 인증을 해주세요
         </h3>
@@ -166,7 +170,7 @@ const AuthenticationPage = () => {
           ※ 중간은 3~4자리, 끝은 4자리 숫자로 입력해주세요
         </div>
         <div className={styles.auth_phoneBox}>
-          <select id="number1" name="number1" defaultValue="010">
+          <select id="number1" name="number1" defaultValue="010" disabled={isPosting ? true : false}>
             <option value="010">010</option>
             <option value="070">070</option>
             <option value="011">011</option>
@@ -184,6 +188,7 @@ const AuthenticationPage = () => {
             inputMode="numeric"
             ref={refNum2}
             maxLength={4}
+            disabled={isPosting ? true : false}
           ></input>
           <hr></hr>
           <input
@@ -196,6 +201,7 @@ const AuthenticationPage = () => {
             inputMode="numeric"
             ref={refNum3}
             maxLength={4}
+            disabled={isPosting ? true : false}
           ></input>
         </div>
 
@@ -220,6 +226,7 @@ const AuthenticationPage = () => {
             required
             ref={refPw}
             maxLength={4}
+            disabled={isPosting ? true : false}
           ></input>
         </div>
 
@@ -228,7 +235,7 @@ const AuthenticationPage = () => {
           ※ 주문조회 비밀번호를 잊으신 경우,<br></br>
           아래 카카오톡 채널로 문의주시기 바랍니다
         </div>
-        <a href="https://google.com">
+        <a href="https://pf.kakao.com/_LExmlG">
           <img src={kakaotalk} alt="" className={styles.kakaoImg}></img>
         </a>
         <br></br>
@@ -240,9 +247,31 @@ const AuthenticationPage = () => {
               조회
             </button>
           )}
-          {isPending && <button disabled>조회 중...</button>}
+          {isPending && <button style={{cursor:"default"}} disabled>조회 중...</button>}
         </div>
       </form>
+
+      {isPosting ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                position: "fixed",
+                top: "300px",
+                left: "0",
+                right: "0",
+              }}
+            >
+              <img
+                style={{ opacity: 1 }}
+                src={spinner}
+                alt="로딩 중..."
+                width="70px"
+              />
+            </div>
+          ) : (
+            <></>
+          )}
     </div>
   );
 };

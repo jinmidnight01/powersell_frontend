@@ -30,6 +30,8 @@ function Modal(props) {
   const [pw, setPw] = useState("");
   // 상품 판매 여부
   const [eventIng, setEventIng] = useState(true);
+  // 구매 버튼 실행 여부
+  const [isClicked, setClicked] = useState(false);
 
   // input box
   const onChange = (e) => {
@@ -90,6 +92,9 @@ function Modal(props) {
         dongho: dongho,
         pw: pw,
       };
+
+      setClicked(true);
+      props.setPosting(true);
 
       axios
         .post(`${hostURL}/api/orders`, inputs)
@@ -204,175 +209,180 @@ function Modal(props) {
 
   const product = props.product;
   useEffect(() => {
-    axios.get(`${hostURL}/api/items/${props.product.itemId}`)
-      .then(response => {
+    axios
+      .get(`${hostURL}/api/items/${props.product.itemId}`)
+      .then((response) => {
         const itemData = response.data;
         if (itemData.eventIng !== undefined) {
           setEventIng(itemData.eventIng);
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error fetching item data:", error);
       });
   }, [props.product.itemId]);
 
   return (
     <>
-      <div id={styles.pc_width} className={styles.Modal} onClick={closeModal}>
-        <form
-          className={styles.modalBody}
-          style={{ transform: `translateY(${transformY}px)` }}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div
-            className={styles.slider_bar_div}
-            onMouseDown={handleDragStart}
-            onMouseMove={handleDragMove}
-            onMouseUp={handleDragEnd}
-            onMouseLeave={handleDragEnd}
-            onTouchStart={handleDragStart}
-            onTouchMove={handleDragMove}
-            onTouchEnd={handleDragEnd}
+      {isClicked ? (
+        <div></div>
+      ) : (
+        <div id={styles.pc_width} className={styles.Modal} onClick={closeModal}>
+          <form
+            className={styles.modalBody}
+            style={{ transform: `translateY(${transformY}px)` }}
+            onClick={(e) => e.stopPropagation()}
           >
-            <div className={styles.slider_bar}></div>
-          </div>
-          <div className={styles.modal_content}>
-            {/* 첫 컨텐츠: 상품 정보, 수량 선택 */}
-            <div className={styles.first_content}>
-              <div className={styles.product_info}>
-                <p className={styles.current_price_small}>{product.name}</p>
-                <p className={styles.current_price_small}>
-                  {product.price}
-                  {"원 "}
-                  <span className={styles.original_price}>
-                    {product.originalPrice}
-                    {"원"}
-                  </span>
-                </p>
-              </div>
-
-              <div className={styles.quantity_selector}>
-                <button
-                  className={styles.quantity_button}
-                  onClick={decreaseQuantity}
-                >
-                  -
-                </button>
-                <span>{quantity}</span>
-                <button
-                  className={styles.quantity_button}
-                  onClick={increaseQuantity}
-                >
-                  +
-                </button>
-              </div>
+            <div
+              className={styles.slider_bar_div}
+              onMouseDown={handleDragStart}
+              onMouseMove={handleDragMove}
+              onMouseUp={handleDragEnd}
+              onMouseLeave={handleDragEnd}
+              onTouchStart={handleDragStart}
+              onTouchMove={handleDragMove}
+              onTouchEnd={handleDragEnd}
+            >
+              <div className={styles.slider_bar}></div>
             </div>
+            <div className={styles.modal_content}>
+              {/* 첫 컨텐츠: 상품 정보, 수량 선택 */}
+              <div className={styles.first_content}>
+                <div className={styles.product_info}>
+                  <p className={styles.current_price_small}>{product.name}</p>
+                  <p className={styles.current_price_small}>
+                    {product.price}
+                    {"원 "}
+                    <span className={styles.original_price}>
+                      {product.originalPrice}
+                      {"원"}
+                    </span>
+                  </p>
+                </div>
 
-            <hr />
-            {/* 둘 컨텐츠: 배송지 정보 */}
-            <div className={styles.second_content}>
-              <h3 className={styles.order_title}>배송지</h3>
+                <div className={styles.quantity_selector}>
+                  <button
+                    className={styles.quantity_button}
+                    onClick={decreaseQuantity}
+                  >
+                    -
+                  </button>
+                  <span>{quantity}</span>
+                  <button
+                    className={styles.quantity_button}
+                    onClick={increaseQuantity}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
 
-              {/* <p style={{ color: "red", textAlign: "left" }}>
+              <hr />
+              {/* 둘 컨텐츠: 배송지 정보 */}
+              <div className={styles.second_content}>
+                <h3 className={styles.order_title}>배송지</h3>
+
+                {/* <p style={{ color: "red", textAlign: "left" }}>
                   {errorMessage}
                 </p> */}
 
-              <div className={styles.input_group}>
-                <label>받는 사람</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={name}
-                  onChange={onChange}
-                />
+                <div className={styles.input_group}>
+                  <label>받는 사람</label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={name}
+                    onChange={onChange}
+                  />
+                </div>
+                <div className={styles.input_group}>
+                  <label>연락처</label>
+                  <select name="preNum" value={preNum} onChange={onChange}>
+                    <option value="010">010</option>
+                    <option value="070">070</option>
+                    <option value="011">011</option>
+                    <option value="02">02</option>
+                    <option value="031">031</option>
+                  </select>
+                  <input
+                    type="text"
+                    name="phoneNumber"
+                    value={phoneNumber}
+                    onChange={onChange}
+                    placeholder="(-) 없이 숫자만 입력해주세요"
+                  />
+                </div>
+                <div className={styles.input_group}>
+                  <label>주소</label>
+                  <button
+                    type="button"
+                    onClick={openPostCode}
+                    className={styles.search_add}
+                  >
+                    주소찾기
+                  </button>
+                  <input
+                    onChange={onChange}
+                    value={zipCode}
+                    type="text"
+                    name="inputZipCodeValue"
+                    disabled
+                  />
+                </div>
+                <div className={`${styles.input_group} ${styles.last}`}>
+                  <label> </label>
+                  <input
+                    onChange={onChange}
+                    value={address}
+                    type="text"
+                    name="inputAddressValue"
+                    disabled
+                  />
+                </div>
+                <div className={`${styles.input_group} ${styles.last}`}>
+                  <label> </label>
+                  <input
+                    type="text"
+                    placeholder="상세주소 입력"
+                    name="dongho"
+                    value={dongho}
+                    onChange={onChange}
+                  />
+                </div>
               </div>
-              <div className={styles.input_group}>
-                <label>연락처</label>
-                <select name="preNum" value={preNum} onChange={onChange}>
-                  <option value="010">010</option>
-                  <option value="070">070</option>
-                  <option value="011">011</option>
-                  <option value="02">02</option>
-                  <option value="031">031</option>
-                </select>
-                <input
-                  type="text"
-                  name="phoneNumber"
-                  value={phoneNumber}
-                  onChange={onChange}
-                  placeholder="(-) 없이 숫자만 입력해주세요"
-                />
-              </div>
-              <div className={styles.input_group}>
-                <label>주소</label>
-                <button
-                  type="button"
-                  onClick={openPostCode}
-                  className={styles.search_add}
-                >
-                  주소찾기
-                </button>
-                <input
-                  onChange={onChange}
-                  value={zipCode}
-                  type="text"
-                  name="inputZipCodeValue"
-                  disabled
-                />
-              </div>
-              <div className={`${styles.input_group} ${styles.last}`}>
-                <label> </label>
-                <input
-                  onChange={onChange}
-                  value={address}
-                  type="text"
-                  name="inputAddressValue"
-                  disabled
-                />
-              </div>
-              <div className={`${styles.input_group} ${styles.last}`}>
-                <label> </label>
-                <input
-                  type="text"
-                  placeholder="상세주소 입력"
-                  name="dongho"
-                  value={dongho}
-                  onChange={onChange}
-                />
+
+              <br />
+
+              <div className={styles.third_content}>
+                <h3 className={styles.order_title}>
+                  주문 확인용 {/* <span>*4자리 숫자로 설정해 주세요</span> */}
+                </h3>
+                <div className={styles.input_group}>
+                  <label>비밀번호</label>
+                  <input
+                    type="password"
+                    name="pw"
+                    value={pw}
+                    onChange={onChange}
+                    placeholder="4자리 숫자로 설정해 주세요"
+                  />
+                </div>
               </div>
             </div>
+            <input
+              onClick={handleSubmit}
+              className={`${styles.submit_button} ${
+                !eventIng ? styles.negative_button : ""
+              }`}
+              type="submit"
+              value={eventIng ? "구매하기" : "오픈 준비 중입니다"}
+              disabled={!eventIng}
+            />
+          </form>
+        </div>
+      )}
 
-            <br />
-
-            <div className={styles.third_content}>
-              <h3 className={styles.order_title}>
-                주문 확인용 {/* <span>*4자리 숫자로 설정해 주세요</span> */}
-              </h3>
-              <div className={styles.input_group}>
-                <label>비밀번호</label>
-                <input
-                  type="password"
-                  name="pw"
-                  value={pw}
-                  onChange={onChange}
-                  placeholder="4자리 숫자로 설정해 주세요"
-                />
-              </div>
-            </div>
-          </div>
-          <input
-            onClick={handleSubmit}
-            className={`${styles.submit_button} ${
-              !eventIng ? styles.negative_button : ""
-            }`}
-            type="submit"
-            value={eventIng ? "구매하기" : "오픈 준비 중입니다"}
-            disabled={!eventIng}
-          />
-        </form>
-      </div>
       {/* 우편주소 code */}
-
       <div className={styles.postCode}>
         {modalState ? (
           <DaumPostcode

@@ -16,7 +16,6 @@ const NotFoundPage = () => {
       </div>
       <div className={styles.buttonBox}>
         <Link to="/">
-          {" "}
           <button>홈으로</button>
         </Link>
       </div>

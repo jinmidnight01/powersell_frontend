@@ -5,10 +5,12 @@ import StatusButton from "./StatusButton";
 import hostURL from "../../hostURL";
 
 import styles from "./admin.module.css";
+import spinner from "../../images/icons/spinner.gif";
 
 const OrderListPage = (props) => {
   const [result, setResult] = useState([]);
   const [selected, setSelected] = useState("전체");
+  const [isLoading, setIsLoading] = useState(true);
   const selectDict = {
     전체: "",
     입금대기: "WAITING",
@@ -30,6 +32,7 @@ const OrderListPage = (props) => {
         .get(`${hostURL}/api/admin/orders`)
         .then((response) => {
           setResult(response.data);
+          setIsLoading(false);
         })
         .catch((error) => {
           console.log(error);
@@ -49,6 +52,16 @@ const OrderListPage = (props) => {
       </select>
 
       {/* total order list */}
+      {isLoading ? (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <img
+            style={{ margin: "150px 0" }}
+            src={spinner}
+            alt="로딩 중..."
+            width="15%"
+          />
+        </div>
+      ) : (
       <div className={styles.order_list}>
         {/* item */}
         {[...result]
@@ -131,7 +144,7 @@ const OrderListPage = (props) => {
               </div>
             </div>
           ))}
-      </div>
+      </div>)}
     </div>
   );
 };

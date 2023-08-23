@@ -5,6 +5,7 @@ import axios from "axios";
 import hostURL from "../../hostURL";
 
 import styles from "./admin.module.css";
+import spinner from "../../images/icons/spinner.gif";
 import ProductModal from "./ProductModal";
 
 const ProductListPage = (props) => {
@@ -19,6 +20,8 @@ const ProductListPage = (props) => {
   const [toggleStatus, setToggleStatus] = useState("+");
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isProductLoading, setIsProductLoading] = useState(true);
+  const [isFeedbackLoading, setIsFeedbackLoading] = useState(true);
 
   // REST API 2-1
   useEffect(() => {
@@ -27,6 +30,7 @@ const ProductListPage = (props) => {
         .get(`${hostURL}/api/items`)
         .then((response) => {
           setProducts(response.data);
+          setIsProductLoading(false);
         })
         .catch((error) => {
           console.log(error);
@@ -99,7 +103,7 @@ const ProductListPage = (props) => {
   // REST API 2-2
   const handleClick = () => {
     if (name.length === 0 || startDate.length === 0 || endDate.length === 0) {
-      alert("모든 항목을 입력해주세요")
+      alert("모든 항목을 입력해주세요");
       return;
     }
     const inputs = {
@@ -111,7 +115,7 @@ const ProductListPage = (props) => {
       startDate: startDate.replace("T", " "),
       endDate: endDate.replace("T", " "),
     };
-    console.log(typeof(inputs.originalPrice))
+    console.log(typeof inputs.originalPrice);
 
     axios
       .post(`${hostURL}/api/admin/items`, inputs)
@@ -141,6 +145,7 @@ const ProductListPage = (props) => {
         .get(`${hostURL}/api/admin/feedbacks`)
         .then((response) => {
           setFeedbacks(response.data);
+          setIsFeedbackLoading(false);
         })
         .catch((error) => {
           console.log(error);
@@ -173,116 +178,133 @@ const ProductListPage = (props) => {
       </div>
 
       {/* 상품 */}
-      {[...products].map((product) => {
-        let productNewName;
-        switch (product.name) {
-          case "제주 삼다수 2L (6개입)":
-            productNewName = "삼다수";
-            break;
-          case "농심 신라면 (5개입)":
-            productNewName = "신라면";
-            break;
-          case "햇반 백미밥 210g (3개입)":
-            productNewName = "햇반";
-            break;
-          case "오뚜기 컵밥 오삼불고기덮밥 310g":
-            productNewName = "컵밥";
-            break;
-          case "곰곰 구운란 10구":
-            productNewName = "구운란";
-            break;
-          default:
-            productNewName = product.name;
-            break;
-        }
+      {isProductLoading ? (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <img
+            style={{ margin: "80px 0" }}
+            src={spinner}
+            alt="로딩 중..."
+            width="15%"
+          />
+        </div>
+      ) : (
+        [...products].map((product) => {
+          let productNewName;
+          switch (product.name) {
+            case "제주 삼다수 2L (6개입)":
+              productNewName = "삼다수";
+              break;
+            case "농심 신라면 (5개입)":
+              productNewName = "신라면";
+              break;
+            case "햇반 백미밥 210g (3개입)":
+              productNewName = "햇반";
+              break;
+            case "오뚜기 컵밥 오삼불고기덮밥 310g":
+              productNewName = "컵밥";
+              break;
+            case "곰곰 구운란 10구":
+              productNewName = "구운란";
+              break;
+            default:
+              productNewName = product.name;
+              break;
+          }
 
-        return (
-          <div
-            onClick={() => combinedClickHandler(product)}
-            key={product.itemId}
-          >
-            <div className={styles.productStyle}>
-              <div>{product.itemId}</div>
-              <div>{productNewName}</div>
-              <div>{product.originalPrice}</div>
-              <div>{product.price}</div>
-              <div>{product.stockQuantity}</div>
+          return (
+            <div
+              onClick={() => combinedClickHandler(product)}
+              key={product.itemId}
+            >
+              <div className={styles.productStyle}>
+                <div>{product.itemId}</div>
+                <div>{productNewName}</div>
+                <div>{product.originalPrice}</div>
+                <div>{product.price}</div>
+                <div>{product.stockQuantity}</div>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })
+      )}
 
       {/* 상품 추가 */}
-      <input
-        type="button"
-        id="addProductToggle"
-        className={styles.addProductToggle}
-        onClick={toggle}
-        value={toggleStatus}
-      ></input>
-      <div id="form" className={styles.addProduct}>
+      {isProductLoading ? (
+        <div></div>
+      ) : (
         <div>
-          <div>ㆍ품명:</div>
           <input
-            name="name"
-            onChange={handleOnChange}
-            type="text"
-            placeholder=" ex. 제주 삼다수 2L (6개입)"
-            value={name}
+            type="button"
+            id="addProductToggle"
+            className={styles.addProductToggle}
+            onClick={toggle}
+            value={toggleStatus}
           ></input>
+          <div id="form" className={styles.addProduct}>
+            <div>
+              <div>ㆍ품명:</div>
+              <input
+                name="name"
+                onChange={handleOnChange}
+                type="text"
+                placeholder=" ex. 제주 삼다수 2L (6개입)"
+                value={name}
+              ></input>
+            </div>
+            <div>
+              <div>ㆍ원가:</div>
+              <input
+                name="originalPrice"
+                onChange={handleOnChange}
+                type="number"
+                placeholder=" ex. 6600"
+                value={originalPrice}
+              ></input>
+            </div>
+            <div>
+              <div>ㆍ정가:</div>
+              <input
+                name="price"
+                onChange={handleOnChange}
+                type="number"
+                placeholder=" ex. 1400"
+                value={price}
+              ></input>
+            </div>
+            <div>
+              <div>ㆍ재고:</div>
+              <input
+                name="stockQuantity"
+                onChange={handleOnChange}
+                type="number"
+                placeholder=" ex. 25"
+                value={stockQuantity}
+              ></input>
+            </div>
+            <div>
+              <div>ㆍ오픈:</div>
+              <input
+                name="startDate"
+                onChange={handleOnChange}
+                type="datetime-local"
+                step="1"
+                value={startDate}
+              ></input>
+            </div>
+            <div>
+              <div>ㆍ마감:</div>
+              <input
+                name="endDate"
+                onChange={handleOnChange}
+                type="datetime-local"
+                step="1"
+                value={endDate}
+              ></input>
+            </div>
+            <button onClick={handleClick}>등록</button>
+          </div>
         </div>
-        <div>
-          <div>ㆍ원가:</div>
-          <input
-            name="originalPrice"
-            onChange={handleOnChange}
-            type="number"
-            placeholder=" ex. 6600"
-            value={originalPrice}
-          ></input>
-        </div>
-        <div>
-          <div>ㆍ정가:</div>
-          <input
-            name="price"
-            onChange={handleOnChange}
-            type="number"
-            placeholder=" ex. 1400"
-            value={price}
-          ></input>
-        </div>
-        <div>
-          <div>ㆍ재고:</div>
-          <input
-            name="stockQuantity"
-            onChange={handleOnChange}
-            type="number"
-            placeholder=" ex. 25"
-            value={stockQuantity}
-          ></input>
-        </div>
-        <div>
-          <div>ㆍ오픈:</div>
-          <input
-            name="startDate"
-            onChange={handleOnChange}
-            type="datetime-local"
-            step="1"
-            value={startDate}
-          ></input>
-        </div>
-        <div>
-          <div>ㆍ마감:</div>
-          <input
-            name="endDate"
-            onChange={handleOnChange}
-            type="datetime-local"
-            step="1"
-            value={endDate}
-          ></input>
-        </div>
-        <button onClick={handleClick}>등록</button>
-      </div>
+      )}
 
       {/* 후기 목록 */}
       <div className={styles.interval}></div>
@@ -293,12 +315,22 @@ const ProductListPage = (props) => {
       </div>
 
       {/* 후기 */}
-      {[...feedbacks].reverse().map((feedback) => (
+      {isFeedbackLoading ? (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <img
+            style={{ margin: "80px 0" }}
+            src={spinner}
+            alt="로딩 중..."
+            width="15%"
+          />
+        </div>
+      ) : (
+      [...feedbacks].reverse().map((feedback) => (
         <div key={feedback.id} className={styles.feedbackStyle}>
           <div>{feedback.id}</div>
           <div>{feedback.content}</div>
         </div>
-      ))}
+      )))}
     </div>
   );
 };

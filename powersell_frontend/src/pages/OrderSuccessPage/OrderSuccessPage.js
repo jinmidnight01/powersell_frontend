@@ -1,4 +1,4 @@
-import { React, useEffect } from "react";
+import { React, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
@@ -7,6 +7,7 @@ import Header from "../../components/Header";
 import account from "../../images/orderSuccess/account.png";
 import bag from "../../images/orderSuccess/shopping-bag.png";
 import scooter from "../../images/orderSuccess/scooter.png";
+import copyText from "../../images/icons/copyText.png";
 
 import styles from "./OrderSuccessPage.module.css";
 import Button from "../../components/Button";
@@ -22,15 +23,19 @@ import 구운란 from "../../images/home/구운란.jpg";
 const OrderSuccessPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [successData, setSuccessData] = useState(null);
+  const [pw, setPw] = useState(null);
 
   // response data
-  const { successData, pw } = location.state;  
   useEffect(() => {
-    if (!successData) {
-      navigate('/');
+    if (location.state === null) {
+      navigate("/");
+    } else {
+      setSuccessData(location.state.successData);
+      setPw(location.state.pw);
     }
-  }, [successData, navigate]);
-  
+  }, [location, navigate]);
+
   // item image
   const itemImage = (order) => {
     switch (order.item.name) {
@@ -49,12 +54,12 @@ const OrderSuccessPage = () => {
     }
   };
   if (!successData) {
-    return <p style={{marginTop: '10%', textAlign: 'center'}}></p>;
+    return;
+    // return <p style={{ marginTop: "10%", textAlign: "center" }}></p>;
   }
 
   return (
     <div id={styles.pcWidth}>
-      
       {/* header */}
       <Header text="주문 완료"></Header>
 
@@ -72,14 +77,29 @@ const OrderSuccessPage = () => {
           </div>
           <hr className={styles.line} />
           <ul>
-            <li><span>예금주</span>: 박진효</li>
             <li>
-              <span>송금계좌</span>: 카카오뱅크
+              <span>예금주</span>: 박진효
+            </li>
+            <li>
+              <span>송금계좌</span>:{" "}
+              <span
+                style={{
+                  textDecoration: "underline",
+                  textDecorationThickness: "1px",
+                }}
+              >
+                카카오뱅크 3333277508505
+              </span>
               <CopyToClipboard
                 text="3333277508505"
                 onCopy={() => alert("계좌가 복사되었습니다")}
               >
-                <span> 3333277508505</span>
+                <img
+                  src={copyText}
+                  alt="copy"
+                  width={14}
+                  style={{ cursor: "pointer", marginLeft: "7px" }}
+                />
               </CopyToClipboard>
             </li>
             <p>(30분 내 미입금 시 주문이 취소됩니다)</p>
@@ -94,14 +114,11 @@ const OrderSuccessPage = () => {
           </div>
           <hr className={styles.line} />
           {/* item title */}
-          
+
           <div style={{ marginBottom: "10px", marginTop: "15px" }}>
             <div className={styles.order_itemTitle}>
               <div>
-                <img
-                  src={itemImage(successData)}
-                  alt={successData.item.name}
-                />
+                <img src={itemImage(successData)} alt={successData.item.name} />
               </div>
               <div>
                 <div className={styles.order_itemInfo_title}>
@@ -159,11 +176,24 @@ const OrderSuccessPage = () => {
           </div>
           <hr className={styles.line} />
           <ul>
-            <li><span>주문일시</span>: {successData.orderDate.slice(0,10) + " " + successData.orderDate.slice(11,19)}</li>
-            <li><span>주문자</span>: {successData.name}</li>
-            <li><span>전화번호</span>: {successData.number}</li>
-            <li><span>주소</span>: {successData.address}</li>
-            <li><span>비밀번호</span>: {pw.slice(0, 2)}xx</li>
+            <li>
+              <span>주문일시</span>:{" "}
+              {successData.orderDate.slice(0, 10) +
+                " " +
+                successData.orderDate.slice(11, 19)}
+            </li>
+            <li>
+              <span>주문자</span>: {successData.name}
+            </li>
+            <li>
+              <span>전화번호</span>: {successData.number}
+            </li>
+            <li>
+              <span>주소</span>: {successData.address} {successData.dongho}
+            </li>
+            <li>
+              <span>비밀번호</span>: {pw.slice(0, 2)}xx
+            </li>
           </ul>
         </div>
 

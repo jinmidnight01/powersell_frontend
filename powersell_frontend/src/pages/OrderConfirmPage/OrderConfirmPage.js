@@ -1,4 +1,4 @@
-import { React, useEffect } from "react";
+import { React, useEffect} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
@@ -9,6 +9,7 @@ import 신라면 from "../../images/home/신라면.jpg";
 import 컵밥 from "../../images/home/컵밥.jpg";
 import 햇반 from "../../images/home/햇반.jpg";
 import 구운란 from "../../images/home/구운란.jpg";
+import copyText from "../../images/icons/copyText.png";
 
 import styles from "./orderconfirm.module.css";
 import res_orderConfirm from "../../data/res_orderConfirm.json";
@@ -53,7 +54,7 @@ const OrderConfirmPage = () => {
         <div>주문 내역</div>
         <div className={styles.order_list}>
           {/* item */}
-          {[...res_orderConfirm]
+          {[...output]
             .sort((a, b) => {
               if (a.orderDate > b.orderDate) return -1;
               if (a.orderDate < b.orderDate) return 1;
@@ -157,12 +158,24 @@ const OrderConfirmPage = () => {
                         <span>ㆍ</span>예금주: <span>박진효</span>
                       </div>
                       <div>
-                        <span>ㆍ</span>계좌: <span>카카오뱅크 </span>
+                        <span>ㆍ</span>계좌:{" "}
+                        <span
+                          style={{
+                            textDecoration: "underline",
+                          }}
+                        >
+                          카카오뱅크 3333277508505
+                        </span>
                         <CopyToClipboard
                           text="3333277508505"
                           onCopy={() => alert("계좌가 복사되었습니다")}
                         >
-                          <span>3333277508505</span>
+                          <img
+                            src={copyText}
+                            alt="copy"
+                            width={14}
+                            style={{ cursor: "pointer", marginLeft: "7px" }}
+                          />
                         </CopyToClipboard>
                       </div>
                       <div>

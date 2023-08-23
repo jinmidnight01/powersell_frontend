@@ -5,6 +5,7 @@ import "../../css/style-mobile.css";
 import share from "../../images/detail/share.jpg";
 import kakaotalk from "../../images/orderConfirm/kakaotalk.png";
 import notion from "../../images/icons/notion.png";
+import spinner from "../../images/icons/spinner.gif";
 
 import hostURL from "../../hostURL";
 
@@ -23,23 +24,25 @@ function DetailProductPage() {
   const [product, setProduct] = useState();
   const [isLoading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const [isPosting, setPosting] = useState(false);
 
   useEffect(() => {
-    async function rendering_item_detail(id) {
-      axios
-        .get(`${hostURL}/api/items/${id}`)
-        .then((response) => {
-          setProduct(response.data);
-        })
-        .catch((error) => {
-          navigate("/404");
-          // console.log("Error fetching items: ", error.response.data);
-        })
-        .finally(() => {
-          setLoading(false); // 로딩 종료
-        });
-    }
-    rendering_item_detail(productId);
+    // async function rendering_item_detail(id) {
+    axios
+      .get(`${hostURL}/api/items/${productId}`)
+      .then((response) => {
+        setProduct(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        navigate("/404");
+        // console.log("Error fetching items: ", error.response.data);
+      });
+    // .finally(() => {
+    //   setLoading(false); // 로딩 종료
+    // });
+    // }
+    // rendering_item_detail(productId);
   }, [productId, navigate]);
 
   const [isClicked, setClicked] = useState(false);
@@ -69,18 +72,35 @@ function DetailProductPage() {
         return null;
     }
   };
-  if (isLoading) {
-    return <p style={{ marginTop: "10%", textAlign: "center" }}>로딩 중...</p>;
-  }
+  // if (isLoading) {
+  //   return <p style={{ marginTop: "10%", textAlign: "center" }}>로딩 중...</p>;
+  // }
+
   if (!product) {
     return (
-      <>
-        <p style={{ marginTop: "10%", textAlign: "center" }}>
-          상품이 없습니다.
-        </p>
-      </>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <img
+          style={{ margin: "150px 0" }}
+          src={spinner}
+          alt="로딩 중..."
+          width="15%"
+        />
+      </div>
+
+      // <div>
+      //   <p style={{ marginTop: "10%", textAlign: "center" }}>
+      //     상품이 없습니다.
+      //   </p>
+      //   <img
+      //     onClick={handleShare}
+      //     className="share-icon"
+      //     src={share}
+      //     alt=""
+      //   ></img>
+      // </div>
     );
   }
+
   const isOutOfStock = product.stockQuantity === 0;
   const kakaoButton = () => {
     if (window.Kakao) {
@@ -139,147 +159,187 @@ function DetailProductPage() {
     }
   };
 
-  if (!product) {
-    return (
-      <div>
-        <p style={{ marginTop: "10%", textAlign: "center" }}>
-          상품이 없습니다.
-        </p>
-        <img
-          onClick={handleShare}
-          className="share-icon"
-          src={share}
-          alt=""
-        ></img>
-      </div>
-    );
-  }
+  const postStyle = (isPosting) => {
+    if (isPosting) {
+      return {
+        opacity: "0.5",
+      };
+    }
+  };
 
   return (
     <div id="pc-width">
-      <Header text="상품 내용"></Header>
+      <div style={postStyle(isPosting)}>
+        <Header text="상품 내용"></Header>
+      </div>
 
-      <img
-        src={itemImage(product)}
-        alt={product.name}
-        className="product-image"
-      />
-
-      <div className="product-details">
-        <div className="nameNshare">
-          <p className="product-name">{product.name}</p>
+      {isLoading ? (
+        <div style={{ display: "flex", justifyContent: "center" }}>
           <img
-            onClick={handleShare}
-            className="share-icon"
-            src={share}
-            alt=""
-          ></img>
+            style={{ margin: "150px 0" }}
+            src={spinner}
+            alt="로딩 중..."
+            width="15%"
+          />
         </div>
-        <p className="discounted-price">
-          <span className="discount-rate">{product.discountRate}% </span>
-          <span className="original-price">{product.originalPrice}원</span>
-        </p>
-        <p className="current-price">{product.price}원</p>
-      </div>
-      <hr style={{ border: "4px solid #e5e5e5" }} />
-      <div className="product-description">
-        <p className="borderText noticeTitle">
-          <i>Notice.</i>
-        </p>
-        <br></br>
-        <br></br>
-        <div className="noticeContent">
-          <p>
-            🛒 1회 최대 구매 수량은 <span className="borderText">2개</span>
-            입니다
-          </p>
-          <br></br>
-          <br></br>
+      ) : (
+        <div>
+          <div style={postStyle(isPosting)}>
+            <img
+              src={itemImage(product)}
+              alt={product.name}
+              className="product-image"
+            />
+            <div className="product-details">
+              <div className="nameNshare">
+                <p className="product-name">{product.name}</p>
+                <img
+                  onClick={handleShare}
+                  className="share-icon"
+                  src={share}
+                  alt=""
+                ></img>
+              </div>
+              <p className="discounted-price">
+                <span className="discount-rate">{product.discountRate}% </span>
+                <span className="original-price">
+                  {product.originalPrice}원
+                </span>
+              </p>
+              <p className="current-price">{product.price}원</p>
+            </div>
+            <hr style={{ border: "4px solid #e5e5e5" }} />
+            <div className="product-description">
+              <p className="borderText noticeTitle">
+                <i>Notice.</i>
+              </p>
+              <br></br>
+              <br></br>
+              <div className="noticeContent">
+                <p>
+                  🛒 1회 최대 구매 수량은{" "}
+                  <span className="borderText">2개</span>
+                  입니다
+                </p>
+                <br></br>
+                <br></br>
 
-          <p>
-            <i className="borderText">✔️ 주요 내용</i>
-          </p>
-          <br></br>
+                <p>
+                  <i className="borderText">✔️ 주요 내용</i>
+                </p>
+                <br></br>
 
-          <p>
-            <span style={{ fontWeight: "bold" }}>1. 배송/주문 안내</span>
-            <br />- 모든 주문들을 취합하여, 매일{" "}
-            <span className="borderText">자정</span>에{" "}
-            <span className="borderText">쿠팡</span>을 통해 일괄 주문합니다
-            <br />- 마이페이지에서 주문조회를 통해{" "}
-            <span className="borderText">배송상황</span>을 확인하실 수 있습니다{" "}
-          </p>
-          <br></br>
+                <p>
+                  <span style={{ fontWeight: "bold" }}>1. 배송/주문 안내</span>
+                  <br />- 모든 주문들을 취합하여, 매일{" "}
+                  <span className="borderText">자정</span>에{" "}
+                  <span className="borderText">쿠팡</span>을 통해 일괄
+                  주문합니다
+                  <br />- 마이페이지에서 주문조회를 통해{" "}
+                  <span className="borderText">배송상황</span>을 확인하실 수
+                  있습니다{" "}
+                </p>
+                <br></br>
 
-          <p>
-            <span style={{ fontWeight: "bold" }}>2. 입금 안내</span>
-            <br />- 주문 시각으로부터 <span className="borderText">
-              30분
-            </span>{" "}
-            내 미입금 시 주문이 자동 취소됩니다.
-          </p>
-          <br></br>
+                <p>
+                  <span style={{ fontWeight: "bold" }}>2. 입금 안내</span>
+                  <br />- 주문 시각으로부터{" "}
+                  <span className="borderText">30분</span> 내 미입금 시 주문이
+                  자동 취소됩니다.
+                </p>
+                <br></br>
 
-          <p>
-            <span style={{ fontWeight: "bold" }}>3. 교환/환불 안내</span>
-            <br />
-            - 단순 변심으로 인한 교환/환불은 <span style={{ fontWeight: "bold" }}>불가</span>합니다
-          </p>
-          <br></br>
+                <p>
+                  <span style={{ fontWeight: "bold" }}>3. 교환/환불 안내</span>
+                  <br />- 단순 변심으로 인한 교환/환불은{" "}
+                  <span style={{ fontWeight: "bold" }}>불가</span>합니다
+                </p>
+                <br></br>
 
-          <p style={{fontStyle: "italic", color: "grey"}}>
-            ※ 미리 공지사항에 고지해 둔 내용을 소비자가 충분히 숙지하지 않아
-            발생되는 일에 대해 판매자가 책임지지 않습니다.
-          </p>
-          <br></br>
-          <br></br>
+                <p style={{ fontStyle: "italic", color: "grey" }}>
+                  ※ 미리 공지사항에 고지해 둔 내용을 소비자가 충분히 숙지하지
+                  않아 발생되는 일에 대해 판매자가 책임지지 않습니다.
+                </p>
+                <br></br>
+                <br></br>
 
-          <p>
-            <i className="borderText">⚠️ 추가 내용</i>
-          </p>
-          <br></br>
-          <div>
-            문의 사항이 있을 시 아래{" "}
-            <span className="borderText">노션 링크</span>나{" "}
-            <span className="borderText">카카오톡 채널</span>을 통해 자세한
-            내용을 확인해주세요
-            <br />
-            <p style={{marginTop: "15px"}}>
-              <a href="https://www.notion.so/SALE-EVENT-15ce9c9fd951457d9da722eafc8c3131?pvs=4">
-                <img src={notion} style={{marginRight: "15px"}} width={42} alt=""></img>
-              </a>
-              <a href="https://google.com">
-                <img src={kakaotalk} width={42} alt=""></img>
-              </a>
-            </p>
+                <p>
+                  <i className="borderText">⚠️ 추가 내용</i>
+                </p>
+                <br></br>
+                <div>
+                  문의 사항이 있을 시 아래{" "}
+                  <span className="borderText">노션 링크</span>나{" "}
+                  <span className="borderText">카카오톡 채널</span>을 통해
+                  자세한 내용을 확인해주세요
+                  <br />
+                  <p style={{ marginTop: "15px" }}>
+                    <a href="https://www.notion.so/9-EVENT-15ce9c9fd951457d9da722eafc8c3131?pvs=4">
+                      <img
+                        src={notion}
+                        style={{ marginRight: "15px" }}
+                        width={42}
+                        alt=""
+                      ></img>
+                    </a>
+                    <a href="https://pf.kakao.com/_LExmlG">
+                      <img src={kakaotalk} width={42} alt=""></img>
+                    </a>
+                  </p>
+                </div>
+                <br></br>
+                <br></br>
+
+                <br></br>
+              </div>
+            </div>
+            <div className="button-container">
+              <Button
+                className={isOutOfStock ? "negative_button" : "positive-button"}
+                onClick={() => {
+                  if (!isOutOfStock) {
+                    setClicked(!isClicked);
+                  }
+                }}
+                text={isOutOfStock ? "품절" : "구매하기"}
+              />
+            </div>
+            {isClicked && (
+              <div className="modal-div">
+                <div className="modal-background"> </div>
+                <Modal
+                  closeModal={() => {
+                    setClicked(!isClicked);
+                    document.body.style.overflow = "auto";
+                  }}
+                  product={product}
+                  setPosting={setPosting}
+                ></Modal>
+              </div>
+            )}
           </div>
-          <br></br>
-          <br></br>
 
-          <br></br>
-        </div>
-      </div>
-      <div className="button-container">
-        <Button
-          className={isOutOfStock ? "negative_button" : "positive-button"}
-          onClick={() => {
-            if (!isOutOfStock) {
-              setClicked(!isClicked);
-            }
-          }}
-          text={isOutOfStock ? "품절" : "구매하기"}
-        />
-      </div>
-      {isClicked && (
-        <div className="modal-div">
-          <div className="modal-background"> </div>
-          <Modal
-            closeModal={() => {
-              setClicked(!isClicked);
-              document.body.style.overflow = "auto";
-            }}
-            product={product}
-          ></Modal>
+          {isPosting ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                position: "fixed",
+                top: "300px",
+                left: "0",
+                right: "0",
+              }}
+            >
+              <img
+                style={{ opacity: 1 }}
+                src={spinner}
+                alt="로딩 중..."
+                width="70px"
+              />
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
       )}
     </div>

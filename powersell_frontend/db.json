@@ -184,6 +184,61 @@
       "dongho": "서울 마포구",
       "pw": "1234",
       "id": 9
+    },
+    {
+      "itemId": 2,
+      "count": 1,
+      "name": "박진효",
+      "number": "01020444630",
+      "zipcode": "04721",
+      "address": "서울 성동구 난계로 67",
+      "dongho": "1234",
+      "pw": "1234",
+      "id": 10
+    },
+    {
+      "itemId": 2,
+      "count": 1,
+      "name": "박진효",
+      "number": "01020444630",
+      "zipcode": "01810",
+      "address": "서울 노원구 공릉로 264",
+      "dongho": "101동 506호",
+      "pw": "1234",
+      "id": 11
+    },
+    {
+      "itemId": 2,
+      "count": 1,
+      "name": "박진효",
+      "number": "01020444630",
+      "zipcode": "38174",
+      "address": "경북 경주시 해맞이마을1길 1",
+      "dongho": "101동 506호",
+      "pw": "1234",
+      "id": 12
+    },
+    {
+      "itemId": 2,
+      "count": 1,
+      "name": "박진효",
+      "number": "01020444630",
+      "zipcode": "03985",
+      "address": "서울 마포구 연희로 1",
+      "dongho": "101동 506호",
+      "pw": "1234",
+      "id": 13
+    },
+    {
+      "itemId": 2,
+      "count": 1,
+      "name": "박진효",
+      "number": "01020444630",
+      "zipcode": "01810",
+      "address": "서울 노원구 공릉로 264",
+      "dongho": "101동 506호",
+      "pw": "1234",
+      "id": 14
     }
   ],
   "api_orders_detail": [
@@ -201,6 +256,21 @@
       "number": "01012341422",
       "pw": "1234",
       "id": 3
+    },
+    {
+      "number": "01020444630",
+      "pw": "1234",
+      "id": 4
+    },
+    {
+      "number": "01020444630",
+      "pw": "1234",
+      "id": 5
+    },
+    {
+      "number": "01011111414",
+      "pw": "1414",
+      "id": 6
     }
   ],
   "api_items": [
@@ -263,9 +333,38 @@
       "eventIng": true,
       "startDate": "2023-08-20 09:19:20",
       "endDate": "2023-08-21 17:19:20"
+    },
+    {
+      "itemId": 6,
+      "name": "박진효",
+      "originalPrice": 0,
+      "price": 0,
+      "stockQuantity": 0,
+      "startDate": "2023-08-23 19:38:20",
+      "endDate": "2023-08-23 15:41:21",
+      "id": 6
     }
   ],
-  "api_admin_items": [],
+  "api_admin_items": [
+    {
+      "name": "박진효1",
+      "originalPrice": 0,
+      "price": 0,
+      "stockQuantity": 0,
+      "startDate": "2023-08-23 18:21:42",
+      "endDate": "2023-08-23 15:21:44",
+      "id": 1
+    },
+    {
+      "name": "박진효",
+      "originalPrice": 0,
+      "price": 0,
+      "stockQuantity": 0,
+      "startDate": "2023-08-23 17:37:49",
+      "endDate": "2023-08-23 15:41:50",
+      "id": 2
+    }
+  ],
   "api_admin_feedbacks": [
     {
       "id": 1,

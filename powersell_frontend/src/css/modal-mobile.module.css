@@ -182,6 +182,9 @@ label {
   border-radius: 5px;
   cursor: pointer;
 }
+.submit_button:active {
+  opacity: 0.8;
+}
 .negative_button {
   background-color: #757575;
   cursor: default;
