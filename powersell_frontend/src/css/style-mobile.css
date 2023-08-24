@@ -180,6 +180,21 @@ hr {
   opacity: 0.8;
 }
 
+.copyright {
+  background-color: rgb(179, 179, 179);
+  color: white;
+  text-align: center;
+  opacity: 0.8;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+}
+
+.copyright p {
+  margin: auto 0;
+  font-size: 13px;
+}
+
 
 /* ====================================== */
 /* detail */

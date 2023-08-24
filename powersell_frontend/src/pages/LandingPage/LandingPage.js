@@ -158,6 +158,11 @@ function LandingPage() {
           onClick={submitFeedback}
         />
       </div>
+
+      {/* Copyright */}
+      <div className="copyright">
+        <p>© Yonsei Workstation team: Powersell<br/> All rights reserved.</p>
+      </div>
     </div>
   );
 }
