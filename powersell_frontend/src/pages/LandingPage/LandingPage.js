@@ -58,7 +58,7 @@ function LandingPage() {
     rendering_item();
   }, []);
 
-  async function submitFeedback() {
+  function submitFeedback() {
     if (feedback.trim() === "") {
       alert("피드백을 입력해주세요!");
       return;
@@ -66,8 +66,8 @@ function LandingPage() {
     setFeedbackLoading(true);
     const inputs = { content: feedback };
     axios
-      .post(`${hostURL}/api/admin/feedbacks`, inputs)
-      .then((response) => {
+      .post(`${hostURL}/api/feedbacks`, inputs)
+      .then(() => {
         alert("피드백이 전송되었습니다. 감사합니다 :-)");
         setFeedback("");
         setFeedbackLoading(false);
@@ -76,6 +76,7 @@ function LandingPage() {
         console.log(error);
       });
   }
+  
   return (
     <div id="pc-width" className="app">
       {/* Header */}
@@ -83,7 +84,7 @@ function LandingPage() {
 
       {/* Banner */}
       <a
-        href="https://www.notion.so/9-EVENT-15ce9c9fd951457d9da722eafc8c3131?pvs=4"
+        href="https://jazzy-note-a6d.notion.site/9-EVENT-15ce9c9fd951457d9da722eafc8c3131?pvs=4"
         className="banner"
       >
         <img src={banner} alt="Promotion Banner" />
@@ -118,7 +119,7 @@ function LandingPage() {
                   </p>
                   <p className="original-price">{product.originalPrice}원</p>
                   <h2 className="discount">
-                    {product.discountRate}% {product.price}원
+                    80% {product.price}원
                   </h2>
                 </div>
               </Link>

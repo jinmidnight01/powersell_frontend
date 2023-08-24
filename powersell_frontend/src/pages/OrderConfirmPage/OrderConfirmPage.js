@@ -12,7 +12,6 @@ import 구운란 from "../../images/home/구운란.jpg";
 import copyText from "../../images/icons/copyText.png";
 
 import styles from "./orderconfirm.module.css";
-import res_orderConfirm from "../../data/res_orderConfirm.json";
 
 // OrderConfirm function
 const OrderConfirmPage = () => {
@@ -124,7 +123,7 @@ const OrderConfirmPage = () => {
                         <hr></hr>
                         <div>
                           <div>
-                            <span>주문 일시</span>: {order.orderDate}
+                            <span>주문 일시</span>: {order.orderDate.replace("T", " ").slice(0, 19)}
                           </div>
                           <div>
                             <span>주소</span>: {order.address} {order.dongho}

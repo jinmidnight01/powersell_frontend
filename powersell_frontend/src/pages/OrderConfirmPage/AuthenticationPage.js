@@ -235,7 +235,7 @@ const AuthenticationPage = () => {
           ※ 주문조회 비밀번호를 잊으신 경우,<br></br>
           아래 카카오톡 채널로 문의주시기 바랍니다
         </div>
-        <a href="https://pf.kakao.com/_LExmlG">
+        <a href="https://pf.kakao.com/_LExmlG" className="iconButton">
           <img src={kakaotalk} alt="" className={styles.kakaoImg}></img>
         </a>
         <br></br>

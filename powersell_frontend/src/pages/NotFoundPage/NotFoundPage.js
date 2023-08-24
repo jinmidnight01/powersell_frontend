@@ -12,7 +12,7 @@ const NotFoundPage = () => {
 
       <div className={styles.main}>
       <div className={styles.content}>
-        해당 주소는 존재하지 않는<br/> 페이지입니다
+        해당 주소는 존재하지 않는 페이지입니다
       </div>
       <div className={styles.buttonBox}>
         <Link to="/">

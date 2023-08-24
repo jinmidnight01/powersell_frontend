@@ -78,13 +78,16 @@ function DetailProductPage() {
 
   if (!product) {
     return (
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <img
-          style={{ margin: "150px 0" }}
-          src={spinner}
-          alt="로딩 중..."
-          width="15%"
-        />
+      <div id="pc-width">
+        <Header text="상품 내용"></Header>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <img
+            style={{ margin: "150px 0" }}
+            src={spinner}
+            alt="로딩 중..."
+            width="15%"
+          />
+        </div>
       </div>
 
       // <div>
@@ -229,8 +232,19 @@ function DetailProductPage() {
                 </p>
                 <br></br>
 
-                <p>
-                  <span style={{ fontWeight: "bold" }}>1. 배송/주문 안내</span>
+                <p style={{lineHeight:"25px"}}>
+                  <span style={{ fontWeight: "bold" }}>1. EVENT 일정 안내</span>
+                  <br />-{" "}
+                  <span className="borderText">1차 이벤트</span>:{" "}
+                  <span className="borderText">8월 28일(월) 오후 9시 </span>~ 재고 소진 시
+                  <br />-{" "}
+                  <span className="borderText">2차 이벤트</span>:{" "}
+                  <span className="borderText">9월 4일(월) 오후 9시 </span>~ 재고 소진 시
+                </p>
+                <br></br>
+
+                <p style={{lineHeight:"25px"}}>
+                  <span style={{ fontWeight: "bold" }}>2. 배송/주문 안내</span>
                   <br />- 모든 주문들을 취합하여, 매일{" "}
                   <span className="borderText">자정</span>에{" "}
                   <span className="borderText">쿠팡</span>을 통해 일괄
@@ -241,22 +255,22 @@ function DetailProductPage() {
                 </p>
                 <br></br>
 
-                <p>
-                  <span style={{ fontWeight: "bold" }}>2. 입금 안내</span>
+                <p style={{lineHeight:"25px"}}>
+                  <span style={{ fontWeight: "bold" }}>3. 입금 안내</span>
                   <br />- 주문 시각으로부터{" "}
                   <span className="borderText">30분</span> 내 미입금 시 주문이
                   자동 취소됩니다.
                 </p>
                 <br></br>
 
-                <p>
-                  <span style={{ fontWeight: "bold" }}>3. 교환/환불 안내</span>
+                <p style={{lineHeight:"25px"}}>
+                  <span style={{ fontWeight: "bold" }}>4. 교환/환불 안내</span>
                   <br />- 단순 변심으로 인한 교환/환불은{" "}
                   <span style={{ fontWeight: "bold" }}>불가</span>합니다
                 </p>
                 <br></br>
 
-                <p style={{ fontStyle: "italic", color: "grey" }}>
+                <p style={{ fontStyle: "italic", color: "grey", lineHeight: "25px" }}>
                   ※ 미리 공지사항에 고지해 둔 내용을 소비자가 충분히 숙지하지
                   않아 발생되는 일에 대해 판매자가 책임지지 않습니다.
                 </p>
@@ -267,22 +281,23 @@ function DetailProductPage() {
                   <i className="borderText">⚠️ 추가 내용</i>
                 </p>
                 <br></br>
-                <div>
+                <div style={{lineHeight: "25px"}}>
                   문의 사항이 있을 시 아래{" "}
                   <span className="borderText">노션 링크</span>나{" "}
                   <span className="borderText">카카오톡 채널</span>을 통해
                   자세한 내용을 확인해주세요
                   <br />
                   <p style={{ marginTop: "15px" }}>
-                    <a href="https://www.notion.so/9-EVENT-15ce9c9fd951457d9da722eafc8c3131?pvs=4">
+                    <a href="https://jazzy-note-a6d.notion.site/9-EVENT-15ce9c9fd951457d9da722eafc8c3131?pvs=4">
                       <img
                         src={notion}
                         style={{ marginRight: "15px" }}
                         width={42}
                         alt=""
+                        className="iconButton"
                       ></img>
                     </a>
-                    <a href="https://pf.kakao.com/_LExmlG">
+                    <a href="https://pf.kakao.com/_LExmlG" className="iconButton">
                       <img src={kakaotalk} width={42} alt=""></img>
                     </a>
                   </p>

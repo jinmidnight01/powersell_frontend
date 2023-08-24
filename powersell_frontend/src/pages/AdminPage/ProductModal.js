@@ -1,9 +1,7 @@
-import { React, useEffect, useParams, useState } from "react";
-import axios from "axios";
-
-import hostURL from "../../hostURL";
+import { React, useState } from "react";
 
 import styles from "./admin.module.css";
+import close from "../../images/icons/close.png";
 
 const ProductModal = ({ product, onClose, onSave }) => {
   const [updatedProduct, setUpdatedProduct] = useState(product);
@@ -12,8 +10,14 @@ const ProductModal = ({ product, onClose, onSave }) => {
     const { name, value } = e.target;
     const tempValue = value.replace("T", " ");
     if (name === "originalPrice" || name === "price" || name === "stockQuantity") {
-      const finalValue = Number(value);
-      setUpdatedProduct((prev) => ({ ...prev, [name]: finalValue }));
+      if (value === "") {
+        const finalValue = "";
+        setUpdatedProduct((prev) => ({ ...prev, [name]: finalValue }));
+      }
+      else {
+        const finalValue = Number(value);
+        setUpdatedProduct((prev) => ({ ...prev, [name]: finalValue }));
+      }
     }
     else {
       const finalValue = tempValue;
@@ -29,7 +33,7 @@ const ProductModal = ({ product, onClose, onSave }) => {
   return (
     <div className={styles.productModal}>
       <section>
-        <button className={styles.shutDown} onClick={onClose}>✖</button>
+        <img className={styles.shutDown} src={close} alt="닫기" onClick={onClose} />
       </section>
       <div>
         <div>ㆍ품명:</div>

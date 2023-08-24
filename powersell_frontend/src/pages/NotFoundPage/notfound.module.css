@@ -16,6 +16,7 @@
     text-align: center;
     margin-top: 80px;
     line-height: 35px;
+    padding: 0 30px;
 }
 
 .buttonBox {
@@ -33,4 +34,8 @@
     width: 150px;
     border-radius: 8px;
     cursor: pointer;
+}
+
+.buttonBox button:active {
+    opacity: 0.8;
 }

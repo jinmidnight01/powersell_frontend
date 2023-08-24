@@ -111,7 +111,7 @@ const OrderListPage = (props) => {
                       <span>전화번호</span>: {order.number}
                     </div>
                     <div>
-                      <span>주문 일시</span>: {order.orderDate}
+                      <span>주문 일시</span>: {order.orderDate.replace("T", " ").slice(0, 19)}
                     </div>
                     <div>
                       <span>주소</span>: {order.address} {order.dongho}
