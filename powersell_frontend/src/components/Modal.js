@@ -62,6 +62,8 @@ function Modal(props) {
   // 구매하기 버튼
   async function handleSubmit(e) {
     e.preventDefault();
+    // '-'가 포함되어 있는지 확인
+    const hasDash = phoneNumber.includes("-");
     const flag1 = phoneNumber.length !== 7 && phoneNumber.length !== 8;
     const flag2 = pw.length !== 4;
 
@@ -75,6 +77,9 @@ function Modal(props) {
       !pw
     ) {
       alert("※ 모든 정보를 입력해주세요.");
+      return;
+    } else if (hasDash) {
+      alert("(-)를 제외한 숫자만 입력해주세요.");
       return;
     } else if (flag1 || flag2) {
       alert("※ 아래 양식을 지켜주세요\n\nㆍ전화번호: 7~8자리ㆍ비밀번호: 4자리");
@@ -221,6 +226,22 @@ function Modal(props) {
         console.error("Error fetching item data:", error);
       });
   }, [props.product.itemId]);
+  const nameRef = useRef();
+  const phoneNumberRef = useRef();
+  const donghoRef = useRef();
+  const pwRef = useRef();
+  useEffect(() => {
+    if (modalState) {
+      // 모달이 열렸을 때만 포커스를 줍니다. 'props.open'은 모달이 열렸는지 알려주는 prop입니다.
+      nameRef.current.focus();
+    }
+  }, [modalState]);
+
+  const moveToNextInput = (currentRef, nextRef) => {
+    if (currentRef.current.value.length > 0) {
+      nextRef.current.focus();
+    }
+  };
 
   return (
     <>
@@ -289,10 +310,14 @@ function Modal(props) {
                 <div className={styles.input_group}>
                   <label>받는 사람</label>
                   <input
+                    ref={nameRef}
                     type="text"
                     name="name"
                     value={name}
-                    onChange={onChange}
+                    onChange={(e) => {
+                      onChange(e);
+                      moveToNextInput(nameRef, phoneNumberRef);
+                    }}
                   />
                 </div>
                 <div className={styles.input_group}>
@@ -305,10 +330,14 @@ function Modal(props) {
                     <option value="031">031</option>
                   </select>
                   <input
+                    ref={phoneNumber}
                     type="text"
                     name="phoneNumber"
                     value={phoneNumber}
-                    onChange={onChange}
+                    onChange={(e) => {
+                      onChange(e);
+                      moveToNextInput(phoneNumberRef, donghoRef);
+                    }}
                     placeholder="(-) 없이 숫자만 입력해주세요"
                   />
                 </div>
@@ -342,11 +371,15 @@ function Modal(props) {
                 <div className={`${styles.input_group} ${styles.last}`}>
                   <label> </label>
                   <input
+                    ref={donghoRef}
                     type="text"
                     placeholder="상세주소 입력"
                     name="dongho"
                     value={dongho}
-                    onChange={onChange}
+                    onChange={(e) => {
+                      onChange(e);
+                      moveToNextInput(donghoRef, pwRef);
+                    }}
                   />
                 </div>
               </div>
@@ -360,6 +393,7 @@ function Modal(props) {
                 <div className={styles.input_group}>
                   <label>비밀번호</label>
                   <input
+                    ref={pwRef}
                     type="password"
                     name="pw"
                     value={pw}
