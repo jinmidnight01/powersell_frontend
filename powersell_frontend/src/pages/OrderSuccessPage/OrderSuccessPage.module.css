@@ -158,3 +158,7 @@ li > span:nth-child(1) {
     font-size: 18px;
     cursor: pointer;
 }
+
+.auth_buttonBox button:active{
+    opacity: 0.8;
+}

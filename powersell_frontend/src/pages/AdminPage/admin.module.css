@@ -30,13 +30,17 @@
   background-color: #fa7979;
   color: white;
   border: transparent;
-  height: 24px;
+  height: 25px;
   font-size: 14px;
-  width: 50px;
+  width: 60px;
   border-radius: 8px;
   margin-top: 6px;
   margin-bottom: 10px;
   cursor: pointer;
+}
+
+.login_box button:active {
+  opacity: 0.8;
 }
 
 /* 관리자 페이지 */
@@ -275,16 +279,16 @@ label > input:checked + .slider:before {
 }
 
 .shutDown {
-  background-color: #fa7979;
-  color: white;
   border: transparent;
-  border-radius: 100%;
   width: 22px;
   height: 22px;
-  font-size: 13px;
   position: absolute;
   margin: 5px 14px;
   cursor: pointer;
+}
+
+.shutDown:active {
+  opacity: 0.8;
 }
 
 .productModal > div {
@@ -296,8 +300,13 @@ label > input:checked + .slider:before {
 }
 
 .productModal > div > div {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.productModal > div > input {
+  height: 20px;
   font-size: 15px;
-  margin-bottom: 3px;
 }
 
 .productModal > .saveButton {
@@ -306,11 +315,15 @@ label > input:checked + .slider:before {
   color: white;
   border: transparent;
   height: 24px;
-  font-size: 14px;
+  font-size: 15px;
   width: 50px;
   border-radius: 8px;
   margin-bottom: 15px;
   cursor: pointer;
+}
+
+.productModal > .saveButton:active {
+  opacity: 0.8;
 }
 
 /* 상품 목록 */
@@ -347,6 +360,7 @@ label > input:checked + .slider:before {
   width: 20%;
   text-align: center;
   line-height: 30px;
+  font-size: 16px;
   border-bottom: 1px double rgb(196, 196, 196);
 }
 
@@ -363,6 +377,10 @@ label > input:checked + .slider:before {
   cursor: pointer;
 }
 
+.addProductToggle:active {
+  opacity: 0.8;
+}
+
 .addProduct {
   display: none;
   margin-left: 7px;
@@ -374,12 +392,13 @@ label > input:checked + .slider:before {
 }
 
 .addProduct > div > div {
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .addProduct > div > input {
   width: 200px;
-  height: 15px;
+  height: 20px;
+  font-size: 15px;
   margin-bottom: 4px;
   margin-left: 7px;
 }
@@ -389,13 +408,17 @@ label > input:checked + .slider:before {
   color: white;
   border: transparent;
   height: 24px;
-  font-size: 14px;
+  font-size: 15px;
   width: 55px;
   border-radius: 7px;
   margin-top: 3px;
   margin-left: 5px;
   margin-bottom: 10px;
   cursor: pointer;
+}
+
+.addProduct button:active {
+  opacity: 0.8;
 }
 
 /* 후기 목록 */

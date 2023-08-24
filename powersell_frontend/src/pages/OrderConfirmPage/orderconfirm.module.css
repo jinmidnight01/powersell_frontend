@@ -183,6 +183,10 @@
     cursor: pointer;
 }
 
+.auth_buttonBox button:active{
+    opacity: 0.8;
+}
+
 /* 주문 조회: 승인 후 */
 
 /* main */  

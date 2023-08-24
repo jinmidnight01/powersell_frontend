@@ -4,9 +4,10 @@
   font-weight: 700;
   font-style: normal;
 }
-
+ 
 :root {
   --point-color: #eb3c3c;
+  -webkit-tap-highlight-color : transparent;
 }
 
 
@@ -259,13 +260,17 @@ hr {
   font-weight: 500;
 }
 
-
 .product-description {
   display: flex;
   flex-direction: column;
   align-items: center;
   flex-grow: 1;
 }
+
+.iconButton:active {
+  opacity: 0.5;
+}
+
 .button-container {
     display: flex;
     justify-content: center;

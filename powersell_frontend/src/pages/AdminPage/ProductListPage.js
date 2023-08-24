@@ -11,9 +11,9 @@ import ProductModal from "./ProductModal";
 const ProductListPage = (props) => {
   const [feedbacks, setFeedbacks] = useState([]);
   const [name, setName] = useState("");
-  const [originalPrice, setOriginalPrice] = useState(0);
-  const [price, setPrice] = useState(0);
-  const [stockQuantity, setStockQuantity] = useState(0);
+  const [originalPrice, setOriginalPrice] = useState("");
+  const [price, setPrice] = useState("");
+  const [stockQuantity, setStockQuantity] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [isClicked, setIsClicked] = useState(0);
@@ -86,8 +86,12 @@ const ProductListPage = (props) => {
     handleProductClick(product);
   };
   const handleSave = (updatedProduct) => {
+    if (updatedProduct.name.length === 0 || updatedProduct.startDate.length === 0 || updatedProduct.endDate.length === 0 || updatedProduct.originalPrice.length === 0 || updatedProduct.price.length === 0 || updatedProduct.stockQuantity.length === 0) {
+      alert("모든 항목을 입력해주세요");
+      return;
+    }
     axios
-      .put(`${hostURL}/api/items/${updatedProduct.itemId}`, updatedProduct)
+      .put(`${hostURL}/api/admin/items/${updatedProduct.itemId}`, updatedProduct)
       .then((response) => {
         if (isClicked === 0) {
           setIsClicked(1);
@@ -102,12 +106,12 @@ const ProductListPage = (props) => {
 
   // REST API 2-2
   const handleClick = () => {
-    if (name.length === 0 || startDate.length === 0 || endDate.length === 0) {
+    if (name.length === 0 || startDate.length === 0 || endDate.length === 0 || originalPrice.length === 0 || price.length === 0 || stockQuantity.length === 0) {
       alert("모든 항목을 입력해주세요");
       return;
     }
+
     const inputs = {
-      // itemId: 6,
       name: name,
       originalPrice: Number(originalPrice),
       price: Number(price),
@@ -115,15 +119,14 @@ const ProductListPage = (props) => {
       startDate: startDate.replace("T", " "),
       endDate: endDate.replace("T", " "),
     };
-    console.log(typeof inputs.originalPrice);
 
     axios
       .post(`${hostURL}/api/admin/items`, inputs)
       .then((response) => {
         setName("");
-        setOriginalPrice(0);
-        setPrice(0);
-        setStockQuantity(0);
+        setOriginalPrice("");
+        setPrice("");
+        setStockQuantity("");
         setStartDate("");
         setEndDate("");
         setToggleStatus("-");
