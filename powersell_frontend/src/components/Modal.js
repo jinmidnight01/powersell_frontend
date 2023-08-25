@@ -35,13 +35,10 @@ function Modal(props) {
   const [isClicked, setClicked] = useState(false);
   // 오픈 일시
   const [startDate, setStartDate] = useState("");
-  // 오픈 상태
-  const [openStatus, setOpenStatus] = useState(false);
-  // 마감 일시
+  
   const [endDate, setEndDate] = useState("");
-  // 마감 상태
+  const [openStatus, setOpenStatus] = useState(false);
   const [closeStatus, setCloseStatus] = useState(false);
-  // 모달 버튼 로딩
   const [isloading, setIsLoading] = useState(true);
 
   // input box
@@ -267,6 +264,7 @@ function Modal(props) {
         setInterval(() => {
           if (startDate === "") return;
           setOpenStatus(startDate < nowTime());
+
           if (endDate === "") return;
           setCloseStatus(endDate < nowTime());
         }, 1);
@@ -468,7 +466,7 @@ function Modal(props) {
                   }`}
                   type="submit"
                   value={closeStatus ? "오픈 준비 중입니다" : openStatus ? "구매하기"  : startDate.slice(6,7) + "월 " + startDate.slice(8,10) + "일 " + startDate.slice(11,13) + "시 " + startDate.slice(14,16) + "분 OPEN"}
-                  disabled={closeStatus || !openStatus}
+                  disabled={!openStatus}
                 />
               )}
             </div>
