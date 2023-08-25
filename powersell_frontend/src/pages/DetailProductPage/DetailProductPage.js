@@ -153,9 +153,8 @@ function DetailProductPage() {
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
-        // title: product.name,
-        title: "꾸꾸까까",
-        url: "https://www.naver.com",
+        title: product.name,
+        url: "https://www.cheapat9.com/",
       });
     } else {
       kakaoButton();
