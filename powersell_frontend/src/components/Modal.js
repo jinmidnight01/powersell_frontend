@@ -9,6 +9,7 @@ import axios from "axios";
 import hostURL from "../hostURL";
 
 function Modal(props) {
+  
   const navigate = useNavigate();
   // 모달 오픈 여부
   const [modalState, setModalState] = useState("");
@@ -155,6 +156,7 @@ function Modal(props) {
     height: "100%",
     display: "block",
   };
+  
 
   // 팝업창 열기
   const openPostCode = () => {
@@ -212,13 +214,17 @@ function Modal(props) {
     if (dragging) {
       const clientY = e.type === "touchmove" ? e.touches[0].clientY : e.clientY;
       const deltaY = clientY - dragStartY;
-      const resistanceValue = deltaY > 0 ? Math.sqrt(deltaY) : 0; // Only allow downwards drag
-
+      // const resistanceValue = deltaY > 0 ? Math.sqrt(deltaY) * 5 : 0;  // 더 큰 상수를 곱하여 움직임을 더 크게 만듭니다.
+      // console.log("DeltaY:", deltaY, "Resistance Value:", resistanceValue); // 디버깅
       if (deltaY < 0) return;
+      setTransformY(deltaY*0.9);
 
-      setTransformY(resistanceValue);
+      // setTransformY(resistanceValue);
     }
   }
+  useEffect(() => {
+    console.log('Transform Y:', transformY);
+  }, [transformY]);
 
   const nowTime = () => {
     const today = new Date();
@@ -375,7 +381,7 @@ function Modal(props) {
                     <option value="031">031</option>
                   </select>
                   <input
-                    // ref={phoneNumber}
+                    ref={phoneNumberRef}
                     type="text"
                     name="phoneNumber"
                     value={phoneNumber}

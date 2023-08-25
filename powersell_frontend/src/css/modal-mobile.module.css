@@ -239,9 +239,9 @@ h3 span {
   .input_group select, .search_add {
     flex: 3;
   }
-  .input_group input {
+  /* .input_group input {
     height:14px 
-  }
+  } */
   .input_group select, input {
     font-size: 12px;
     color: black;
