@@ -315,7 +315,7 @@ function DetailProductPage() {
                     setClicked(!isClicked);
                   }
                 }}
-                text={isOutOfStock ? "품절" : "구매하기"}
+                text={isOutOfStock ? "품절" : "주문하기"}
               />
             </div>
             {isClicked && (
