@@ -9,7 +9,6 @@ import axios from "axios";
 import hostURL from "../hostURL";
 
 function Modal(props) {
-  
   const navigate = useNavigate();
   // 모달 오픈 여부
   const [modalState, setModalState] = useState("");
@@ -36,10 +35,13 @@ function Modal(props) {
   const [isClicked, setClicked] = useState(false);
   // 오픈 일시
   const [startDate, setStartDate] = useState("");
-  
-  const [endDate, setEndDate] = useState("");
+  // 오픈 상태
   const [openStatus, setOpenStatus] = useState(false);
+  // 마감 일시
+  const [endDate, setEndDate] = useState("");
+  // 마감 상태
   const [closeStatus, setCloseStatus] = useState(false);
+  // 구매 버튼 로딩 상태
   const [isloading, setIsLoading] = useState(true);
 
   // input box
@@ -156,7 +158,6 @@ function Modal(props) {
     height: "100%",
     display: "block",
   };
-  
 
   // 팝업창 열기
   const openPostCode = () => {
@@ -217,13 +218,13 @@ function Modal(props) {
       // const resistanceValue = deltaY > 0 ? Math.sqrt(deltaY) * 5 : 0;  // 더 큰 상수를 곱하여 움직임을 더 크게 만듭니다.
       // console.log("DeltaY:", deltaY, "Resistance Value:", resistanceValue); // 디버깅
       if (deltaY < 0) return;
-      setTransformY(deltaY*0.9);
+      setTransformY(deltaY * 0.9);
 
       // setTransformY(resistanceValue);
     }
   }
   useEffect(() => {
-    console.log('Transform Y:', transformY);
+    console.log("Transform Y:", transformY);
   }, [transformY]);
 
   const nowTime = () => {
@@ -381,7 +382,7 @@ function Modal(props) {
                     <option value="031">031</option>
                   </select>
                   <input
-                    ref={phoneNumberRef}
+                    // ref={phoneNumberRef}
                     type="text"
                     name="phoneNumber"
                     value={phoneNumber}
@@ -454,7 +455,7 @@ function Modal(props) {
                 </div>
               </div>
             </div>
-            <div style={{height:"100px"}}>
+            <div style={{ height: "100px" }}>
               {isloading ? (
                 <div style={{ display: "flex", justifyContent: "center" }}>
                   <img
@@ -471,8 +472,21 @@ function Modal(props) {
                     closeStatus || !openStatus ? styles.negative_button : ""
                   }`}
                   type="submit"
-                  value={closeStatus ? "오픈 준비 중입니다" : openStatus ? "구매하기"  : startDate.slice(6,7) + "월 " + startDate.slice(8,10) + "일 " + startDate.slice(11,13) + "시 " + startDate.slice(14,16) + "분 OPEN"}
-                  disabled={!openStatus}
+                  value={
+                    closeStatus
+                      ? "오픈 준비 중입니다"
+                      : openStatus
+                      ? "구매하기"
+                      : startDate.slice(6, 7) +
+                        "월 " +
+                        startDate.slice(8, 10) +
+                        "일 " +
+                        startDate.slice(11, 13) +
+                        "시 " +
+                        startDate.slice(14, 16) +
+                        "분 OPEN"
+                  }
+                  disabled={closeStatus || !openStatus}
                 />
               )}
             </div>
