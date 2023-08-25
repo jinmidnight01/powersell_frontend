@@ -76,92 +76,98 @@ function LandingPage() {
         console.log(error);
       });
   }
-  
+
   return (
     <div id="pc-width" className="app">
-      {/* Header */}
-      <HomeHeader img2={user} />
+      <div className="wrap">
+        {/* Header */}
+        <HomeHeader img2={user} />
 
-      {/* Banner */}
-      <a
-        href="https://jazzy-note-a6d.notion.site/9-EVENT-15ce9c9fd951457d9da722eafc8c3131?pvs=4"
-        className="banner"
-      >
-        <img src={banner} alt="Promotion Banner" />
-      </a>
+        {/* Banner */}
+        <a
+          href="https://jazzy-note-a6d.notion.site/9-EVENT-15ce9c9fd951457d9da722eafc8c3131?pvs=4"
+          className="banner"
+        >
+          <img src={banner} alt="Promotion Banner" />
+        </a>
 
-      {/* Products */}
-      {isLoading ? (
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <img
-            style={{ margin: "150px 0" }}
-            src={spinner}
-            alt="로딩 중..."
-            width="15%"
-          />
-        </div>
-      ) : (
-        <div className="products">
-          {itemList.map((product) => (
-            <div key={product.itemId} className="product">
-              <Link className="product-link" to={`/product/${product.itemId}`}>
-                <img
-                  className="product-img"
-                  src={itemImage(product)}
-                  alt={product.name}
-                />
-                <div className="description">
-                  <p className="product-name">
-                    {product.stockQuantity === 0 && (
-                      <span className="soldout">품절</span>
-                    )}
-                    {product.name}
-                  </p>
-                  <p className="original-price">{product.originalPrice}원</p>
-                  <h2 className="discount">
-                    80% {product.price}원
-                  </h2>
-                </div>
-              </Link>
-            </div>
-          ))}
-        </div>
-      )}
-      <div>
-        <hr />
-      </div>
-      {/* Footer */}
-      <div className="footer">
-        <h3 className="footerMessage">💌powersell팀에게 남기고 싶은 말💌</h3>
-        {isFeedbackLoading ? (
+        {/* Products */}
+        {isLoading ? (
           <div style={{ display: "flex", justifyContent: "center" }}>
             <img
-              style={{ margin: "20px 0" }}
+              style={{ margin: "150px 0" }}
               src={spinner}
               alt="로딩 중..."
               width="15%"
             />
           </div>
         ) : (
-          <textarea
-            onChange={handleFeedbackChange}
-            value={feedback}
-            className="feedback-input"
-            type="text"
-            placeholder="짧은 한 줄 소감도 큰 도움이 됩니다!"
-          />
+          <div className="products">
+            {itemList.map((product) => (
+              <div key={product.itemId} className="product">
+                <Link
+                  className="product-link"
+                  to={`/product/${product.itemId}`}
+                >
+                  <img
+                    className="product-img"
+                    src={itemImage(product)}
+                    alt={product.name}
+                  />
+                  <div className="description">
+                    <p className="product-name">
+                      {product.stockQuantity === 0 && (
+                        <span className="soldout">품절</span>
+                      )}
+                      {product.name}
+                    </p>
+                    <p className="original-price">{product.originalPrice}원</p>
+                    <h2 className="discount">80% {product.price}원</h2>
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </div>
         )}
-        <input
-          type="button"
-          className="submit-button"
-          value="제출하기"
-          onClick={submitFeedback}
-        />
+        <div>
+          <hr />
+        </div>
+        {/* Footer */}
+        <div className="footer">
+          <h3 className="footerMessage">💌powersell팀에게 남기고 싶은 말💌</h3>
+          {isFeedbackLoading ? (
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <img
+                style={{ margin: "20px 0" }}
+                src={spinner}
+                alt="로딩 중..."
+                width="15%"
+              />
+            </div>
+          ) : (
+            <textarea
+              onChange={handleFeedbackChange}
+              value={feedback}
+              className="feedback-input"
+              type="text"
+              placeholder="짧은 한 줄 소감도 큰 도움이 됩니다!"
+            />
+          )}
+          <input
+            type="button"
+            className="submit-button"
+            value="제출하기"
+            onClick={submitFeedback}
+          />
+        </div>
       </div>
 
       {/* Copyright */}
       <div className="copyright">
-        <p>© Yonsei Workstation team: Powersell<br/> All rights reserved.</p>
+        <p>
+          © Yonsei Workstation team: Powersell
+          <br /> All rights reserved.
+        </p>
       </div>
     </div>
   );

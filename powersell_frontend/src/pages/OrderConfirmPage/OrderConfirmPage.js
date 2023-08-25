@@ -145,7 +145,7 @@ const OrderConfirmPage = () => {
                 </div>
 
                 {/* payment notification */}
-                {order.orderStatus === "WAITING" ? (
+                {order.orderStatus === "WAITING" || order.orderStatus === null ? (
                   <div className={styles.order_noti}>
                     <hr></hr>
                     <div>

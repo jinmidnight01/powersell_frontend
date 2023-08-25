@@ -287,7 +287,7 @@
       "price": 1400,
       "discountRate": 80,
       "stockQuantity": 14,
-      "eventIng": false,
+      "eventIng": true,
       "startDate": "2023-08-20 09:19:20",
       "endDate": "2023-08-21 17:19:20"
     },
@@ -338,16 +338,6 @@
       "eventIng": true,
       "startDate": "2023-08-20 09:19:20",
       "endDate": "2023-08-21 17:19:20"
-    },
-    {
-      "itemId": 6,
-      "name": "박진효",
-      "originalPrice": 0,
-      "price": 0,
-      "stockQuantity": 0,
-      "startDate": "2023-08-23 19:38:20",
-      "endDate": "2023-08-23 15:41:21",
-      "id": 6
     }
   ],
   "api_admin_items": [

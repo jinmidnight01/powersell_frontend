@@ -111,13 +111,29 @@ const ProductListPage = (props) => {
       return;
     }
 
+    const finalStartDate = () => {
+      if (startDate.length === 16) {
+        return startDate.replace("T", " ") + ":00";
+      } else {
+        return startDate.replace("T", " ");
+      }
+    }
+
+    const finalEndDate = () => {
+      if (endDate.length === 16) {
+        return endDate.replace("T", " ") + ":00";
+      } else {
+        return endDate.replace("T", " ");
+      }
+    }
+
     const inputs = {
       name: name,
       originalPrice: Number(originalPrice),
       price: Number(price),
       stockQuantity: Number(stockQuantity),
-      startDate: startDate.replace("T", " "),
-      endDate: endDate.replace("T", " "),
+      startDate: finalStartDate(),
+      endDate: finalEndDate(),
     };
 
     axios

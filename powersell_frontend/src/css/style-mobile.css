@@ -12,6 +12,15 @@
 
 
 /* App.css */
+.app {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrap {
+  min-height: calc(100vh - 60px);
+}
+
 .header {
   display: flex;
   justify-content: center;
@@ -188,12 +197,20 @@ hr {
   height: 60px;
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
 .copyright p {
   margin: auto 0;
   font-size: 13px;
 }
+
+@media all and (min-width: 601px) {
+  .copyright {
+    width: 400px;
+  }
+}
+
 
 
 /* ====================================== */
@@ -315,8 +332,9 @@ hr {
   cursor: default;
   width: 80%;
 }
-
-
+.negative_button:active {
+  opacity: 1;
+}
 
 
 .modal-div {

@@ -178,11 +178,11 @@ label {
   background-color: #fa7979;
   border: none;
   color: white;
-  padding: 15px 20px;
+
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  
+  height: 45px;
 }
 .submit_button:active {
   opacity: 0.8;
@@ -191,6 +191,9 @@ label {
   background-color: #757575;
   cursor: default;
   width: 80%;
+}
+.negative_button:active {
+  opacity: 1;
 }
 
 input[type="number"]::-webkit-outer-spin-button,

@@ -8,7 +8,6 @@ const ProductModal = ({ product, onClose, onSave }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    const tempValue = value.replace("T", " ");
     if (name === "originalPrice" || name === "price" || name === "stockQuantity") {
       if (value === "") {
         const finalValue = "";
@@ -20,8 +19,21 @@ const ProductModal = ({ product, onClose, onSave }) => {
       }
     }
     else {
-      const finalValue = tempValue;
-      setUpdatedProduct((prev) => ({ ...prev, [name]: finalValue }));
+      if (name === "startDate" || name === "endDate") {
+        const tempValue = value.replace("T", " ");
+        if (tempValue.length === 16) {
+          const finalValue = tempValue + ":00";
+          setUpdatedProduct((prev) => ({ ...prev, [name]: finalValue }));
+        }
+        else {
+          const finalValue = tempValue;
+          setUpdatedProduct((prev) => ({ ...prev, [name]: finalValue }));    
+        }
+      }
+      else {
+        const finalValue = value;
+        setUpdatedProduct((prev) => ({ ...prev, [name]: finalValue }));
+      }
     }
   };
 

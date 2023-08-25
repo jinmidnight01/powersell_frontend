@@ -6,6 +6,7 @@ import styles from "./admin.module.css";
 
 const LoginPage = (e) => {
   const focus = useRef();
+  const submitFocus = useRef();
   const navigator = useNavigate();
 
   useEffect(() => {
@@ -24,6 +25,13 @@ const LoginPage = (e) => {
     }
   };
 
+  const handleOnChange = () => {
+    const pw = document.getElementById("password").value
+    if (pw.length === 4) {
+      submitFocus.current.focus();
+    }
+  }
+
   return (
     <div id={styles.pcWidth}>
       <Header text="로그인"></Header>
@@ -41,6 +49,7 @@ const LoginPage = (e) => {
           </p>
           <p>
             <input
+              onChange = {handleOnChange}
               type="password"
               id="password"
               name="password"
@@ -48,7 +57,7 @@ const LoginPage = (e) => {
               required
             />
           </p>
-          <button onClick={handleClick}>제출</button>
+          <button onClick={handleClick} ref={submitFocus}>제출</button>
         </div>
       </div>
     </div>

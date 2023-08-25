@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import styles from "../css/modal-mobile.module.css";
 import DaumPostcode from "react-daum-postcode";
 import { useNavigate } from "react-router-dom";
+import spinner from "../images/icons/spinner.gif";
 import axios from "axios";
 
 import hostURL from "../hostURL";
@@ -32,6 +33,16 @@ function Modal(props) {
   const [eventIng, setEventIng] = useState(true);
   // 구매 버튼 실행 여부
   const [isClicked, setClicked] = useState(false);
+  // 오픈 일시
+  const [startDate, setStartDate] = useState("");
+  // 오픈 상태
+  const [openStatus, setOpenStatus] = useState(false);
+  // 마감 일시
+  const [endDate, setEndDate] = useState("");
+  // 마감 상태
+  const [closeStatus, setCloseStatus] = useState(false);
+  // 모달 버튼 로딩
+  const [isloading, setIsLoading] = useState(true);
 
   // input box
   const onChange = (e) => {
@@ -212,20 +223,56 @@ function Modal(props) {
     }
   }
 
+  const nowTime = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = ("0" + (today.getMonth() + 1)).slice(-2);
+    const day = ("0" + today.getDate()).slice(-2);
+    const hours = ("0" + today.getHours()).slice(-2);
+    const minutes = ("0" + today.getMinutes()).slice(-2);
+    const seconds = ("0" + today.getSeconds()).slice(-2);
+
+    const dateTimeString =
+      year +
+      "-" +
+      month +
+      "-" +
+      day +
+      " " +
+      hours +
+      ":" +
+      minutes +
+      ":" +
+      seconds;
+    return dateTimeString;
+  };
+
   const product = props.product;
   useEffect(() => {
     axios
       .get(`${hostURL}/api/items/${props.product.itemId}`)
       .then((response) => {
         const itemData = response.data;
+        setStartDate(itemData.startDate);
+        setEndDate(itemData.endDate);
         if (itemData.eventIng !== undefined) {
           setEventIng(itemData.eventIng);
         }
       })
       .catch((error) => {
         console.error("Error fetching item data:", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+        setInterval(() => {
+          if (startDate === "") return;
+          setOpenStatus(startDate < nowTime());
+          if (endDate === "") return;
+          setCloseStatus(endDate < nowTime());
+        }, 1);
       });
-  }, [props.product.itemId]);
+  }, [props.product.itemId, startDate, endDate]);
+
   // const nameRef = useRef();
   // const phoneNumberRef = useRef();
   // const donghoRef = useRef();
@@ -403,15 +450,28 @@ function Modal(props) {
                 </div>
               </div>
             </div>
-            <input
-              onClick={handleSubmit}
-              className={`${styles.submit_button} ${
-                !eventIng ? styles.negative_button : ""
-              }`}
-              type="submit"
-              value={eventIng ? "구매하기" : "오픈 준비 중입니다"}
-              disabled={!eventIng}
-            />
+            <div style={{height:"100px"}}>
+              {isloading ? (
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <img
+                    style={{ margin: "37px 0" }}
+                    src={spinner}
+                    alt="로딩 중..."
+                    width="10%"
+                  />
+                </div>
+              ) : (
+                <input
+                  onClick={handleSubmit}
+                  className={`${styles.submit_button} ${
+                    closeStatus || !openStatus ? styles.negative_button : ""
+                  }`}
+                  type="submit"
+                  value={closeStatus ? "오픈 준비 중입니다" : openStatus ? "구매하기"  : startDate.slice(6,7) + "월 " + startDate.slice(8,10) + "일 " + startDate.slice(11,13) + "시 " + startDate.slice(14,16) + "분 OPEN"}
+                  disabled={closeStatus || !openStatus}
+                />
+              )}
+            </div>
           </form>
         </div>
       )}
