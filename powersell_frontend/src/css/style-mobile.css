@@ -178,7 +178,7 @@ hr {
   border: none;
   color: #FFFFFF;
   margin-top: 15px;
-  width: 80%;
+  width: 90%;
   padding: 8px;
   font-size: 16px;
   border-radius: 10px;
@@ -320,9 +320,9 @@ hr {
   border-radius: 8px;
   color: #FFFFFF;
   width: 80%;
-  padding: 13px;
   font-size: 16px;
   cursor: pointer;
+  height: 45px;
 }
 .positive_button:active {
   opacity: 0.8;
@@ -330,7 +330,6 @@ hr {
 .negative_button {
   background-color: #757575;
   cursor: default;
-  width: 80%;
 }
 .negative_button:active {
   opacity: 1;

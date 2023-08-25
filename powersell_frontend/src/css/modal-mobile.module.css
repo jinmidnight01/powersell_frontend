@@ -190,7 +190,7 @@ label {
 .negative_button {
   background-color: #757575;
   cursor: default;
-  width: 80%;
+  width: 90%;
 }
 .negative_button:active {
   opacity: 1;
