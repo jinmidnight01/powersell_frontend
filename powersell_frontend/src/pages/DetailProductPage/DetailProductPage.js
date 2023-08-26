@@ -108,7 +108,7 @@ function DetailProductPage() {
   let templateIdNum;
 
 // 미래의 혜은 링크 바꿔
-switch (order.name) {
+switch (product.name) {
   case "제주 삼다수 2L (6개입)":
     templateIdNum = 97689;
     break;
@@ -125,7 +125,7 @@ switch (order.name) {
     templateIdNum = 97706;
     break;
   default:
-    templateIds = "https://www.cheapat9.com/static/media/banner.df263d89b89f5f29dcc9.jpg";
+    templateIdNum = 97689;
 }
   
   const kakaoButton = () => {
