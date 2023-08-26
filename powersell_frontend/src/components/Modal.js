@@ -139,13 +139,12 @@ function Modal(props) {
   }, []);
   // 스타일 정의 code
   const postCodeStyle = {
+    height: "80%",
     position: "fixed",
-    top: "75%",
-    bottom: 0,
+    bottom: "0",
     left: "50%",
-    transform: "translate(-50%, -50%)",
+    transform: "translate(-50%)",
     width: windowWidth >= 400 ? "400px" : "100%",
-    height: "100%",
     display: "block",
   };
   
@@ -218,6 +217,7 @@ function Modal(props) {
     console.log('Transform Y:', transformY);
   }, [transformY]);
 
+
   const product = props.product;
   useEffect(() => {
     axios
@@ -243,12 +243,12 @@ function Modal(props) {
     }
   }, [modalState]);
 
-  const moveToNextInput = (currentRef, nextRef) => {
-    if (currentRef.current.value.length > 0) {
+  const moveToNextInput = (currentRef, nextRef, length) => {
+    if (currentRef.current.value.length >= length) {
       nextRef.current.focus();
     }
   };
-
+  
   return (
     <>
       {isClicked ? (
@@ -322,8 +322,7 @@ function Modal(props) {
                     value={name}
                     onChange={(e) => {
                       onChange(e);
-                      moveToNextInput(nameRef, phoneNumberRef);
-                    }}
+                      moveToNextInput(nameRef, phoneNumberRef, 4);                    }}
                   />
                 </div>
                 <div className={styles.input_group}>
@@ -342,7 +341,6 @@ function Modal(props) {
                     value={phoneNumber}
                     onChange={(e) => {
                       onChange(e);
-                      moveToNextInput(phoneNumberRef, donghoRef);
                     }}
                     placeholder="(-) 없이 숫자만 입력해주세요"
                   />
@@ -384,7 +382,7 @@ function Modal(props) {
                     value={dongho}
                     onChange={(e) => {
                       onChange(e);
-                      moveToNextInput(donghoRef, pwRef);
+                      moveToNextInput(donghoRef, pwRef, 20);
                     }}
                   />
                 </div>

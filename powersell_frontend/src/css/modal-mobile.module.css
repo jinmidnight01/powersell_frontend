@@ -1,3 +1,5 @@
+/* 기본 설정 */
+
 /* modal창 외부화면 */
 .Modal {
   width: 100%;
@@ -146,7 +148,7 @@ hr {
   background-color: #FFFFFF;
   color: #fa7979;
   border: 2px solid #fa7979;
-  padding: 3px;
+  padding: 5px;
   font-size: 10px;
   font-weight: 600;
 }
@@ -179,7 +181,7 @@ label {
   border: none;
   color: white;
   padding: 15px 20px;
-  border-radius: 5px;
+  border-radius: 3px;
   cursor: pointer;
   font-size: 16px;
 }
@@ -204,7 +206,7 @@ h3 span {
   margin-left: 10px;
 }
 
-
+/* pc화면 */
 @media all and (min-width: 601px) {
   #pc_width {
     width: 400px;
@@ -212,6 +214,8 @@ h3 span {
   }
 }
 
+
+/* 작은 모바일 */
 @media all and (max-width: 399px) {
   .current_price_small {
     font-size: 17px;
@@ -219,14 +223,13 @@ h3 span {
   
 
   .quantity_selector {
-    gap: 5px;
+    gap: 3px;
     font-size: 14px;
     color: black;
   }
 
   .quantity_button {
     font-size: 20px;
-    color: black
   }
 
   .input_group {
@@ -234,12 +237,13 @@ h3 span {
   }
   .input_group select, .search_add {
     flex: 3;
+    height:25px ;
   }
   /* .input_group input {
     height:14px 
   } */
-  .input_group select, input {
-    font-size: 12px;
+  .input_group select, .input_group input {
+    font-size: 11px;
     color: black;
   }
 
@@ -248,7 +252,8 @@ h3 span {
     width: 20%;
   }
   .search_add {
-    font-size: 12px;
+    font-size: 11px;
+    padding: 3px;
     white-space: nowrap;
   }
   .input_group input {
