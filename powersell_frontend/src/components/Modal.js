@@ -30,7 +30,7 @@ function Modal(props) {
   // 비밀번호
   const [pw, setPw] = useState("");
   // 상품 판매 여부
-  const [eventIng, setEventIng] = useState(true);
+  // const [eventIng, setEventIng] = useState(true);
   // 구매 버튼 실행 여부
   const [isClicked, setClicked] = useState(false);
   // 오픈 일시
@@ -118,9 +118,9 @@ function Modal(props) {
           document.body.style.overflow = "auto";
           const successData = response.data;
           // eventIng 값을 업데이트
-          if (successData.eventIng !== undefined) {
-            setEventIng(successData.eventIng);
-          }
+          // if (successData.eventIng !== undefined) {
+          //   setEventIng(successData.eventIng);
+          // }
           navigate("/ordersuccess", {
             state: { successData: successData, pw: pw },
           });
@@ -258,9 +258,9 @@ function Modal(props) {
         const itemData = response.data;
         setStartDate(itemData.startDate);
         setEndDate(itemData.endDate);
-        if (itemData.eventIng !== undefined) {
-          setEventIng(itemData.eventIng);
-        }
+        // if (itemData.eventIng !== undefined) {
+        //   setEventIng(itemData.eventIng);
+        // }
       })
       .catch((error) => {
         console.error("Error fetching item data:", error);
