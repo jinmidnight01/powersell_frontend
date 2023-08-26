@@ -105,6 +105,29 @@ function DetailProductPage() {
   }
 
   const isOutOfStock = product.stockQuantity === 0;
+  let templateIdNum;
+
+// 미래의 혜은 링크 바꿔
+switch (order.name) {
+  case "제주 삼다수 2L (6개입)":
+    templateIdNum = 97689;
+    break;
+  case "농심 신라면 (5개입)":
+    templateIdNum = 97705;
+    break;
+  case "오뚜기 컵밥 오삼불고기덮밥 310g":
+    templateIdNum = 97704;
+    break;
+  case "햇반 백미밥 210g (3개입)":
+    templateIdNum = 97693;
+    break;
+  case "곰곰 구운란 10구":
+    templateIdNum = 97706;
+    break;
+  default:
+    templateIds = "https://www.cheapat9.com/static/media/banner.df263d89b89f5f29dcc9.jpg";
+}
+  
   const kakaoButton = () => {
     if (window.Kakao) {
       const kakao = window.Kakao;
@@ -112,40 +135,12 @@ function DetailProductPage() {
       if (!kakao.isInitialized()) {
         kakao.init("92b357c41da16ab9f3e0fa7f98cfbc30");
       }
-
-      kakao.Share.sendDefault({
-        objectType: "feed",
-        content: {
-          title: "딸기 치즈 케익",
-          description: "#케익 #딸기 #삼평동 #카페 #분위기 #소개팅",
-          imageUrl:
-            "http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png",
-          link: {
-            mobileWebUrl: "https://developers.kakao.com",
-            webUrl: "https://developers.kakao.com",
-          },
+      kakao.Share.createCustomButton({
+        templateId: templateIdNum,
+        templateArgs: {
+          title: '상품 상세 페이지',
+          description: '상세 설명',
         },
-        social: {
-          likeCount: 286,
-          commentCount: 45,
-          sharedCount: 845,
-        },
-        buttons: [
-          {
-            title: "웹으로 보기",
-            link: {
-              mobileWebUrl: "https://developers.kakao.com",
-              webUrl: "https://developers.kakao.com",
-            },
-          },
-          {
-            title: "앱으로 보기",
-            link: {
-              mobileWebUrl: "https://developers.kakao.com",
-              webUrl: "https://developers.kakao.com",
-            },
-          },
-        ],
       });
     }
   };
@@ -231,18 +226,18 @@ function DetailProductPage() {
                 </p>
                 <br></br>
 
-                <p style={{lineHeight:"25px"}}>
+                <p style={{ lineHeight: "25px" }}>
                   <span style={{ fontWeight: "bold" }}>1. EVENT 일정 안내</span>
-                  <br />-{" "}
-                  <span className="borderText">1차 이벤트</span>:{" "}
-                  <span className="borderText">8월 28일(월) 오후 9시 </span>~ 재고 소진 시
-                  <br />-{" "}
-                  <span className="borderText">2차 이벤트</span>:{" "}
-                  <span className="borderText">9월 4일(월) 오후 9시 </span>~ 재고 소진 시
+                  <br />- <span className="borderText">1차 이벤트</span>:{" "}
+                  <span className="borderText">8월 28일(월) 오후 9시 </span>~
+                  재고 소진 시
+                  <br />- <span className="borderText">2차 이벤트</span>:{" "}
+                  <span className="borderText">9월 4일(월) 오후 9시 </span>~
+                  재고 소진 시
                 </p>
                 <br></br>
 
-                <p style={{lineHeight:"25px"}}>
+                <p style={{ lineHeight: "25px" }}>
                   <span style={{ fontWeight: "bold" }}>2. 배송/주문 안내</span>
                   <br />- 모든 주문들을 취합하여, 매일{" "}
                   <span className="borderText">자정</span>에{" "}
@@ -254,7 +249,7 @@ function DetailProductPage() {
                 </p>
                 <br></br>
 
-                <p style={{lineHeight:"25px"}}>
+                <p style={{ lineHeight: "25px" }}>
                   <span style={{ fontWeight: "bold" }}>3. 입금 안내</span>
                   <br />- 주문 시각으로부터{" "}
                   <span className="borderText">30분</span> 내 미입금 시 주문이
@@ -262,14 +257,20 @@ function DetailProductPage() {
                 </p>
                 <br></br>
 
-                <p style={{lineHeight:"25px"}}>
+                <p style={{ lineHeight: "25px" }}>
                   <span style={{ fontWeight: "bold" }}>4. 교환/환불 안내</span>
                   <br />- 단순 변심으로 인한 교환/환불은{" "}
                   <span style={{ fontWeight: "bold" }}>불가</span>합니다
                 </p>
                 <br></br>
 
-                <p style={{ fontStyle: "italic", color: "grey", lineHeight: "25px" }}>
+                <p
+                  style={{
+                    fontStyle: "italic",
+                    color: "grey",
+                    lineHeight: "25px",
+                  }}
+                >
                   ※ 미리 공지사항에 고지해 둔 내용을 소비자가 충분히 숙지하지
                   않아 발생되는 일에 대해 판매자가 책임지지 않습니다.
                 </p>
@@ -280,7 +281,7 @@ function DetailProductPage() {
                   <i className="borderText">⚠️ 추가 내용</i>
                 </p>
                 <br></br>
-                <div style={{lineHeight: "25px"}}>
+                <div style={{ lineHeight: "25px" }}>
                   문의 사항이 있을 시 아래{" "}
                   <span className="borderText">노션 링크</span>나{" "}
                   <span className="borderText">카카오톡 채널</span>을 통해
@@ -296,7 +297,10 @@ function DetailProductPage() {
                         className="iconButton"
                       ></img>
                     </a>
-                    <a href="https://pf.kakao.com/_LExmlG" className="iconButton">
+                    <a
+                      href="https://pf.kakao.com/_LExmlG"
+                      className="iconButton"
+                    >
                       <img src={kakaotalk} width={42} alt=""></img>
                     </a>
                   </p>
