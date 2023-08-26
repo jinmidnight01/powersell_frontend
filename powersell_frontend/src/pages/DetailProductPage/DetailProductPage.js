@@ -108,25 +108,25 @@ function DetailProductPage() {
   let templateIdNum;
 
 // 미래의 혜은 링크 바꿔
-switch (order.name) {
-  case "제주 삼다수 2L (6개입)":
-    templateIdNum = 97689;
-    break;
-  case "농심 신라면 (5개입)":
-    templateIdNum = 97705;
-    break;
-  case "오뚜기 컵밥 오삼불고기덮밥 310g":
-    templateIdNum = 97704;
-    break;
-  case "햇반 백미밥 210g (3개입)":
-    templateIdNum = 97693;
-    break;
-  case "곰곰 구운란 10구":
-    templateIdNum = 97706;
-    break;
-  default:
-    templateIds = "https://www.cheapat9.com/static/media/banner.df263d89b89f5f29dcc9.jpg";
-}
+// switch (order.name) {
+//   case "제주 삼다수 2L (6개입)":
+//     templateIdNum = 97689;
+//     break;
+//   case "농심 신라면 (5개입)":
+//     templateIdNum = 97705;
+//     break;
+//   case "오뚜기 컵밥 오삼불고기덮밥 310g":
+//     templateIdNum = 97704;
+//     break;
+//   case "햇반 백미밥 210g (3개입)":
+//     templateIdNum = 97693;
+//     break;
+//   case "곰곰 구운란 10구":
+//     templateIdNum = 97706;
+//     break;
+//   default:
+//     templateIds = "https://www.cheapat9.com/static/media/banner.df263d89b89f5f29dcc9.jpg";
+// }
   
   const kakaoButton = () => {
     if (window.Kakao) {
