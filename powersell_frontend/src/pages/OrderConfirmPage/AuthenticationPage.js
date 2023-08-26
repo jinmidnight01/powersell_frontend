@@ -14,7 +14,7 @@ import styles from "./orderconfirm.module.css";
 
 // Authentication function
 const AuthenticationPage = () => {
-  const refNum2 = useRef(); const refNum3 = useRef(); const refPw = useRef();
+  const refNum2 = useRef(); const refNum3 = useRef(); const refPw = useRef(); const submitFocus = useRef();
   const reg = /^[0-9]{4}$/;
   const [isPosting, setIsPosting] = useState(false);
   const [isPending, setIsPending] = useState(false);
@@ -59,6 +59,15 @@ const AuthenticationPage = () => {
       if (!reg.test(pw.value)) {
         refPw.current.focus();
       }
+    }
+  }
+
+  // function: input focus (3)
+  const pwToSubmit = () => {
+    const pw = document.getElementById("pw").value;
+
+    if (pw.length === 4) {
+      submitFocus.current.focus();
     }
   }
 
@@ -221,6 +230,7 @@ const AuthenticationPage = () => {
           <input
             id="pw"
             name="pw"
+            onInput={pwToSubmit}
             type="text"
             inputMode="numeric"
             required
@@ -243,7 +253,7 @@ const AuthenticationPage = () => {
         {/* confirm button (REST API) */}
         <div className={styles.auth_buttonBox}>
           {!isPending && (
-            <button type="submit" onClick={handleSubmit}>
+            <button type="submit" onClick={handleSubmit} ref={submitFocus}>
               조회
             </button>
           )}
