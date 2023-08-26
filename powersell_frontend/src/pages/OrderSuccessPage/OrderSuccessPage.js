@@ -82,24 +82,25 @@ const OrderSuccessPage = () => {
             </li>
             <li>
               <span>송금계좌</span>:{" "}
-              <span
-                style={{
-                  textDecoration: "underline",
-                  textDecorationThickness: "1px",
-                }}
-              >
-                카카오뱅크 3333277508505
-              </span>
               <CopyToClipboard
                 text="3333277508505"
                 onCopy={() => alert("계좌가 복사되었습니다")}
               >
-                <img
-                  src={copyText}
-                  alt="copy"
-                  width={14}
-                  style={{ cursor: "pointer", marginLeft: "7px" }}
-                />
+                <span>
+                  <span
+                    style={{
+                      textDecoration: "underline",
+                    }}
+                  >
+                    카카오뱅크 3333277508505
+                  </span>
+                  <img
+                    src={copyText}
+                    alt="copy"
+                    width={14}
+                    style={{ cursor: "pointer", marginLeft: "7px" }}
+                  />
+                </span>
               </CopyToClipboard>
             </li>
             <p>(30분 내 미입금 시 주문이 취소됩니다)</p>

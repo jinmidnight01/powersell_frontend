@@ -239,6 +239,17 @@
       "dongho": "101동 506호",
       "pw": "1234",
       "id": 14
+    },
+    {
+      "itemId": 1,
+      "count": 1,
+      "name": "박진효",
+      "number": "01020444630",
+      "zipcode": "03716",
+      "address": "서울 서대문구 연희로5길 14",
+      "dongho": "506호",
+      "pw": "1234",
+      "id": 15
     }
   ],
   "api_orders_detail": [
@@ -289,7 +300,7 @@
       "stockQuantity": 14,
       "eventIng": true,
       "startDate": "2023-08-20 09:19:20",
-      "endDate": "2023-08-21 17:19:20"
+      "endDate": "2023-08-28 17:19:20"
     },
     {
       "id": 2,

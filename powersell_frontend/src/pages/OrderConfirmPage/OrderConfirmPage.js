@@ -1,4 +1,4 @@
-import { React, useEffect} from "react";
+import { React, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
@@ -123,7 +123,8 @@ const OrderConfirmPage = () => {
                         <hr></hr>
                         <div>
                           <div>
-                            <span>주문 일시</span>: {order.orderDate.replace("T", " ").slice(0, 19)}
+                            <span>주문 일시</span>:{" "}
+                            {order.orderDate.replace("T", " ").slice(0, 19)}
                           </div>
                           <div>
                             <span>주소</span>: {order.address} {order.dongho}
@@ -145,7 +146,8 @@ const OrderConfirmPage = () => {
                 </div>
 
                 {/* payment notification */}
-                {order.orderStatus === "WAITING" || order.orderStatus === null ? (
+                {order.orderStatus === "WAITING" ||
+                order.orderStatus === null ? (
                   <div className={styles.order_noti}>
                     <hr></hr>
                     <div>
@@ -158,23 +160,25 @@ const OrderConfirmPage = () => {
                       </div>
                       <div>
                         <span>ㆍ</span>계좌:{" "}
-                        <span
-                          style={{
-                            textDecoration: "underline",
-                          }}
-                        >
-                          카카오뱅크 3333277508505
-                        </span>
                         <CopyToClipboard
                           text="3333277508505"
                           onCopy={() => alert("계좌가 복사되었습니다")}
                         >
-                          <img
-                            src={copyText}
-                            alt="copy"
-                            width={14}
-                            style={{ cursor: "pointer", marginLeft: "7px" }}
-                          />
+                          <span>
+                            <span
+                              style={{
+                                textDecoration: "underline",
+                              }}
+                            >
+                              카카오뱅크 3333277508505
+                            </span>
+                            <img
+                              src={copyText}
+                              alt="copy"
+                              width={14}
+                              style={{ cursor: "pointer", marginLeft: "7px" }}
+                            />
+                          </span>
                         </CopyToClipboard>
                       </div>
                       <div>
