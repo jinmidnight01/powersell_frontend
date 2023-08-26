@@ -105,29 +105,29 @@ function DetailProductPage() {
   }
 
   const isOutOfStock = product.stockQuantity === 0;
-  let templateIdNum;
+  let imageUrl;
 
-// 미래의 혜은 링크 바꿔
-switch (product.name) {
-  case "제주 삼다수 2L (6개입)":
-    templateIdNum = 97689;
-    break;
-  case "농심 신라면 (5개입)":
-    templateIdNum = 97705;
-    break;
-  case "오뚜기 컵밥 오삼불고기덮밥 310g":
-    templateIdNum = 97704;
-    break;
-  case "햇반 백미밥 210g (3개입)":
-    templateIdNum = 97693;
-    break;
-  case "곰곰 구운란 10구":
-    templateIdNum = 97706;
-    break;
-  default:
-    templateIdNum = 97689;
-}
-  
+  // templateId related to name
+  switch (product.name) {
+    case "제주 삼다수 2L (6개입)":
+      imageUrl = 'https://i.ibb.co/Fqt03tQ/image.jpg';
+      break;
+    case "농심 신라면 (5개입)":
+      imageUrl = "https://i.ibb.co/hs8kHWs/image.jpg";
+      break;
+    case "오뚜기 컵밥 오삼불고기덮밥 310g":
+      imageUrl = "https://i.ibb.co/wsxHrfj/image.jpg";
+      break;
+    case "햇반 백미밥 210g (3개입)":
+      imageUrl = "https://i.ibb.co/hdqThLv/image.jpg";
+      break;
+    case "곰곰 구운란 10구":
+      imageUrl = "https://i.ibb.co/Z2gNTwb/image.png";
+      break;
+    default:
+      imageUrl = "https://i.ibb.co/Rvw6N3H/landing.png";
+  }
+
   const kakaoButton = () => {
     if (window.Kakao) {
       const kakao = window.Kakao;
@@ -135,12 +135,38 @@ switch (product.name) {
       if (!kakao.isInitialized()) {
         kakao.init("92b357c41da16ab9f3e0fa7f98cfbc30");
       }
-      kakao.Share.createCustomButton({
-        templateId: templateIdNum,
-        templateArgs: {
-          title: '상품 상세 페이지',
-          description: '상세 설명',
+      // kakao.Share.createCustomButton({
+      //   templateId: templateIdNum,
+      //   templateArgs: {
+      //     title: "상품 상세 페이지",
+      //     description: "상세 설명",
+      //   },
+      // });
+      kakao.Share.sendDefault({
+        objectType: "feed",
+        content: {
+          title: product.name,
+          description: `${product.price}원`,
+          imageUrl: imageUrl,
+          link: {
+            mobileWebUrl: `https://www.cheapat9.com/product/${product.itemId}`,
+            webUrl: `https://www.cheapat9.com/product/${product.itemId}`,
+          },
         },
+        // social: {
+        //   likeCount: 286,
+        //   commentCount: 45,
+        //   sharedCount: 845,
+        // },
+        buttons: [
+          {
+            title: "보러가기",
+            link: {
+              mobileWebUrl: `https://www.cheapat9.com/product/${product.itemId}`,
+              webUrl: `https://www.cheapat9.com/product/${product.itemId}`,
+              },
+          },
+        ],
       });
     }
   };
@@ -149,7 +175,7 @@ switch (product.name) {
     if (navigator.share) {
       navigator.share({
         title: product.name,
-        url: "https://www.cheapat9.com/",
+        url: `https://www.cheapat9.com/product/${product.itemId}`,
       });
     } else {
       kakaoButton();

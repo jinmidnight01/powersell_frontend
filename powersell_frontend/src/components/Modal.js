@@ -226,7 +226,6 @@ function Modal(props) {
     console.log("Transform Y:", transformY);
   }, [transformY]);
 
-<<<<<<< HEAD
   const nowTime = () => {
     const today = new Date();
     const year = today.getFullYear();
@@ -250,8 +249,6 @@ function Modal(props) {
       seconds;
     return dateTimeString;
   };
-=======
->>>>>>> hyeeun
 
   const product = props.product;
   useEffect(() => {
@@ -278,27 +275,8 @@ function Modal(props) {
           setCloseStatus(endDate < nowTime());
         }, 1);
       });
-<<<<<<< HEAD
   }, [props.product.itemId, startDate, endDate]);
 
-  // const nameRef = useRef();
-  // const phoneNumberRef = useRef();
-  // const donghoRef = useRef();
-  // const pwRef = useRef();
-  // useEffect(() => {
-  //   if (modalState) {
-  //     // 모달이 열렸을 때만 포커스를 줍니다. 'props.open'은 모달이 열렸는지 알려주는 prop입니다.
-  //     nameRef.current.focus();
-  //   }
-  // }, [modalState]);
-
-  // const moveToNextInput = (currentRef, nextRef) => {
-  //   if (currentRef.current.value.length > 0) {
-  //     nextRef.current.focus();
-  //   }
-  // };
-=======
-  }, [props.product.itemId]);
   const nameRef = useRef();
   const phoneNumberRef = useRef();
   const donghoRef = useRef();
@@ -309,7 +287,6 @@ function Modal(props) {
       nameRef.current.focus();
     }
   }, [modalState]);
->>>>>>> hyeeun
 
   const moveToNextInput = (currentRef, nextRef, length) => {
     if (currentRef.current.value.length >= length) {
