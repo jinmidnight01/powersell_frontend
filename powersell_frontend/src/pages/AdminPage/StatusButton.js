@@ -63,7 +63,7 @@ const StatusButton = (props) => {
   // REST API 1-4: WAITING
   const handleClickWaiting = () => {
     axios
-      .patch(`${hostURL}/api/admin/orders/${orderId}`, { orderStatus: "WAITING" })
+      .patch(`${hostURL}/api/admin/orders/${orderId}`, { status: "WAITING" })
       .then((response) => {
         setStyle1(clickedButtonStyle);
         setStyle2(ButtonStyle);
@@ -78,8 +78,9 @@ const StatusButton = (props) => {
 
   // REST API 1-4: DELIVERING
   const handleClickDelivering = () => {
+    console.log(orderId)
     axios
-      .patch(`${hostURL}/api/admin/orders/${orderId}`, { orderStatus: "DELIVERING" })
+      .patch(`${hostURL}/api/admin/orders/${orderId}`, { status: "DELIVERING" })
       .then((response) => {
         setStyle1(ButtonStyle);
         setStyle2(clickedButtonStyle);
@@ -95,7 +96,7 @@ const StatusButton = (props) => {
   // REST API 1-4: ARRIVED
   const handleClickArrived = () => {
     axios
-      .patch(`${hostURL}/api/admin/orders/${orderId}`, { orderStatus: "ARRIVED" })
+      .patch(`${hostURL}/api/admin/orders/${orderId}`, { status: "ARRIVED" })
       .then((response) => {
         setStyle1(ButtonStyle);
         setStyle2(ButtonStyle);
@@ -111,7 +112,7 @@ const StatusButton = (props) => {
   // REST API 1-4: CANCELED
   const handleClickCanceled = () => {
     axios
-      .patch(`${hostURL}/api/admin/orders/${orderId}`, { orderStatus: "CANCELED" })
+      .patch(`${hostURL}/api/admin/orders/${orderId}`, { status: "CANCELED" })
       .then((response) => {
         setStyle1(ButtonStyle);
         setStyle2(ButtonStyle);
