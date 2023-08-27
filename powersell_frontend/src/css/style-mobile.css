@@ -254,6 +254,9 @@ hr {
 .share-icon:hover {
   background-color: #99c6f5;
 }
+.share-icon:active {
+  opacity: 0.5;
+}
 
 .product-image {
   width: 85%;
