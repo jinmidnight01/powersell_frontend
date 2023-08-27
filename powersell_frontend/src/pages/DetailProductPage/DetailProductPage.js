@@ -110,7 +110,7 @@ function DetailProductPage() {
   // templateId related to name
   switch (product.name) {
     case "제주 삼다수 2L (6개입)":
-      imageUrl = 'https://i.ibb.co/Fqt03tQ/image.jpg';
+      imageUrl = "https://i.ibb.co/Fqt03tQ/image.jpg";
       break;
     case "농심 신라면 (5개입)":
       imageUrl = "https://i.ibb.co/hs8kHWs/image.jpg";
@@ -164,7 +164,7 @@ function DetailProductPage() {
             link: {
               mobileWebUrl: `https://www.cheapat9.com/product/${product.itemId}`,
               webUrl: `https://www.cheapat9.com/product/${product.itemId}`,
-              },
+            },
           },
         ],
       });
@@ -269,6 +269,8 @@ function DetailProductPage() {
                   <span className="borderText">자정</span>에{" "}
                   <span className="borderText">쿠팡</span>을 통해 일괄
                   주문합니다
+                  <br />- 쿠팡 기준{" "}
+                  <span className="borderText">무료 배송지역</span>만 주문 가능합니다
                   <br />- 마이페이지에서 주문조회를 통해{" "}
                   <span className="borderText">배송상황</span>을 확인하실 수
                   있습니다{" "}
