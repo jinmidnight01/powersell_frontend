@@ -44,14 +44,14 @@ const OrderListPage = (props) => {
     <div className={styles.order_main}>
       {/* sort selectBox */}
       <div style={{display:"flex", justifyContent:"space-between"}}>
-        <select onChange={handleSelect} value={selected} style={{marginLeft: "30px"}}>
+        <select onChange={handleSelect} value={selected} style={{marginLeft: "15px"}}>
           {Object.keys(selectDict).map((status) => (
             <option value={status} key={status}>
               {status}
             </option>
           ))}
         </select>
-        <span style={{marginRight: "30px"}}>주문: {result.length}개</span>
+        <span style={{marginRight: "15px"}}>주문: {result.length}개</span>
       </div>
 
       {/* total order list */}
