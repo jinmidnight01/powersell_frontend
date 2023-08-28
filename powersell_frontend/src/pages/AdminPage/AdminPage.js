@@ -20,7 +20,7 @@ const AdminPage = () => {
   // prevent direct access
   useEffect(() => {
     if (location.state !== 200) {
-      navigate("/login");
+      navigate("/AEKNplk47vHHnKJk");
     } 
   }, [location.state, navigate]);
 

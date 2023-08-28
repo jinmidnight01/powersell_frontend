@@ -18,8 +18,8 @@ const LoginPage = (e) => {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-    if (username === "admin" && password === "1234") {
-      navigator("/admin", { state: 200 });
+    if (username === "woiwufvhn" && password === "eazwrdctfvy") {
+      navigator("/AKIAXTK3G6H3T33QXQWE", { state: 200 });
     } else {
       alert("아이디 또는 비밀번호가 일치하지 않습니다.");
     }

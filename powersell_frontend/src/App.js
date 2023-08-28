@@ -20,8 +20,8 @@ function App() {
       <Route path='/orderfail' element={<OrderFailPage/>} />
       <Route path='/authentication' element={<AuthenticationPage />} />
       <Route path='/orderconfirm' element={<OrderConfirmPage />} />
-      <Route path='/admin/*' element={<AdminPage />} />
-      <Route path='/login' element={<LoginPage />} />
+      <Route path='/AKIAXTK3G6H3T33QXQWE/*' element={<AdminPage />} />
+      <Route path='/AEKNplk47vHHnKJk' element={<LoginPage />} />
       <Route path={"*"} element={<NotFoundPage />}/>
     </Routes>
   );
