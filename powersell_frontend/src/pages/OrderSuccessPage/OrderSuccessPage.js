@@ -76,7 +76,7 @@ const OrderSuccessPage = () => {
             <div>송금 계좌</div>
           </div>
           <hr className={styles.line} />
-          <p style={{color:"red", textAlign: "left", fontSize:"12px", marginLeft: "5px"}}>※ 주문 후 30분 내 미입금시 주문 취소됩니다</p>
+          <p style={{color:"red", textAlign: "left", fontSize:"12px", marginLeft: "10px"}}>※ 주문 후 30분 내 미입금시 주문 취소됩니다</p>
           <ul style={{marginTop: "5px"}}>
             <li>
               <span>예금주</span>: 박진효

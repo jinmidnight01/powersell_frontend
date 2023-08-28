@@ -50,6 +50,7 @@ const OrderListPage = (props) => {
           </option>
         ))}
       </select>
+      <span style={{marginLeft: "100px"}}>{result.length}</span>
 
       {/* total order list */}
       {isLoading ? (
