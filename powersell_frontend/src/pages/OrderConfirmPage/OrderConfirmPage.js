@@ -1,4 +1,4 @@
-import { React, useEffect } from "react";
+import { React, useEffect} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
@@ -123,6 +123,12 @@ const OrderConfirmPage = () => {
                         <hr></hr>
                         <div>
                           <div>
+                            <span>주문자</span>: {order.name}
+                          </div>
+                          <div>
+                            <span>전화번호</span>: {order.number}
+                          </div>
+                          <div>
                             <span>주문 일시</span>:{" "}
                             {order.orderDate.replace("T", " ").slice(0, 19)}
                           </div>
@@ -154,7 +160,7 @@ const OrderConfirmPage = () => {
                       <div>
                         아직 <span>입금 대기</span> 단계이신가요?
                       </div>
-                      <div>※ 미입금 고객의 경우 배송이 시작되지 않습니다</div>
+                      <div>※ 주문 후 30분 내 미입금시 주문 취소됩니다</div>
                       <div>
                         <span>ㆍ</span>예금주: <span>박진효</span>
                       </div>
@@ -182,7 +188,9 @@ const OrderConfirmPage = () => {
                         </CopyToClipboard>
                       </div>
                       <div>
-                        (주문 후 <span>30분 내 미입금시 주문 취소</span>됩니다)
+                        (입금자명을{" "}
+                        <span style={{ color: "black" }}>'{order.name}'</span>로
+                        해주세요)
                       </div>
                     </div>
                   </div>
