@@ -2,6 +2,7 @@ import { React, useState, useEffect } from "react";
 import axios from "axios";
 
 import StatusButton from "./StatusButton";
+
 import hostURL from "../../hostURL";
 
 import styles from "./admin.module.css";
@@ -9,19 +10,70 @@ import spinner from "../../images/icons/spinner.gif";
 
 const OrderListPage = (props) => {
   const [result, setResult] = useState([]);
-  const [selected, setSelected] = useState("전체");
+  const [selected, setSelected] = useState("배송전체");
+  const [productSelected, setProductSelected]= useState("상품전체");
   const [isLoading, setIsLoading] = useState(true);
+  const [page, setPage] = useState(1);
   const selectDict = {
-    전체: "",
+    배송전체: "",
     입금대기: "WAITING",
     배송중: "DELIVERING",
     배송완료: "ARRIVED",
     주문취소: "CANCELED",
   };
+  const productDict = {
+    상품전체: "",
+    삼다수: "제주 삼다수 2L (6개입)",
+    햇반: "햇반 백미밥 210g (3개입)",
+    컵밥: "오뚜기 컵밥 오삼불고기덮밥 310g",
+    라면: "농심 신라면 (5개입)",
+    구운란: "곰곰 구운란 10구",
+  };
+  const filteredResult = [...result]
+    .sort((a, b) => {
+      if (a.orderDate > b.orderDate) return -1;
+      if (a.orderDate < b.orderDate) return 1;
+      return 0;
+    })
+    .filter((order) => {
+      if (selected === "배송전체") {
+        return true;
+      }
+      return order.orderStatus === selectDict[selected];
+    })
+    .filter((order) => {
+      if (productSelected === "상품전체") {
+        return true;
+      }
+      return order.item.name === productDict[productSelected];
+    })
+    .filter((order) => {
+      const page1 = document.getElementById("page1");
+      const page2 = document.getElementById("page2");
+      if (page === 2) {
+        page1.style.backgroundColor = "white";
+        page2.style.backgroundColor = "#fa7979";
+        return order.orderDate >= "2023-09-04 21:00:00" && order.orderDate <= "2023-09-10 23:59:59";
+      }
+      else {
+        page1.style.backgroundColor = "#fa7979";
+        page2.style.backgroundColor = "white";
+        return order.orderDate >= "2023-08-28 21:00:00" && order.orderDate <= "2023-09-03 23:59:59";
+      }
+    });
+
+  // product count
+  let productCount = 0;
+  for (let i = 0; i < filteredResult.length; i++) {
+    productCount += filteredResult[i].count;
+  }
 
   // function: select standard
   const handleSelect = (e) => {
     setSelected(e.target.value);
+  };
+  const productSelect = (e) => {
+    setProductSelected(e.target.value);
   };
 
   // REST API 1-1
@@ -42,16 +94,31 @@ const OrderListPage = (props) => {
 
   return (
     <div className={styles.order_main}>
+      {/* test order */}
+      <div className={styles.testOrder}>
+        <div id="page1" onClick={() => setPage(1)}><div>1</div></div>
+        <div id="page2" onClick={() => setPage(2)}><div>2</div></div>
+      </div>
+
       {/* sort selectBox */}
-      <div style={{display:"flex", justifyContent:"space-between"}}>
-        <select onChange={handleSelect} value={selected} style={{marginLeft: "15px"}}>
-          {Object.keys(selectDict).map((status) => (
-            <option value={status} key={status}>
-              {status}
-            </option>
-          ))}
-        </select>
-        <span style={{marginRight: "15px"}}>주문: {result.length}개</span>
+      <div className={styles.selectBox}>
+        <div>
+          <select onChange={handleSelect} value={selected}>
+            {Object.keys(selectDict).map((status) => (
+              <option value={status} key={status}>
+                {status}
+              </option>
+            ))}
+          </select>
+          <select onChange={productSelect} value={productSelected}>
+            {Object.keys(productDict).map((product) => (
+              <option value={product} key={product}>
+                {product}
+              </option>
+            ))}
+          </select>
+        </div>
+        <span>주문/상품: {filteredResult.length}/{productCount}</span>
       </div>
 
       {/* total order list */}
@@ -65,21 +132,9 @@ const OrderListPage = (props) => {
           />
         </div>
       ) : (
-      <div className={styles.order_list}>
-        {/* item */}
-        {[...result]
-          .sort((a, b) => {
-            if (a.orderDate > b.orderDate) return -1;
-            if (a.orderDate < b.orderDate) return 1;
-            return 0;
-          })
-          .filter((order) => {
-            if (selected === "전체") {
-              return true;
-            }
-            return order.orderStatus === selectDict[selected];
-          })
-          .map((order) => (
+        <div className={styles.order_list}>
+          {/* item */}
+          {filteredResult.map((order) => (
             <div key={order.orderId} className={styles.order_box}>
               <div className={styles.order_item}>
                 {/* item title */}
@@ -114,7 +169,8 @@ const OrderListPage = (props) => {
                       <span>전화번호</span>: {order.number}
                     </div>
                     <div>
-                      <span>주문 일시</span>: {order.orderDate.replace("T", " ").slice(0, 19)}
+                      <span>주문 일시</span>:{" "}
+                      {order.orderDate.replace("T", " ").slice(0, 19)}
                     </div>
                     <div>
                       <span>주소</span>: {order.address} {order.dongho}
@@ -147,7 +203,8 @@ const OrderListPage = (props) => {
               </div>
             </div>
           ))}
-      </div>)}
+        </div>
+      )}
     </div>
   );
 };

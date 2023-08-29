@@ -127,7 +127,6 @@ label > input:checked + .slider:before {
 /* main */
 
 /* Order List Page */
-
 .order_main {
   padding-left: 10px;
   padding-right: 10px;
@@ -135,12 +134,56 @@ label > input:checked + .slider:before {
 }
 
 /* sort selectBox */
-.order_main > select {
+.selectBox {
+  display: flex;
+  justify-content: space-between;
+}
+
+.selectBox select {
   border: 1px rgb(181, 181, 181) solid;
   border-radius: 7px;
   height: 25px;
-  width: 90px;
+  width: 80px;
+}
+
+.selectBox select:nth-child(1) {
   margin-left: 10px;
+}
+
+.selectBox select:nth-child(2) {
+  margin-left: 15px;
+}
+
+.selectBox span {
+  margin-right: 15px;
+}
+
+/* test order */
+.testOrder {
+  display: flex;
+  margin-bottom: 18px;
+  margin-left: 12px;
+}
+
+.testOrder > div {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  justify-content: center;
+  display: flex;
+  cursor: pointer;
+  margin-right: 15px;
+  border: 1px solid black;
+}
+
+.testOrder > div:active {
+  opacity: 0.8;
+}
+
+.testOrder > div > div {
+  margin: auto 0;
+  font-size: 18px;
+  color: black;
 }
 
 /* total order list */
