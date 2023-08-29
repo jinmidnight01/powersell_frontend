@@ -14,6 +14,9 @@ const OrderListPage = (props) => {
   const [productSelected, setProductSelected]= useState("상품전체");
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
+  const [searchCount, setSearchCount] = useState("");
+  const [searchName, setSearchName] = useState("");
+  const [searchNumber, setSearchNumber] = useState("");
   const selectDict = {
     배송전체: "",
     입금대기: "WAITING",
@@ -60,6 +63,24 @@ const OrderListPage = (props) => {
         return true;
       }
       return order.item.name === productDict[productSelected];
+    })
+    .filter((order) => {
+      if (searchCount === "") {
+        return true;
+      }
+      return order.count.toString().replace(" ","").toLocaleLowerCase().includes(searchCount.toLocaleLowerCase().replace(" ",""));
+    })
+    .filter((order) => {
+      if (searchName === "") {
+        return true;
+      }
+      return order.name.toString().replace(" ","").toLocaleLowerCase().includes(searchName.toLocaleLowerCase().replace(" ",""));
+    })
+    .filter((order) => {
+      if (searchNumber === "") {
+        return true;
+      }
+      return order.number.toString().replace(" ","").toLocaleLowerCase().includes(searchNumber.toLocaleLowerCase().replace(" ",""));
     });
 
   // product count
@@ -74,6 +95,17 @@ const OrderListPage = (props) => {
   };
   const productSelect = (e) => {
     setProductSelected(e.target.value);
+  };
+
+  // search function
+  const onChangeCount = (e) => {
+    setSearchCount(e.target.value);
+  };
+  const onChangeName = (e) => {
+    setSearchName(e.target.value);
+  };
+  const onChangeNumber = (e) => {
+    setSearchNumber(e.target.value);
   };
 
   // REST API 1-1
@@ -119,6 +151,13 @@ const OrderListPage = (props) => {
           </select>
         </div>
         <span>주문/상품: {filteredResult.length}/{productCount}</span>
+      </div>
+
+      {/* search bar */}
+      <div className={styles.searchBar}>
+        <input type="text" placeholder="주문개수" onChange={onChangeCount}/>
+        <input type="text" placeholder="주문자명" onChange={onChangeName}/>
+        <input type="text" placeholder="전화번호" onChange={onChangeNumber}/>
       </div>
 
       {/* total order list */}
@@ -173,7 +212,7 @@ const OrderListPage = (props) => {
                       {order.orderDate.replace("T", " ").slice(0, 19)}
                     </div>
                     <div>
-                      <span>주소</span>: {order.address} {order.dongho}
+                      <span>주소</span>: ({order.zipcode}) {order.address} {order.dongho}
                     </div>
                   </div>
                 </div>

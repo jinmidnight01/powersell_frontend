@@ -186,6 +186,20 @@ label > input:checked + .slider:before {
   color: black;
 }
 
+/* search bar */
+.searchBar {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+}
+
+.searchBar > input {
+  height: 20px;
+  width: 100px;
+  border-radius: 5px;
+  border: 1px rgb(181, 181, 181) solid;
+}
+
 /* total order list */
 .order_list {
   margin-top: 23px;
