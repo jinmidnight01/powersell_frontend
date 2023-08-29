@@ -52,10 +52,10 @@ const OrderListPage = (props) => {
     setProductSelected(e.target.value);
   };
 
-  // 주문 개수
-  const [countSelected, setCountSelected] = useState("주문개수");
+  // 상품 개수
+  const [countSelected, setCountSelected] = useState("상품개수");
   const countDict = {
-    주문개수: "",
+    상품개수: "",
     "1개": 1,
     "2개": 2,
   };
@@ -108,7 +108,7 @@ const OrderListPage = (props) => {
       return order.item.name === productDict[productSelected];
     })
     .filter((order) => {
-      if (countSelected === "주문개수") {
+      if (countSelected === "상품개수") {
         return true;
       }
       return order.count === countDict[countSelected];
@@ -186,7 +186,7 @@ const OrderListPage = (props) => {
       {/* second sort selectBox */}
       <div className={styles.secondSelectBox}>
         <select onChange={countSelect} value={countSelected}>
-          <option value="주문개수">주문개수</option>
+          <option value="상품개수">상품개수</option>
           <option value="1개">1개</option>
           <option value="2개">2개</option>
         </select>
