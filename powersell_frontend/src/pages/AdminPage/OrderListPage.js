@@ -36,18 +36,6 @@ const OrderListPage = (props) => {
       return 0;
     })
     .filter((order) => {
-      if (selected === "배송전체") {
-        return true;
-      }
-      return order.orderStatus === selectDict[selected];
-    })
-    .filter((order) => {
-      if (productSelected === "상품전체") {
-        return true;
-      }
-      return order.item.name === productDict[productSelected];
-    })
-    .filter((order) => {
       const page1 = document.getElementById("page1");
       const page2 = document.getElementById("page2");
       if (page === 2) {
@@ -60,6 +48,18 @@ const OrderListPage = (props) => {
         page2.style.backgroundColor = "white";
         return order.orderDate >= "2023-08-28 21:00:00" && order.orderDate <= "2023-09-03 23:59:59";
       }
+    })
+    .filter((order) => {
+      if (selected === "배송전체") {
+        return true;
+      }
+      return order.orderStatus === selectDict[selected];
+    })
+    .filter((order) => {
+      if (productSelected === "상품전체") {
+        return true;
+      }
+      return order.item.name === productDict[productSelected];
     });
 
   // product count
