@@ -474,7 +474,7 @@ function Modal(props) {
                       ? "오픈 준비 중입니다"
                       : openStatus
                       ? "구매하기"
-                      : startDate.slice(6, 7) +
+                      : startDate.slice(5, 7) +
                         "월 " +
                         startDate.slice(8, 10) +
                         "일 " +
