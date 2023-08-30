@@ -140,6 +140,18 @@ const OrderListPage = (props) => {
     productCount += filteredResult[i].count;
   }
 
+  // total cost
+  let cost = 0;
+  for (let i = 0; i < filteredResult.length; i++) {
+    cost += filteredResult[i].item.originalPrice * filteredResult[i].count;
+  }
+
+  // total revenue
+  let revenue = 0;
+  for (let i = 0; i < filteredResult.length; i++) {
+    revenue += filteredResult[i].orderPrice;
+  }
+
   // REST API 1-1
   const [reloadFlag, setReloadFlag] = useState(0);
   useEffect(() => {
@@ -155,6 +167,9 @@ const OrderListPage = (props) => {
         });
     }
   }, [props.status, reloadFlag]);
+
+  const num = 1000000
+  console.log(num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
 
   return (
     <div className={styles.order_main}>
@@ -194,10 +209,15 @@ const OrderListPage = (props) => {
         <input type="text" placeholder="전화번호" onChange={onChangeNumber} />
       </div>
 
-      {/* order count */}
+      {/* order & payment count */}
       <div className={styles.orderCount}>
         <span>
           주문: {filteredResult.length}개 / 상품: {productCount}개
+        </span>
+      </div>
+      <div className={styles.paymentCount}>
+        <span>
+          비용: {cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원 / 매출: {revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
         </span>
       </div>
 

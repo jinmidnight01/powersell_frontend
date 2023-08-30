@@ -200,11 +200,19 @@ label > input:checked + .slider:before {
   border: 1px rgb(181, 181, 181) solid;
 }
 
-/* order count */
+/* order & payment count */
 .orderCount {
   display: flex;
   flex-direction: row-reverse;
   margin-top: 12px;
+  font-size: 14px;
+  margin-right: 12px;
+}
+
+.paymentCount {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-top: 2px;
   font-size: 14px;
   margin-right: 12px;
 }
