@@ -168,9 +168,6 @@ const OrderListPage = (props) => {
     }
   }, [props.status, reloadFlag]);
 
-  const num = 1000000
-  console.log(num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
-
   return (
     <div className={styles.order_main}>
       {/* first sort selectBox */}
