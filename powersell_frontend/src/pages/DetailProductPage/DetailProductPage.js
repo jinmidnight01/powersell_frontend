@@ -66,7 +66,7 @@ function DetailProductPage() {
         return 컵밥;
       case "햇반 백미밥 210g (3개입)":
         return 햇반;
-      case "무항생제 맥반석 구운계란 (15구)":
+      case "[EEE] 무항생제 맥반석 구운계란 (15구)":
         return 구운란;
       default:
         return null;
@@ -121,7 +121,7 @@ function DetailProductPage() {
     case "햇반 백미밥 210g (3개입)":
       imageUrl = "https://i.ibb.co/hdqThLv/image.jpg";
       break;
-    case "무항생제 맥반석 구운계란 (15구)":
+    case "[EEE] 무항생제 맥반석 구운계란 (15구)":
       imageUrl = "https://i.ibb.co/Z2gNTwb/image.png";
       break;
     default:
@@ -254,9 +254,16 @@ function DetailProductPage() {
 
                 <p style={{ lineHeight: "25px" }}>
                   <span style={{ fontWeight: "bold" }}>1. EVENT 일정 안내</span>
-                  <br />- <span className="borderText">1차 이벤트</span>:{" "}
-                  <span className="borderText">8월 28일(월) 오후 9시 </span>~
-                  재고 소진 시
+                  <span
+                    style={{
+                      textDecoration: "line-through",
+                      textDecorationThickness: "1px",
+                    }}
+                  >
+                    <br />- <span className="borderText">1차 이벤트</span>:{" "}
+                    <span className="borderText">8월 28일(월) 오후 9시 </span>~
+                    재고 소진 시
+                  </span>
                   <br />- <span className="borderText">2차 이벤트</span>:{" "}
                   <span className="borderText">9월 4일(월) 오후 9시 </span>~
                   재고 소진 시
@@ -270,7 +277,8 @@ function DetailProductPage() {
                   <span className="borderText">쿠팡</span>을 통해 일괄
                   주문합니다
                   <br />- 쿠팡 기준{" "}
-                  <span className="borderText">무료 배송지역</span>만 주문 가능합니다
+                  <span className="borderText">무료 배송지역</span>만 주문
+                  가능합니다
                   <br />- 마이페이지에서 주문조회를 통해{" "}
                   <span className="borderText">배송상황</span>을 확인하실 수
                   있습니다{" "}
