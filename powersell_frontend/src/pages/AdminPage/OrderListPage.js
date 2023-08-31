@@ -17,7 +17,7 @@ const OrderListPage = (props) => {
   // 출시 회차
   const [testOrderSelected, setTestOrderSelected] = useState("1회차");
   const testOrderDict = {
-    // "2회차": "2회차",
+    "2회차": "2회차",
     "1회차": "1회차",
     전체: "전체",
   };
@@ -46,7 +46,8 @@ const OrderListPage = (props) => {
     햇반: "햇반 백미밥 210g (3개입)",
     컵밥: "오뚜기 컵밥 오삼불고기덮밥 310g",
     라면: "농심 신라면 (5개입)",
-    구운란: "곰곰 구운란 10구",
+    곰곰란: "곰곰 구운란 10구",
+    구운란: "[EEE] 무항생제 맥반석 구운계란 (15구)"
   };
   const productSelect = (e) => {
     setProductSelected(e.target.value);
@@ -267,7 +268,7 @@ const OrderListPage = (props) => {
                     </div>
                     <div>
                       <span>주문 일시</span>:{" "}
-                      {order.orderDate.replace("T", " ").slice(0, 19)}
+                      {order.orderDate.replace("T", " ").slice(0, 24)}
                     </div>
                     <div>
                       <span>주소</span>: ({order.zipcode}) {order.address}{" "}

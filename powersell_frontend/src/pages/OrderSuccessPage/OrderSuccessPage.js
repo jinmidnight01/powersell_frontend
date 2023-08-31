@@ -184,7 +184,7 @@ const OrderSuccessPage = () => {
           <ul>
             <li>
               <span>주문일시</span>:{" "}
-              {successData.orderDate.replace("T", " ").slice(0, 19)}
+              {successData.orderDate.replace("T", " ").slice(0, 24)}
             </li>
             <li>
               <span>주문자</span>: {successData.name}

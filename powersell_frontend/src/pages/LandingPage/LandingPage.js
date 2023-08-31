@@ -13,6 +13,7 @@ import 신라면 from "../../images/home/신라면.jpg";
 import 컵밥 from "../../images/home/컵밥.jpg";
 import 햇반 from "../../images/home/햇반.jpg";
 import 구운란 from "../../images/home/구운란.jpg";
+import 곰곰 from "../../images/home/곰곰.png";
 import spinner from "../../images/icons/spinner.gif";
 
 function LandingPage() {
@@ -36,12 +37,14 @@ function LandingPage() {
         return 햇반;
       case "[EEE] 무항생제 맥반석 구운계란 (15구)":
         return 구운란;
+      case "곰곰 구운란 10구":
+        return 곰곰;
       default:
         return null;
     }
   };
 
-  const [itemList, setItemList] = useState([]);
+  const [tempList, setItemList] = useState([]);
 
   useEffect(() => {
     async function rendering_item() {
@@ -57,6 +60,14 @@ function LandingPage() {
     }
     rendering_item();
   }, []);
+  let itemList = []
+  for (let i = 0; i < tempList.length; i++) {
+    if (tempList[i].itemId === 5) {
+      continue;
+    }
+    itemList.push(tempList[i]);
+  }
+  console.log(itemList)
 
   function submitFeedback() {
     if (feedback.trim() === "") {

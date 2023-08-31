@@ -225,6 +225,9 @@ const ProductListPage = (props) => {
             case "[EEE] 무항생제 맥반석 구운계란 (15구)":
               productNewName = "구운란";
               break;
+            case "곰곰 구운란 10구":
+              productNewName = "곰곰란";
+              break;
             default:
               productNewName = product.name;
               break;

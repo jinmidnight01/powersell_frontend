@@ -9,6 +9,7 @@ import 신라면 from "../../images/home/신라면.jpg";
 import 컵밥 from "../../images/home/컵밥.jpg";
 import 햇반 from "../../images/home/햇반.jpg";
 import 구운란 from "../../images/home/구운란.jpg";
+import 곰곰 from "../../images/home/곰곰.png";
 import copyText from "../../images/icons/copyText.png";
 
 import styles from "./orderconfirm.module.css";
@@ -38,6 +39,8 @@ const OrderConfirmPage = () => {
         return 햇반;
       case "[EEE] 무항생제 맥반석 구운계란 (15구)":
         return 구운란;
+      case "곰곰 구운란 10구":
+        return 곰곰;
       default:
         break;
     }
@@ -130,7 +133,7 @@ const OrderConfirmPage = () => {
                           </div>
                           <div>
                             <span>주문 일시</span>:{" "}
-                            {order.orderDate.replace("T", " ").slice(0, 19)}
+                            {order.orderDate.replace("T", " ").slice(0, 24)}
                           </div>
                           <div>
                             <span>주소</span>: {order.address} {order.dongho}
@@ -143,7 +146,7 @@ const OrderConfirmPage = () => {
                       {/* order cancel */}
                       <div className={styles.order_cancel}>
                         <div>
-                          <span>주문 일시</span>: {order.orderTime}
+                          <span>주문 일시</span>: {order.orderDate.replace("T", " ").slice(0, 24)}
                         </div>
                         <div>※ 해당 주문은 취소되었습니다</div>
                       </div>

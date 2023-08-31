@@ -20,7 +20,7 @@ const LoginPage = (e) => {
     e.preventDefault();
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
-    const inputs = {username: username, password: password};
+    const inputs = {id: username, password: password};
 
     if (username === "woiwufvhn" && password === "eazwrdctfvy") {
       navigator("/AKIAXTK3G6H3T33QXQWE", { state: 200 });
@@ -30,8 +30,9 @@ const LoginPage = (e) => {
     }
 
     // axios
-    // .post(`${hostURL}/api/login`, inputs)
+    // .post(`${hostURL}/api/check`, inputs)
     // .then((response) => {
+    //   console.log(response.data);
     //   if (response.data === true) {
     //     navigator("/AKIAXTK3G6H3T33QXQWE", { state: 200 });
     //   }

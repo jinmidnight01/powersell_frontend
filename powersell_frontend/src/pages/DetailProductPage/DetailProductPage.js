@@ -17,6 +17,7 @@ import 신라면 from "../../images/home/신라면.jpg";
 import 컵밥 from "../../images/home/컵밥.jpg";
 import 햇반 from "../../images/home/햇반.jpg";
 import 구운란 from "../../images/home/구운란.jpg";
+import 곰곰 from "../../images/home/곰곰.png";
 
 function DetailProductPage() {
   const params = useParams();
@@ -27,6 +28,10 @@ function DetailProductPage() {
   const [isPosting, setPosting] = useState(false);
 
   useEffect(() => {
+    if (productId === "5") {
+      navigate("/404");
+    }
+
     // async function rendering_item_detail(id) {
     axios
       .get(`${hostURL}/api/items/${productId}`)
@@ -68,6 +73,8 @@ function DetailProductPage() {
         return 햇반;
       case "[EEE] 무항생제 맥반석 구운계란 (15구)":
         return 구운란;
+      case "곰곰 구운란 10구":
+        return 곰곰;
       default:
         return null;
     }
