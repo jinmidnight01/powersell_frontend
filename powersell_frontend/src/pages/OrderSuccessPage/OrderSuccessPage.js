@@ -47,7 +47,7 @@ const OrderSuccessPage = () => {
         return 컵밥;
       case "햇반 백미밥 210g (3개입)":
         return 햇반;
-      case "곰곰 구운란 10구":
+      case "무항생제 맥반석 구운계란 (15구)":
         return 구운란;
       default:
         return null;
