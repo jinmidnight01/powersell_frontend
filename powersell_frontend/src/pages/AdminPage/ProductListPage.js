@@ -222,7 +222,7 @@ const ProductListPage = (props) => {
             case "오뚜기 컵밥 오삼불고기덮밥 310g":
               productNewName = "컵밥";
               break;
-            case "곰곰 구운란 10구":
+            case "무항생제 맥반석 구운계란 (15구)":
               productNewName = "구운란";
               break;
             default:

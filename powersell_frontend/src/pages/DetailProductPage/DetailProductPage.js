@@ -16,7 +16,7 @@ import 삼다수 from "../../images/home/삼다수.jpg";
 import 신라면 from "../../images/home/신라면.jpg";
 import 컵밥 from "../../images/home/컵밥.jpg";
 import 햇반 from "../../images/home/햇반.jpg";
-import 구운란 from "../../images/home/구운란.png";
+import 구운란 from "../../images/home/구운란.jpg";
 
 function DetailProductPage() {
   const params = useParams();
@@ -66,7 +66,7 @@ function DetailProductPage() {
         return 컵밥;
       case "햇반 백미밥 210g (3개입)":
         return 햇반;
-      case "곰곰 구운란 10구":
+      case "무항생제 맥반석 구운계란 (15구)":
         return 구운란;
       default:
         return null;
@@ -121,7 +121,7 @@ function DetailProductPage() {
     case "햇반 백미밥 210g (3개입)":
       imageUrl = "https://i.ibb.co/hdqThLv/image.jpg";
       break;
-    case "곰곰 구운란 10구":
+    case "무항생제 맥반석 구운계란 (15구)":
       imageUrl = "https://i.ibb.co/Z2gNTwb/image.png";
       break;
     default:
