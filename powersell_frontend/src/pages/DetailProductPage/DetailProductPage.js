@@ -129,7 +129,7 @@ function DetailProductPage() {
       imageUrl = "https://i.ibb.co/hdqThLv/image.jpg";
       break;
     case "[EEE] 무항생제 맥반석 구운계란 (15구)":
-      imageUrl = "https://i.ibb.co/Z2gNTwb/image.png";
+      imageUrl = "https://i.ibb.co/gyv3MMB/image.jpg";
       break;
     default:
       imageUrl = "https://i.ibb.co/Rvw6N3H/landing.png";
