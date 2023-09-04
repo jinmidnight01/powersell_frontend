@@ -81,8 +81,6 @@ const OrderListPage = (props) => {
     })
     .filter((order) => {
       if (testOrderDict[testOrderSelected] === "2회차") {
-        console.log(order.orderDate)
-
         return (
           order.orderDate >= "2023-09-04T21:00:00" &&
           order.orderDate <= "2023-09-10T23:59:59"
