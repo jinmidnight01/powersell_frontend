@@ -248,8 +248,8 @@ function DetailProductPage() {
                 ※ <span className="borderText">할인율</span>이 <span className="borderText">50%</span>로 변경되었습니다<br/>
                 ※ <span className="borderText">1회 최대 구매 수량</span>이 <span className="borderText">1개</span>로 변경되었습니다<br/>
               </span>
-              <br></br>
-              <br></br>
+              {/* <br></br>
+              <br></br> */}
               <div className="noticeContent">
                 <p>
                   🛒 1회 최대 구매 수량은{" "}
