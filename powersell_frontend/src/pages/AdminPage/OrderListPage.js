@@ -89,7 +89,7 @@ const OrderListPage = (props) => {
       else if (testOrderDict[testOrderSelected] === "1회차") {
         return (
           order.orderDate >= "2023-08-28 21:00:00" &&
-          order.orderDate <= "2023-09-03 23:59:59"
+          order.orderDate <= "2023-09-04 20:59:59"
         );
       }
       else {
