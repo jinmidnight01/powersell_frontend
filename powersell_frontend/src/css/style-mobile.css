@@ -302,6 +302,13 @@ hr {
   flex-grow: 1;
 }
 
+.product-description > span {
+  padding: 0 20px;
+  margin-top: 25px;
+  line-height: 25px;
+  font-style: italic
+}
+
 .iconButton:active {
   opacity: 0.5;
 }

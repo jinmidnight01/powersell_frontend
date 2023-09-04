@@ -5,7 +5,7 @@ import "../../css/style-mobile.css";
 import hostURL from "../../hostURL";
 
 import user from "../../images/icons/user.png";
-import banner from "../../images/home/banner.jpg";
+import banner50 from "../../images/home/banner50.jpg";
 import { Link } from "react-router-dom";
 import HomeHeader from "./../../components/HomeHeader";
 import 삼다수 from "../../images/home/삼다수.jpg";
@@ -110,7 +110,7 @@ function LandingPage() {
           href="https://jazzy-note-a6d.notion.site/9-EVENT-15ce9c9fd951457d9da722eafc8c3131?pvs=4"
           className="banner"
         >
-          <img src={banner} alt="Promotion Banner" />
+          <img src={banner50} alt="Promotion Banner" />
         </a>
 
         {/* Products */}

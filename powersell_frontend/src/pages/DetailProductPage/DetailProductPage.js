@@ -243,6 +243,11 @@ function DetailProductPage() {
               <p className="borderText noticeTitle">
                 <i>Notice.</i>
               </p>
+              <span>
+                ※ 고객님들의 뜨거운 관심과 성원에 힘입어 <span className="borderText">3, 4차 EVENT까지 연장</span>하였습니다<br/>
+                ※ <span className="borderText">할인율</span>이 <span className="borderText">50%</span>로 변경되었습니다<br/>
+                ※ <span className="borderText">1회 최대 구매 수량</span>이 <span className="borderText">1개</span>로 변경되었습니다<br/>
+              </span>
               <br></br>
               <br></br>
               <div className="noticeContent">
