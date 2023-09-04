@@ -81,15 +81,17 @@ const OrderListPage = (props) => {
     })
     .filter((order) => {
       if (testOrderDict[testOrderSelected] === "2회차") {
+        console.log(order.orderDate)
+
         return (
-          order.orderDate >= "2023-09-04 21:00:00" &&
-          order.orderDate <= "2023-09-10 23:59:59"
+          order.orderDate >= "2023-09-04T21:00:00" &&
+          order.orderDate <= "2023-09-10T23:59:59"
         );
       }
       else if (testOrderDict[testOrderSelected] === "1회차") {
         return (
-          order.orderDate >= "2023-08-28 21:00:00" &&
-          order.orderDate <= "2023-09-04 20:59:59"
+          order.orderDate >= "2023-08-28T21:00:00" &&
+          order.orderDate <= "2023-09-03T23:59:59"
         );
       }
       else {
