@@ -78,7 +78,6 @@ const StatusButton = (props) => {
 
   // REST API 1-4: DELIVERING
   const handleClickDelivering = () => {
-    console.log(orderId)
     axios
       .patch(`${hostURL}/api/admin/orders/${orderId}`, { status: "DELIVERING" })
       .then((response) => {

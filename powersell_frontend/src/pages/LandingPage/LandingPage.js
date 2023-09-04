@@ -67,7 +67,6 @@ function LandingPage() {
     }
     itemList.push(tempList[i]);
   }
-  console.log(itemList)
 
   function submitFeedback() {
     if (feedback.trim() === "") {
