@@ -22,27 +22,19 @@ const LoginPage = (e) => {
     const password = document.getElementById("password").value;
     const inputs = {id: username, password: password};
 
-    if (username === "woiwufvhn" && password === "eazwrdctfvy") {
-      navigator("/AKIAXTK3G6H3T33QXQWE", { state: 200 });
-    }
-    else {
-      alert("아이디 또는 비밀번호가 일치하지 않습니다.");
-    }
-
-    // axios
-    // .post(`${hostURL}/api/check`, inputs)
-    // .then((response) => {
-    //   console.log(response.data);
-    //   if (response.data === true) {
-    //     navigator("/AKIAXTK3G6H3T33QXQWE", { state: 200 });
-    //   }
-    //   else {
-    //     alert("아이디 또는 비밀번호가 일치하지 않습니다.");
-    //   }
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    // });
+    axios
+    .post(`${hostURL}/api/check`, inputs)
+    .then((response) => {
+      if (response.data.result === 'True') {
+        navigator("/AKIAXTK3G6H3T33QXQWE", { state: response.status });
+      }
+      else {
+        alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   };
 
   return (
