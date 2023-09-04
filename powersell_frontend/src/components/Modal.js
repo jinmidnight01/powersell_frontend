@@ -336,6 +336,7 @@ function Modal(props) {
                   <button
                     className={styles.quantity_button}
                     onClick={decreaseQuantity}
+                    disabled
                   >
                     -
                   </button>
@@ -343,6 +344,7 @@ function Modal(props) {
                   <button
                     className={styles.quantity_button}
                     onClick={increaseQuantity}
+                    disabled
                   >
                     +
                   </button>

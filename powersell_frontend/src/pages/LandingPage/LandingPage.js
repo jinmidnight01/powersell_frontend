@@ -62,10 +62,22 @@ function LandingPage() {
   }, []);
   let itemList = []
   for (let i = 0; i < tempList.length; i++) {
-    if (tempList[i].itemId === 5) {
-      continue;
+    switch (tempList[i].itemId) {
+      case 1:
+        continue;
+      case 2:
+        continue;
+      case 3:
+        continue;
+      case 4:
+        continue;
+      case 5:
+        continue;
+      case 441:
+        continue;
+      default:
+        itemList.push(tempList[i]);
     }
-    itemList.push(tempList[i]);
   }
 
   function submitFeedback() {
@@ -132,7 +144,7 @@ function LandingPage() {
                       {product.name}
                     </p>
                     <p className="original-price">{product.originalPrice}원</p>
-                    <h2 className="discount">80% {product.price}원</h2>
+                    <h2 className="discount">50% {product.price}원</h2>
                   </div>
                 </Link>
               </div>
