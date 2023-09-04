@@ -26,7 +26,7 @@ const LoginPage = (e) => {
     .post(`${hostURL}/api/check`, inputs)
     .then((response) => {
       if (response.data.result === 'True') {
-        navigator("/AKIAXTK3G6H3T33QXQWE", { state: response.status });
+        navigator("/admin", { state: response.status });
       }
       else {
         alert("아이디 또는 비밀번호가 일치하지 않습니다.");
