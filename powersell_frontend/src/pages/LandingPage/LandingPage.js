@@ -5,7 +5,7 @@ import "../../css/style-mobile.css";
 import hostURL from "../../hostURL";
 
 import user from "../../images/icons/user.png";
-import banner from "../../images/home/banner.jpg";
+import banner50 from "../../images/home/banner50.jpg";
 import { Link } from "react-router-dom";
 import HomeHeader from "./../../components/HomeHeader";
 import 삼다수 from "../../images/home/삼다수.jpg";
@@ -62,12 +62,23 @@ function LandingPage() {
   }, []);
   let itemList = []
   for (let i = 0; i < tempList.length; i++) {
-    if (tempList[i].itemId === 5) {
-      continue;
+    switch (tempList[i].itemId) {
+      case 1:
+        continue;
+      case 2:
+        continue;
+      case 3:
+        continue;
+      case 4:
+        continue;
+      case 5:
+        continue;
+      case 441:
+        continue;
+      default:
+        itemList.push(tempList[i]);
     }
-    itemList.push(tempList[i]);
   }
-  console.log(itemList)
 
   function submitFeedback() {
     if (feedback.trim() === "") {
@@ -99,7 +110,7 @@ function LandingPage() {
           href="https://jazzy-note-a6d.notion.site/9-EVENT-15ce9c9fd951457d9da722eafc8c3131?pvs=4"
           className="banner"
         >
-          <img src={banner} alt="Promotion Banner" />
+          <img src={banner50} alt="Promotion Banner" />
         </a>
 
         {/* Products */}
@@ -133,7 +144,7 @@ function LandingPage() {
                       {product.name}
                     </p>
                     <p className="original-price">{product.originalPrice}원</p>
-                    <h2 className="discount">80% {product.price}원</h2>
+                    <h2 className="discount">50% {product.price}원</h2>
                   </div>
                 </Link>
               </div>

@@ -15,8 +15,10 @@ const OrderListPage = (props) => {
   const [searchNumber, setSearchNumber] = useState("");
 
   // 출시 회차
-  const [testOrderSelected, setTestOrderSelected] = useState("1회차");
+  const [testOrderSelected, setTestOrderSelected] = useState("2회차");
   const testOrderDict = {
+    "4회차": "4회차",
+    "3회차": "3회차",
     "2회차": "2회차",
     "1회차": "1회차",
     전체: "전체",
@@ -80,16 +82,28 @@ const OrderListPage = (props) => {
       return 0;
     })
     .filter((order) => {
-      if (testOrderDict[testOrderSelected] === "2회차") {
+      if (testOrderDict[testOrderSelected] === "4회차") {
         return (
-          order.orderDate >= "2023-09-04 21:00:00" &&
-          order.orderDate <= "2023-09-10 23:59:59"
+          order.orderDate >= "2023-09-18T21:00:00" &&
+          order.orderDate <= "2023-09-24T23:59:59"
+        );
+      }
+      else if (testOrderDict[testOrderSelected] === "3회차") {
+        return (
+          order.orderDate >= "2023-09-11T21:00:00" &&
+          order.orderDate <= "2023-09-17T23:59:59"
+        );
+      }
+      else if (testOrderDict[testOrderSelected] === "2회차") {
+        return (
+          order.orderDate >= "2023-09-04T21:00:00" &&
+          order.orderDate <= "2023-09-10T23:59:59"
         );
       }
       else if (testOrderDict[testOrderSelected] === "1회차") {
         return (
-          order.orderDate >= "2023-08-28 21:00:00" &&
-          order.orderDate <= "2023-09-03 23:59:59"
+          order.orderDate >= "2023-08-28T21:00:00" &&
+          order.orderDate <= "2023-09-03T23:59:59"
         );
       }
       else {
