@@ -124,6 +124,11 @@ function LandingPage() {
             />
           </div>
         ) : (
+          itemList.length === 0 ? (
+          <div className="productRenewal">
+            서비스 정비 중...
+          </div>
+          ) : (
           <div className="products">
             {itemList.map((product) => (
               <div key={product.itemId} className="product">
@@ -149,7 +154,7 @@ function LandingPage() {
                 </Link>
               </div>
             ))}
-          </div>
+          </div> )
         )}
         <div>
           <hr />

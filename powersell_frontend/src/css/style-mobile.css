@@ -77,6 +77,12 @@
   text-decoration: none;
 }
 
+.productRenewal {
+  text-align: center;
+  margin: 150px 0;
+  font-size: 20px;
+}
+
 .product {
   margin-bottom: 10px;
 }
