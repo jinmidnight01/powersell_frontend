@@ -501,6 +501,7 @@ function Modal(props) {
             style={postCodeStyle}
             autoClose={false}
             onComplete={onCompletePost}
+            focusInput={true}
           ></DaumPostcode>
         ) : null}
       </div>
