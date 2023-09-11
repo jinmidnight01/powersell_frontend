@@ -286,7 +286,7 @@ function Modal(props) {
       // 모달이 열렸을 때만 포커스를 줍니다. 'props.open'은 모달이 열렸는지 알려주는 prop입니다.
       nameRef.current.focus();
     }
-  }, [modalState]);
+  }, [isClicked]);
 
   const moveToNextInput = (currentRef, nextRef, length) => {
     if (currentRef.current.value.length >= length) {
