@@ -10,7 +10,7 @@ import hostURL from "../hostURL";
 
 function Modal(props) {
   const navigate = useNavigate();
-  // 모달 오픈 여부
+  // 주소 찾기 모달 오픈 여부
   const [modalState, setModalState] = useState("");
 
   // 수량
@@ -282,7 +282,7 @@ function Modal(props) {
   const donghoRef = useRef();
   const pwRef = useRef();
   useEffect(() => {
-    if (modalState) {
+    if (isClicked) {
       // 모달이 열렸을 때만 포커스를 줍니다. 'props.open'은 모달이 열렸는지 알려주는 prop입니다.
       nameRef.current.focus();
     }
@@ -293,6 +293,15 @@ function Modal(props) {
       nextRef.current.focus();
     }
   };
+
+  useEffect(()=> {
+    if (modalState) {
+      const element = document.getElementById('region_name');      
+      if (element) {
+        element.focus();
+      }
+    }
+  }, [modalState]);
   
   return (
     <>
