@@ -393,6 +393,7 @@ function DetailProductPage() {
                   }}
                   product={product}
                   setPosting={setPosting}
+                  isClicked={isClicked}
                 ></Modal>
               </div>
             )}
