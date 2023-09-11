@@ -5,7 +5,7 @@ import "../../css/style-mobile.css";
 import hostURL from "../../hostURL";
 
 import user from "../../images/icons/user.png";
-import banner50 from "../../images/home/banner50.jpg";
+import banner from "../../images/home/banner.jpg";
 import { Link } from "react-router-dom";
 import HomeHeader from "./../../components/HomeHeader";
 import 삼다수 from "../../images/home/삼다수.jpg";
@@ -63,17 +63,17 @@ function LandingPage() {
   let itemList = []
   for (let i = 0; i < tempList.length; i++) {
     switch (tempList[i].itemId) {
-      case 1:
-        continue;
-      case 2:
-        continue;
-      case 3:
-        continue;
-      case 4:
-        continue;
       case 5:
         continue;
-      case 441:
+      case 457:
+        continue;
+      case 458:
+        continue;
+      case 459:
+        continue;
+      case 460:
+        continue;
+      case 461:
         continue;
       default:
         itemList.push(tempList[i]);
@@ -110,7 +110,7 @@ function LandingPage() {
           href="https://jazzy-note-a6d.notion.site/9-EVENT-15ce9c9fd951457d9da722eafc8c3131?pvs=4"
           className="banner"
         >
-          <img src={banner50} alt="Promotion Banner" />
+          <img src={banner} alt="Promotion Banner" />
         </a>
 
         {/* Products */}

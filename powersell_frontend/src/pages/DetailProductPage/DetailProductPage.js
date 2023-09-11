@@ -28,7 +28,7 @@ function DetailProductPage() {
   const [isPosting, setPosting] = useState(false);
 
   useEffect(() => {
-    if (productId === "1" || productId === "2" || productId === "3" || productId === "4" || productId === "5" || productId === "441") {
+    if (productId === "5" || productId === "457" || productId === "458" || productId === "459" || productId === "460" || productId === "461") {
       navigate("/404");
     }
 
@@ -243,16 +243,12 @@ function DetailProductPage() {
               <p className="borderText noticeTitle">
                 <i>Notice.</i>
               </p>
-              <span>
-                ※ <span className="borderText">할인율</span>이 <span className="borderText">50%</span>로 변경되었습니다<br/>
-                ※ <span className="borderText">1회 최대 구매 수량</span>이 <span className="borderText">1개</span>로 변경되었습니다<br/>
-              </span>
               {/* <br></br>
               <br></br> */}
               <div className="noticeContent">
                 <p>
                   🛒 1회 최대 구매 수량은{" "}
-                  <span className="borderText">1개</span>
+                  <span className="borderText">2개</span>
                   입니다
                 </p>
                 <br></br>
