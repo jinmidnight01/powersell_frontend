@@ -71,7 +71,7 @@ function Modal(props) {
   };
 
   // 구매하기 버튼
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
     // '-'가 포함되어 있는지 확인
     const hasDash = phoneNumber.includes("-");
@@ -222,9 +222,6 @@ function Modal(props) {
       // setTransformY(resistanceValue);
     }
   }
-  useEffect(() => {
-    console.log("Transform Y:", transformY);
-  }, [transformY]);
 
   const nowTime = () => {
     const today = new Date();
@@ -277,22 +274,22 @@ function Modal(props) {
       });
   }, [props.product.itemId, startDate, endDate]);
 
-  const nameRef = useRef();
-  const phoneNumberRef = useRef();
-  const donghoRef = useRef();
-  const pwRef = useRef();
-  useEffect(() => {
-    if (isClicked) {
-      // 모달이 열렸을 때만 포커스를 줍니다. 'props.open'은 모달이 열렸는지 알려주는 prop입니다.
-      nameRef.current.focus();
-    }
-  }, [isClicked]);
+  // const nameRef = useRef();
+  // const phoneNumberRef = useRef();
+  // const donghoRef = useRef();
+  // const pwRef = useRef();
+  // useEffect(() => {
+  //   if (isClicked) {
+  //     // 모달이 열렸을 때만 포커스를 줍니다. 'props.open'은 모달이 열렸는지 알려주는 prop입니다.
+  //     nameRef.current.focus();
+  //   }
+  // }, [isClicked]);
 
-  const moveToNextInput = (currentRef, nextRef, length) => {
-    if (currentRef.current.value.length >= length) {
-      nextRef.current.focus();
-    }
-  };
+  // const moveToNextInput = (currentRef, nextRef, length) => {
+  //   if (currentRef.current.value.length >= length) {
+  //     nextRef.current.focus();
+  //   }
+  // };
 
   useEffect(()=> {
     if (modalState) {
@@ -372,13 +369,14 @@ function Modal(props) {
                 <div className={styles.input_group}>
                   <label>받는 사람</label>
                   <input
-                    ref={nameRef}
+                    // ref={nameRef}
                     type="text"
                     name="name"
                     value={name}
                     onChange={(e) => {
                       onChange(e);
-                      moveToNextInput(nameRef, phoneNumberRef, 4);                    }}
+                      // moveToNextInput(nameRef, phoneNumberRef, 4);                    
+                    }}
                   />
                 </div>
                 <div className={styles.input_group}>
@@ -431,14 +429,14 @@ function Modal(props) {
                 <div className={`${styles.input_group} ${styles.last}`}>
                   <label> </label>
                   <input
-                    ref={donghoRef}
+                    // ref={donghoRef}
                     type="text"
                     placeholder="상세주소 입력"
                     name="dongho"
                     value={dongho}
                     onChange={(e) => {
                       onChange(e);
-                      moveToNextInput(donghoRef, pwRef, 20);
+                      // moveToNextInput(donghoRef, pwRef, 20);
                     }}
                   />
                 </div>
@@ -453,7 +451,7 @@ function Modal(props) {
                 <div className={styles.input_group}>
                   <label>비밀번호</label>
                   <input
-                    ref={pwRef}
+                    // ref={pwRef}
                     type="password"
                     name="pw"
                     value={pw}

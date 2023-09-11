@@ -84,25 +84,25 @@ const OrderListPage = (props) => {
     .filter((order) => {
       if (testOrderDict[testOrderSelected] === "4회차") {
         return (
-          order.orderDate >= "2023-09-18T21:00:00" &&
+          order.orderDate >= "2023-09-18T20:59:00" &&
           order.orderDate <= "2023-09-24T23:59:59"
         );
       }
       else if (testOrderDict[testOrderSelected] === "3회차") {
         return (
-          order.orderDate >= "2023-09-11T21:00:00" &&
+          order.orderDate >= "2023-09-11T20:59:00" &&
           order.orderDate <= "2023-09-17T23:59:59"
         );
       }
       else if (testOrderDict[testOrderSelected] === "2회차") {
         return (
-          order.orderDate >= "2023-09-04T21:00:00" &&
+          order.orderDate >= "2023-09-04T20:59:00" &&
           order.orderDate <= "2023-09-10T23:59:59"
         );
       }
       else if (testOrderDict[testOrderSelected] === "1회차") {
         return (
-          order.orderDate >= "2023-08-28T21:00:00" &&
+          order.orderDate >= "2023-08-28T20:59:00" &&
           order.orderDate <= "2023-09-03T23:59:59"
         );
       }
