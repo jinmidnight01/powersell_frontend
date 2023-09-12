@@ -231,7 +231,7 @@ function DetailProductPage() {
                 ></img>
               </div>
               <p className="discounted-price">
-                <span className="discount-rate">50% </span>
+                <span className="discount-rate">80% </span>
                 <span className="original-price">
                   {product.originalPrice}원
                 </span>

@@ -149,7 +149,7 @@ function LandingPage() {
                       {product.name}
                     </p>
                     <p className="original-price">{product.originalPrice}원</p>
-                    <h2 className="discount">50% {product.price}원</h2>
+                    <h2 className="discount">80% {product.price}원</h2>
                   </div>
                 </Link>
               </div>
