@@ -291,9 +291,16 @@ function DetailProductPage() {
                   <span className="borderText">9월 11일(월) 오후 9시 </span>~
                   재고 소진 시
                   </span>
+                  <span
+                    style={{
+                      textDecoration: "line-through",
+                      textDecorationThickness: "1px",
+                    }}
+                  >
                   <br />- <span className="borderText">4차 이벤트</span>:{" "}
                   <span className="borderText">9월 18일(월) 오후 9시 </span>~
                   재고 소진 시
+                  </span>
                 </p>
                 <br></br>
 
