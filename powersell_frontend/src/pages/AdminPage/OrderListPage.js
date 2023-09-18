@@ -15,7 +15,7 @@ const OrderListPage = (props) => {
   const [searchNumber, setSearchNumber] = useState("");
 
   // 출시 회차
-  const [testOrderSelected, setTestOrderSelected] = useState("3회차");
+  const [testOrderSelected, setTestOrderSelected] = useState("4회차");
   const testOrderDict = {
     "4회차": "4회차",
     "3회차": "3회차",
