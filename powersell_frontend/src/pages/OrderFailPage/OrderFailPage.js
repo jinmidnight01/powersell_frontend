@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import Header from "../../components/Header";
-import styles from "./OrderFailPage.module.css";
+import styles from "../../css/OrderFailPage.module.css";
 import Button from "../../components/Button";
 
 import warning from "../../images/orderFail/warning.png";

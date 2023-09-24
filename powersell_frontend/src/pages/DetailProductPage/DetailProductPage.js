@@ -27,12 +27,12 @@ function DetailProductPage() {
   const navigate = useNavigate();
   const [isPosting, setPosting] = useState(false);
 
+  // REST API 2-3: get item detail
   useEffect(() => {
     if (productId === "5" || productId === "457" || productId === "458" || productId === "459" || productId === "460" || productId === "461") {
       navigate("/404");
     }
 
-    // async function rendering_item_detail(id) {
     axios
       .get(`${hostURL}/api/items/${productId}`)
       .then((response) => {
@@ -47,7 +47,7 @@ function DetailProductPage() {
     //   setLoading(false); // 로딩 종료
     // });
     // }
-    // rendering_item_detail(productId);
+
   }, [productId, navigate]);
 
   const [isClicked, setClicked] = useState(false);

@@ -9,7 +9,7 @@ import bag from "../../images/orderSuccess/shopping-bag.png";
 import scooter from "../../images/orderSuccess/scooter.png";
 import copyText from "../../images/icons/copyText.png";
 
-import styles from "./OrderSuccessPage.module.css";
+import styles from "../../css/OrderSuccessPage.module.css";
 import Button from "../../components/Button";
 import { Link } from "react-router-dom";
 
@@ -28,6 +28,7 @@ const OrderSuccessPage = () => {
 
   // response data
   useEffect(() => {
+    // prevent direct access
     if (location.state === null) {
       navigate("/");
     } else {
@@ -53,9 +54,9 @@ const OrderSuccessPage = () => {
         return null;
     }
   };
+  
   if (!successData) {
     return;
-    // return <p style={{ marginTop: "10%", textAlign: "center" }}></p>;
   }
 
   return (

@@ -46,6 +46,7 @@ function LandingPage() {
 
   const [tempList, setItemList] = useState([]);
 
+  // REST API 2-1: GET all items
   useEffect(() => {
     async function rendering_item() {
       axios
@@ -80,6 +81,7 @@ function LandingPage() {
     }
   }
 
+  // REST API 3-2: POST feedback
   function submitFeedback() {
     if (feedback.trim() === "") {
       alert("피드백을 입력해주세요!");

@@ -1,26 +1,36 @@
-import { React, useRef, useEffect } from "react";
+import { React, useRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 import hostURL from "../../hostURL";
 
 import Header from "../../components/Header";
-import styles from "./admin.module.css";
+import styles from "../../css/admin.module.css";
 
 const LoginPage = (e) => {
   const focus = useRef();
-  const submitFocus = useRef();
   const navigator = useNavigate();
+  const [inputs, setInputs] = useState({
+    id: "",
+    password: "",
+  });
+  const { id, password } = inputs;
+
+  const onChange = (e) => {
+    const { value, name } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
+  };
 
   useEffect(() => {
     focus.current.focus();
   }, []);
 
+  // REST API 4-1: login
   const handleClick = (e) => {
     e.preventDefault();
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-    const inputs = {id: username, password: password};
 
     axios
     .post(`${hostURL}/api/check`, inputs)
@@ -46,10 +56,12 @@ const LoginPage = (e) => {
             <input
               type="text"
               id="username"
-              name="username"
+              name="id"
               placeholder=" Username"
               required
               ref={focus}
+              value={id}
+              onChange={onChange}
             />
           </p>
           <p>
@@ -59,9 +71,11 @@ const LoginPage = (e) => {
               name="password"
               placeholder=" Password"
               required
+              value={password}
+              onChange={onChange}
             />
           </p>
-          <button onClick={handleClick} ref={submitFocus}>제출</button>
+          <button onClick={handleClick}>제출</button>
         </div>
       </div>
     </div>

@@ -12,25 +12,6 @@ function Modal(props) {
   const navigate = useNavigate();
   // 주소 찾기 모달 오픈 여부
   const [modalState, setModalState] = useState("");
-
-  // 수량
-  const [quantity, setQuantity] = useState(1); // 상태 변수 설정
-  // 주문자명
-  const [name, setName] = useState("");
-  // 지역번호
-  const [preNum, setPreNum] = useState("010");
-  // 전화번호
-  const [phoneNumber, setPhoneNumber] = useState("");
-  // 우편 번호
-  const [zipCode, setZipCode] = useState("");
-  // 주소
-  const [address, setAddress] = useState("");
-  // 상세 주소
-  const [dongho, setDongho] = useState("");
-  // 비밀번호
-  const [pw, setPw] = useState("");
-  // 상품 판매 여부
-  // const [eventIng, setEventIng] = useState(true);
   // 구매 버튼 실행 여부
   const [isClicked, setClicked] = useState(false);
   // 오픈 일시
@@ -44,33 +25,33 @@ function Modal(props) {
   // 구매 버튼 로딩 상태
   const [isloading, setIsLoading] = useState(true);
 
-  // input box
+  // 수량, 주문자명, 지역번호, 전화번호, 우편 번호, 주소, 상세 주소, 비밀번호
+  const [inputs, setInputs] = useState({
+    quantity: 1,
+    name: "",
+    preNum: "010",
+    phoneNumber: "",
+    zipCode: "",
+    address: "",
+    dongho: "",
+    pw: "",
+  });
+
+  const { quantity, name, preNum, phoneNumber, zipCode, address, dongho, pw } = inputs;
+
+  // input 객체 생성
   const onChange = (e) => {
-    let value = e.target.value;
-    switch (e.target.name) {
-      case "name":
-        setName(value); // 문자와 공백만 허용
-        return;
-      case "preNum":
-        setPreNum(value);
-        return;
-      case "phoneNumber":
-        value = value.replace(/[^0-9]/g, "");
-        setPhoneNumber(value);
-        return;
-      case "dongho":
-        setDongho(value);
-        return;
-      case "pw":
-        value = value.replace(/[^0-9]/g, "");
-        setPw(value);
-        return;
-      default:
-        return;
+    let { value, name } = e.target;
+    if (name === "phoneNumber" || name === "pw") {
+      value = value.replace(/[^0-9]/g, "");
     }
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
   };
 
-  // 구매하기 버튼
+  // REST API 1-2: post order
   function handleSubmit(e) {
     e.preventDefault();
     // '-'가 포함되어 있는지 확인
@@ -97,14 +78,13 @@ function Modal(props) {
       return;
     } else {
       const number = preNum + phoneNumber;
-      const totalAdd = address;
-      const inputs = {
+      const submitInputs = {
         itemId: props.product.itemId,
         count: quantity,
         name: name,
         number: number,
         zipcode: zipCode,
-        address: totalAdd,
+        address: address,
         dongho: dongho,
         pw: pw,
       };
@@ -113,14 +93,10 @@ function Modal(props) {
       props.setPosting(true);
 
       axios
-        .post(`${hostURL}/api/orders`, inputs)
+        .post(`${hostURL}/api/orders`, submitInputs)
         .then((response) => {
           document.body.style.overflow = "auto";
           const successData = response.data;
-          // eventIng 값을 업데이트
-          // if (successData.eventIng !== undefined) {
-          //   setEventIng(successData.eventIng);
-          // }
           navigate("/ordersuccess", {
             state: { successData: successData, pw: pw },
           });
@@ -147,6 +123,7 @@ function Modal(props) {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
   // 스타일 정의 code
   const postCodeStyle = {
     height: "80%",
@@ -158,15 +135,13 @@ function Modal(props) {
     display: "block",
   };
 
-  // 팝업창 열기
-  const openPostCode = () => {
-    setModalState(true);
-  };
-
   // onCompletePost 함수
   const onCompletePost = (data) => {
-    setAddress(data.address);
-    setZipCode(data.zonecode);
+    setInputs({
+      ...inputs,
+      address: data.address,
+      zipCode: data.zonecode,
+    });
     setModalState(false);
   };
 
@@ -178,7 +153,10 @@ function Modal(props) {
   function increaseQuantity(e) {
     e.preventDefault();
     if (quantity < 2) {
-      setQuantity((prevQuantity) => prevQuantity + 1);
+      setInputs({
+        ...inputs,
+        quantity: quantity + 1
+      });
     }
   }
 
@@ -186,7 +164,10 @@ function Modal(props) {
   function decreaseQuantity(e) {
     e.preventDefault();
     if (quantity > 1) {
-      setQuantity((prevQuantity) => prevQuantity - 1);
+      setInputs({
+        ...inputs,
+        quantity: quantity - 1
+      });
     }
   }
 
@@ -249,30 +230,16 @@ function Modal(props) {
 
   const product = props.product;
   useEffect(() => {
-    axios
-      .get(`${hostURL}/api/items/${props.product.itemId}`)
-      .then((response) => {
-        const itemData = response.data;
-        setStartDate(itemData.startDate);
-        setEndDate(itemData.endDate);
-        // if (itemData.eventIng !== undefined) {
-        //   setEventIng(itemData.eventIng);
-        // }
-      })
-      .catch((error) => {
-        console.error("Error fetching item data:", error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-        setInterval(() => {
-          if (startDate === "") return;
-          setOpenStatus(startDate < nowTime());
-
-          if (endDate === "") return;
-          setCloseStatus(endDate < nowTime());
-        }, 1);
-      });
-  }, [props.product.itemId, startDate, endDate]);
+    setStartDate(product.startDate);
+    setEndDate(product.endDate);
+    setInterval(() => {
+      if (startDate === "") return;
+      setOpenStatus(startDate < nowTime());
+      if (endDate === "") return;
+      setCloseStatus(endDate < nowTime());
+    }, 1);
+    setIsLoading(false);
+  }, [props.product.itemId, product.startDate, product.endDate, startDate, endDate]);
 
   // const nameRef = useRef();
   // const phoneNumberRef = useRef();
@@ -291,15 +258,15 @@ function Modal(props) {
   //   }
   // };
 
-  useEffect(()=> {
+  useEffect(() => {
     if (modalState) {
-      const element = document.getElementById('region_name');      
+      const element = document.getElementById('region_name');
       if (element) {
         element.focus();
       }
     }
   }, [modalState]);
-  
+
   return (
     <>
       {isClicked ? (
@@ -359,11 +326,6 @@ function Modal(props) {
               {/* 둘 컨텐츠: 배송지 정보 */}
               <div className={styles.second_content}>
                 <h3 className={styles.order_title}>배송지</h3>
-
-                {/* <p style={{ color: "red", textAlign: "left" }}>
-                  {errorMessage}
-                </p> */}
-
                 <div className={styles.input_group}>
                   <label>받는 사람</label>
                   <input
@@ -371,10 +333,9 @@ function Modal(props) {
                     type="text"
                     name="name"
                     value={name}
-                    onChange={(e) => {
-                      onChange(e);
-                      // moveToNextInput(nameRef, phoneNumberRef, 4);                    
-                    }}
+                    onChange={onChange}
+                  //  moveToNextInput(donghoRef, pwRef, 20);
+                  // }}
                   />
                 </div>
                 <div className={styles.input_group}>
@@ -391,9 +352,7 @@ function Modal(props) {
                     type="text"
                     name="phoneNumber"
                     value={phoneNumber}
-                    onChange={(e) => {
-                      onChange(e);
-                    }}
+                    onChange={onChange}
                     placeholder="(-) 없이 숫자만 입력해주세요"
                   />
                 </div>
@@ -401,7 +360,7 @@ function Modal(props) {
                   <label>주소</label>
                   <button
                     type="button"
-                    onClick={openPostCode}
+                    onClick={() => { setModalState(true); }}
                     className={styles.search_add}
                   >
                     주소찾기
@@ -410,7 +369,7 @@ function Modal(props) {
                     onChange={onChange}
                     value={zipCode}
                     type="text"
-                    name="inputZipCodeValue"
+                    name="zipCode"
                     disabled
                   />
                 </div>
@@ -420,7 +379,7 @@ function Modal(props) {
                     onChange={onChange}
                     value={address}
                     type="text"
-                    name="inputAddressValue"
+                    name="address"
                     disabled
                   />
                 </div>
@@ -432,10 +391,9 @@ function Modal(props) {
                     placeholder="상세주소 입력"
                     name="dongho"
                     value={dongho}
-                    onChange={(e) => {
-                      onChange(e);
-                      // moveToNextInput(donghoRef, pwRef, 20);
-                    }}
+                    onChange={onChange}
+                  //  moveToNextInput(donghoRef, pwRef, 20);
+                  // }}
                   />
                 </div>
               </div>
@@ -444,7 +402,7 @@ function Modal(props) {
 
               <div className={styles.third_content}>
                 <h3 className={styles.order_title}>
-                  주문 확인용 {/* <span>*4자리 숫자로 설정해 주세요</span> */}
+                  주문 확인용
                 </h3>
                 <div className={styles.input_group}>
                   <label>비밀번호</label>
@@ -472,16 +430,14 @@ function Modal(props) {
               ) : (
                 <input
                   onClick={handleSubmit}
-                  className={`${styles.submit_button} ${
-                    closeStatus || !openStatus ? styles.negative_button : ""
-                  }`}
+                  className={`${styles.submit_button} ${closeStatus || !openStatus ? styles.negative_button : ""}`}
                   type="submit"
                   value={
                     closeStatus
                       ? "오픈 준비 중입니다"
                       : openStatus
-                      ? "구매하기"
-                      : startDate.slice(5, 7) +
+                        ? "구매하기"
+                        : startDate.slice(5, 7) +
                         "월 " +
                         startDate.slice(8, 10) +
                         "일 " +

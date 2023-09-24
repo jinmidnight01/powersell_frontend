@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import Header from "../../components/Header";
 
-import styles from "./notfound.module.css";
+import styles from "../../css/notfound.module.css";
 
 const NotFoundPage = () => {
   return (

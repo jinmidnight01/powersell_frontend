@@ -12,15 +12,16 @@ import 구운란 from "../../images/home/구운란.jpg";
 import 곰곰 from "../../images/home/곰곰.png";
 import copyText from "../../images/icons/copyText.png";
 
-import styles from "./orderconfirm.module.css";
+import styles from "../../css/orderconfirm.module.css";
 
 // OrderConfirm function
 const OrderConfirmPage = () => {
   const output = useLocation().state;
   const navigate = useNavigate();
 
-  // prevent direct URL access
+  // response data
   useEffect(() => {
+    // prevent direct URL access
     if (output === null) {
       navigate("/authentication");
     }
@@ -155,8 +156,8 @@ const OrderConfirmPage = () => {
                 </div>
 
                 {/* payment notification */}
-                {order.orderStatus === "WAITING" ||
-                order.orderStatus === null ? (
+                {(order.orderStatus === "WAITING" ||
+                order.orderStatus === null) && (
                   <div className={styles.order_noti}>
                     <hr></hr>
                     <div>
@@ -196,10 +197,7 @@ const OrderConfirmPage = () => {
                         해주세요)
                       </div>
                     </div>
-                  </div>
-                ) : (
-                  <></>
-                )}
+                  </div>)}
               </div>
             ))}
         </div>
