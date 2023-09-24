@@ -4,5 +4,5 @@
   status = 200
 
 [build]
-  command = ""
-  publish = ""
+  command = "CI= npm run build"
+  publish = "CI= npm run build"
