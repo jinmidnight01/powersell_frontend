@@ -58,7 +58,14 @@ function DetailProductPage() {
     } else {
       document.body.style.overflow = "auto";
     }
+    // scroll 관련 내용 : 62 ~ 66 lines
+    return () => {
+      // 이 cleanup function은 컴포넌트가 unmount되거나
+      // 이 useEffect가 다시 호출되기 전에 실행됩니다.
+      document.body.style.overflow = "auto";
+    };
   }, [isClicked]);
+  
 
   // item image
   const itemImage = (order) => {
@@ -198,6 +205,7 @@ function DetailProductPage() {
   };
 
   return (
+    
     <div id="pc-width">
       <div style={postStyle(isPosting)}>
         <Header text="상품 내용"></Header>
