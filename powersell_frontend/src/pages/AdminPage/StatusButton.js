@@ -37,116 +37,81 @@ const StatusButton = (props) => {
     height: "26px"
   };
 
-  // style flag
-  const initialStyle = [ButtonStyle, ButtonStyle, ButtonStyle, ButtonStyle];
+  // intial button style
+  const initialStyle = {
+    WAITING: ButtonStyle,
+    DELIVERING: ButtonStyle,
+    ARRIVED: ButtonStyle,
+    CANCELED: ButtonStyle
+  };
+
   switch (orderStatus) {
     case "WAITING":
-      initialStyle[0] = clickedButtonStyle;
+      initialStyle.WAITING = clickedButtonStyle;
       break;
     case "DELIVERING":
-      initialStyle[1] = clickedButtonStyle;
+      initialStyle.DELIVERING = clickedButtonStyle;
       break;
     case "ARRIVED":
-      initialStyle[2] = clickedButtonStyle;
+      initialStyle.ARRIVED = clickedButtonStyle;
       break;
     case "CANCELED":
-      initialStyle[3] = clickedButtonStyle;
+      initialStyle.CANCELED = clickedButtonStyle;
       break;
     default:
       break;
   }
-  const [style1, setStyle1] = useState(initialStyle[0])
-  const [style2, setStyle2] = useState(initialStyle[1])
-  const [style3, setStyle3] = useState(initialStyle[2])
-  const [style4, setStyle4] = useState(initialStyle[3])
 
-  // REST API 1-4: WAITING
-  const handleClickWaiting = () => {
-    axios
-      .patch(`${hostURL}/api/admin/orders/${orderId}`, { status: "WAITING" })
-      .then((response) => {
-        setStyle1(clickedButtonStyle);
-        setStyle2(ButtonStyle);
-        setStyle3(ButtonStyle);
-        setStyle4(ButtonStyle);
-        reloadFlag === 0 ? setReloadFlag(1) : setReloadFlag(0);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  const [styleInput, setStyleInput] = useState(initialStyle);
+  const { WAITING, DELIVERING, ARRIVED, CANCELED } = styleInput;
+  
+  // REST API 1-4: change order status
+  const onClick = (e) => {
+    setStyleInput({
+      WAITING: ButtonStyle,
+      DELIVERING: ButtonStyle,
+      ARRIVED: ButtonStyle,
+      CANCELED: ButtonStyle
+    });
 
-  // REST API 1-4: DELIVERING
-  const handleClickDelivering = () => {
     axios
-      .patch(`${hostURL}/api/admin/orders/${orderId}`, { status: "DELIVERING" })
-      .then((response) => {
-        setStyle1(ButtonStyle);
-        setStyle2(clickedButtonStyle);
-        setStyle3(ButtonStyle);
-        setStyle4(ButtonStyle);
-        reloadFlag === 0 ? setReloadFlag(1) : setReloadFlag(0);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  // REST API 1-4: ARRIVED
-  const handleClickArrived = () => {
-    axios
-      .patch(`${hostURL}/api/admin/orders/${orderId}`, { status: "ARRIVED" })
-      .then((response) => {
-        setStyle1(ButtonStyle);
-        setStyle2(ButtonStyle);
-        setStyle3(clickedButtonStyle);
-        setStyle4(ButtonStyle);
-        reloadFlag === 0 ? setReloadFlag(1) : setReloadFlag(0);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  // REST API 1-4: CANCELED
-  const handleClickCanceled = () => {
-    axios
-      .patch(`${hostURL}/api/admin/orders/${orderId}`, { status: "CANCELED" })
-      .then((response) => {
-        setStyle1(ButtonStyle);
-        setStyle2(ButtonStyle);
-        setStyle3(ButtonStyle);
-        setStyle4(clickedButtonStyle);
-        reloadFlag === 0 ? setReloadFlag(1) : setReloadFlag(0);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    .patch(`${hostURL}/api/admin/orders/${orderId}`, { status: e.target.value })
+    .then((response) => {
+      setStyleInput((prev) => ({...prev, [e.target.value]: clickedButtonStyle}));
+      reloadFlag === 0 ? setReloadFlag(1) : setReloadFlag(0);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   };
 
   return (
     <div style={orderDelivery}>
       <button
-        onClick={handleClickWaiting}
-        style={style1}
+        onClick={onClick}
+        style={WAITING}
+        value="WAITING"
       >
         입금대기
       </button>
       <button
-        onClick={handleClickDelivering}
-        style={style2}
+        onClick={onClick}
+        style={DELIVERING}
+        value="DELIVERING"
       >
         배송중
       </button>
       <button
-        onClick={handleClickArrived}
-        style={style3}
+        onClick={onClick}
+        style={ARRIVED}
+        value="ARRIVED"
       >
         배송완료
       </button>
       <button
-        onClick={handleClickCanceled}
-        style={style4}
+        onClick={onClick}
+        style={CANCELED}
+        value="CANCELED"
       >
         주문취소
       </button>

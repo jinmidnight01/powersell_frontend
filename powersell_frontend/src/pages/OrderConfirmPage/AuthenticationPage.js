@@ -1,4 +1,4 @@
-import { React, useState, useRef, useEffect } from "react";
+import { React, useState, useRef, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -10,144 +10,110 @@ import key from "../../images/orderConfirm/key.png";
 import kakaotalk from "../../images/orderConfirm/kakaotalk.png";
 import spinner from "../../images/icons/spinner.gif";
 
-import styles from "./orderconfirm.module.css";
+import styles from "../../css/orderconfirm.module.css";
 
 // Authentication function
 const AuthenticationPage = () => {
   const refNum2 = useRef(); const refNum3 = useRef(); const refPw = useRef(); const submitFocus = useRef();
-  const reg = /^[0-9]{4}$/;
   const [isPosting, setIsPosting] = useState(false);
-  const [isPending, setIsPending] = useState(false);
   const navigate = useNavigate();
-  const inputNoti = {
-    display: "none",
-    fontSize: "11px",
-    marginLeft: "30px",
-    marginTop: "7px",
-    color: "#fa7979",
-    fontWeight: "bold",
+
+  // 전화번호, 비밀번호
+  const [inputs, setInputs] = useState({
+    number1: "010",
+    number2: "",
+    number3: "",
+    pw: "",
+  });
+
+  const { number1, number2, number3, pw } = inputs;
+
+  // input 객체 생성
+  const onChange = (e) => {
+    const { value, name } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
   };
+  
+  // function: input focus
+  const reg = useMemo(() => /^[0-9]{4}$/, []);
+  useEffect(() => {
+    if ((/^[0-9]{2,3}$/).test(number1)) {
+      refNum2.current.focus();
+    };
+  }, [number1, reg]);
 
   useEffect(() => {
-    refNum2.current.focus();
-  }, []);
+    if (reg.test(number2)) {
+      refNum3.current.focus();
+    };
+  }, [number2, reg]);
 
-  // function: input focus (1)
-  const num2ToNum3 = () => {
-    const number2 = document.getElementById("number2");
-    const number3 = document.getElementById("number3");
-    const pw = document.getElementById("pw");
+  useEffect(() => {
+    if (reg.test(number3)) {
+      refPw.current.focus();
+    };
+  }, [number3, reg]);
 
-    if (reg.test(number2.value)) {
-      if (reg.test(number3.value)) {
-        if (!reg.test(pw.value)) {
-          refPw.current.focus();
-        }
-      }
-      else {
-        refNum3.current.focus();
-      }
-    }
-  };
-
-  // function: input focus (2)
-  const num3ToPw = () => {
-    const number3 = document.getElementById("number3");
-    const pw = document.getElementById("pw");
-
-    if (reg.test(number3.value)) {
-      if (!reg.test(pw.value)) {
-        refPw.current.focus();
-      }
-    }
-  }
-
-  // function: input focus (3)
-  const pwToSubmit = () => {
-    const pw = document.getElementById("pw").value;
-
-    if (pw.length === 4) {
+  useEffect(() => {
+    if (reg.test(pw)) {
       submitFocus.current.focus();
-    }
-  }
+    };
+  }, [pw, reg]);
 
-  // function: submit
+  // style
+  const [styleInputs, setStyleInputs] = useState({
+    numberNotiStyle: {},
+    number2Style: {},
+    number3Style: {},
+    pwNotiStyle: {},
+    pwStyle: {}
+  });
+
+  const { numberNotiStyle, number2Style, number3Style, pwNotiStyle, pwStyle } = styleInputs;
+
+  // REST API 1-3: post authentication data
   const handleSubmit = (e) => {
-    const number1 = document.getElementById("number1");
-    const number2 = document.getElementById("number2");
-    const number3 = document.getElementById("number3");
-    const pw = document.getElementById("pw");
-
-    const flagNum2 = /^[0-9]{3,4}$/.test(number2.value);
-    const flagNum3 = reg.test(number3.value);
-    const flagPw = reg.test(pw.value);
+    const flagNum2 = /^[0-9]{3,4}$/.test(number2);
+    const flagNum3 = reg.test(number3);
+    const flagPw = reg.test(pw);
 
     // prevent page reset
     e.preventDefault();
 
-    // change button from 조회 to 조회 중...
-    setIsPending(true);
-
-    // urge input change
-    if (!flagNum2 || !flagNum3 || !flagPw) {
-      // password noti, password change
-      if (!flagPw) {
-        document.getElementById("pwNoti").style.display = "block";
-        pw.style.borderColor = "#fa7979";
-        pw.style.borderWidth = "2px";
-        refPw.current.focus();
-      } else {
-        document.getElementById("pwNoti").style.display = "none";
-        pw.style.borderColor = "rgb(205, 205, 205)";
-      }
-
-      // number noti change
-      if (!flagNum2 || !flagNum3) {
-        document.getElementById("numberNoti").style.display = "block";
-      } else {
-        document.getElementById("numberNoti").style.display = "none";
-      }
-      // number3 change
-      if (!flagNum3) {
-        number3.style.borderColor = "#fa7979";
-        number3.style.borderWidth = "2px";
-        refNum3.current.focus();
-      } else {
-        number3.style.borderColor = "rgb(205, 205, 205)";
-      }
-      // number2 change
-      if (!flagNum2) {
-        number2.style.borderColor = "#fa7979";
-        number2.style.borderWidth = "2px";
-        refNum2.current.focus();
-      } else {
-        number2.style.borderColor = "rgb(205, 205, 205)";
-      }
-
-      setIsPending(false);
-      return;
-    }
-    postRequest(number1.value, number2.value, number3.value, pw.value);
-  };
-
-  // function: POST request
-  const postRequest = async (number1, number2, number3, pw) => {
-    const number = number1 + number2 + number3;
-    const inputs = { number: number, pw: pw };
-    // const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-    // await sleep(500);
+    // loading start
     setIsPosting(true);
 
-    // REST API 1-3
+    // input 형식 검사
+    if (!flagNum2 || !flagNum3 || !flagPw) {
+      setStyleInputs({
+        ...styleInputs,
+        numberNotiStyle: flagNum2 && flagNum3 ? {display: "none"} : {display: "block"},
+        number2Style: flagNum2 ? {borderColor: "rgb(205, 205, 205)"} : {borderColor: "#fa7979", borderWidth: "2px"},
+        number3Style: flagNum3 ? {borderColor: "rgb(205, 205, 205)"} : {borderColor: "#fa7979", borderWidth: "2px"},
+        pwNotiStyle: flagPw ? {display: "none"} : {display: "block"},
+        pwStyle: flagPw ? {borderColor: "rgb(205, 205, 205)"} : {borderColor: "#fa7979", borderWidth: "2px"}
+      });
+      setIsPosting(false);
+      return;
+    }
+
+    // 주문 인증 POST
+    const number = number1 + number2 + number3;
+    const inputs = { number: number, pw: pw };
+
     axios
       .post(`${hostURL}/api/orders/detail`, inputs)
       .then((response) => {
+        // 주문 내역이 없는 경우
         if (response.data.length === 0) {
           alert("해당 주문 내역이 없습니다");
-          setIsPending(false);
           setIsPosting(false);
           return;
         }
+        // 주문 내역이 있는 경우
         navigate("/orderconfirm", { state: response.data });
       })
       .catch((error) => {
@@ -175,11 +141,11 @@ const AuthenticationPage = () => {
             <div>전화번호</div>
           </div>
         </div>
-        <div id="numberNoti" style={inputNoti}>
+        <div className={styles.auth_inputNoti} style={numberNotiStyle}>
           ※ 중간은 3~4자리, 끝은 4자리 숫자로 입력해주세요
         </div>
         <div className={styles.auth_phoneBox}>
-          <select id="number1" name="number1" defaultValue="010" disabled={isPosting ? true : false}>
+          <select name="number1" onChange={onChange} value={number1} disabled={isPosting ? true : false}>
             <option value="010">010</option>
             <option value="070">070</option>
             <option value="011">011</option>
@@ -188,9 +154,8 @@ const AuthenticationPage = () => {
           </select>
           <hr></hr>
           <input
-            id="number2"
             name="number2"
-            onInput={num2ToNum3}
+            onChange={onChange} 
             type="text"
             required
             placeholder="0000"
@@ -198,12 +163,13 @@ const AuthenticationPage = () => {
             ref={refNum2}
             maxLength={4}
             disabled={isPosting ? true : false}
+            value={number2}
+            style={number2Style}
           ></input>
           <hr></hr>
           <input
-            id="number3"
             name="number3"
-            onInput={num3ToPw}
+            onChange={onChange} 
             type="text"
             required
             placeholder="0000"
@@ -211,6 +177,8 @@ const AuthenticationPage = () => {
             ref={refNum3}
             maxLength={4}
             disabled={isPosting ? true : false}
+            value={number3}
+            style={number3Style}
           ></input>
         </div>
 
@@ -223,20 +191,21 @@ const AuthenticationPage = () => {
             <div>비밀번호 (4자리 숫자)</div>
           </div>
         </div>
-        <div id="pwNoti" style={inputNoti}>
+        <div className={styles.auth_inputNoti} style={pwNotiStyle}>
           ※ 4자리 숫자로 입력해주세요
         </div>
         <div className={styles.auth_pwBox}>
           <input
-            id="pw"
             name="pw"
-            onInput={pwToSubmit}
+            onChange={onChange} 
             type="text"
             inputMode="numeric"
             required
             ref={refPw}
             maxLength={4}
             disabled={isPosting ? true : false}
+            value={pw}
+            style={pwStyle}
           ></input>
         </div>
 
@@ -252,12 +221,12 @@ const AuthenticationPage = () => {
 
         {/* confirm button (REST API) */}
         <div className={styles.auth_buttonBox}>
-          {!isPending && (
+          {!isPosting && (
             <button type="submit" onClick={handleSubmit} ref={submitFocus}>
               조회
             </button>
           )}
-          {isPending && <button style={{cursor:"default"}} disabled>조회 중...</button>}
+          {isPosting && <button style={{cursor:"default"}} disabled>조회 중...</button>}
         </div>
       </form>
 

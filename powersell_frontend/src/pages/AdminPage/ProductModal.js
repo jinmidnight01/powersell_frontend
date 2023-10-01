@@ -1,45 +1,19 @@
 import { React, useState } from "react";
 
-import styles from "./admin.module.css";
+import styles from "../../css/admin.module.css";
 import close from "../../images/icons/close.png";
 
 const ProductModal = ({ product, onClose, onSave }) => {
   const [updatedProduct, setUpdatedProduct] = useState(product);
 
+  // input 객체 재생성
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === "originalPrice" || name === "price" || name === "stockQuantity") {
-      if (value === "") {
-        const finalValue = "";
-        setUpdatedProduct((prev) => ({ ...prev, [name]: finalValue }));
-      }
-      else {
-        const finalValue = Number(value);
-        setUpdatedProduct((prev) => ({ ...prev, [name]: finalValue }));
-      }
-    }
-    else {
-      if (name === "startDate" || name === "endDate") {
-        const tempValue = value.replace("T", " ");
-        if (tempValue.length === 16) {
-          const finalValue = tempValue + ":00";
-          setUpdatedProduct((prev) => ({ ...prev, [name]: finalValue }));
-        }
-        else {
-          const finalValue = tempValue;
-          setUpdatedProduct((prev) => ({ ...prev, [name]: finalValue }));    
-        }
-      }
-      else {
-        const finalValue = value;
-        setUpdatedProduct((prev) => ({ ...prev, [name]: finalValue }));
-      }
-    }
+    setUpdatedProduct((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSave = () => {
     onSave(updatedProduct);
-    onClose();
   };
 
   return (

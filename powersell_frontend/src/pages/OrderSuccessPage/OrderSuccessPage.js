@@ -9,7 +9,7 @@ import bag from "../../images/orderSuccess/shopping-bag.png";
 import scooter from "../../images/orderSuccess/scooter.png";
 import copyText from "../../images/icons/copyText.png";
 
-import styles from "./OrderSuccessPage.module.css";
+import styles from "../../css/OrderSuccessPage.module.css";
 import Button from "../../components/Button";
 import { Link } from "react-router-dom";
 
@@ -28,6 +28,7 @@ const OrderSuccessPage = () => {
 
   // response data
   useEffect(() => {
+    // prevent direct access
     if (location.state === null) {
       navigate("/");
     } else {
@@ -53,9 +54,9 @@ const OrderSuccessPage = () => {
         return null;
     }
   };
+  
   if (!successData) {
     return;
-    // return <p style={{ marginTop: "10%", textAlign: "center" }}></p>;
   }
 
   return (
@@ -76,8 +77,8 @@ const OrderSuccessPage = () => {
             <div>송금 계좌</div>
           </div>
           <hr className={styles.line} />
-          <p style={{color:"red", textAlign: "left", fontSize:"12px", marginLeft: "10px"}}>※ 주문 후 30분 내 미입금시 주문 취소됩니다</p>
-          <ul style={{marginTop: "5px"}}>
+          <p style={{ color: "red", textAlign: "left", fontSize: "12px", marginLeft: "10px" }}>※ 주문 후 30분 내 미입금시 주문 취소됩니다</p>
+          <ul style={{ marginTop: "5px" }}>
             <li>
               <span>예금주</span>: 박진효
             </li>
@@ -103,7 +104,7 @@ const OrderSuccessPage = () => {
                   />
                 </span>
               </CopyToClipboard>
-              <div style={{marginTop: "3px"}}>
+              <div style={{ marginTop: "3px" }}>
                 (입금자명을{" "}
                 <span style={{ fontWeight: "bold" }}>'{successData.name}'</span>로
                 해주세요)

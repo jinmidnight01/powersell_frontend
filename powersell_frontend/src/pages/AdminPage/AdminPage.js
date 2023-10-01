@@ -10,7 +10,7 @@ import OrderListPage from "./OrderListPage";
 
 import backIcon from "../../images/icons/left.png";
 
-import styles from "./admin.module.css";
+import styles from "../../css/admin.module.css";
 
 const AdminPage = () => {
   const [title, setTitle] = useState("주문 목록");
@@ -21,21 +21,8 @@ const AdminPage = () => {
   useEffect(() => {
     if (location.state !== 200) {
       navigate("/login");
-    } 
-  }, [location.state, navigate]);
-
-  // function: toggle
-  const toggle = () => {
-    if (title === "주문 목록") {
-      setTitle("상품/후기 목록");
-      document.getElementById("orderlist").style.display = "none";
-      document.getElementById("productlist").style.display = "block";
-    } else if (title === "상품/후기 목록") {
-      setTitle("주문 목록");
-      document.getElementById("orderlist").style.display = "block";
-      document.getElementById("productlist").style.display = "none";
     }
-  };
+  }, [location.state, navigate]);
 
   return (
     <div id={styles.pcWidth}>
@@ -48,7 +35,7 @@ const AdminPage = () => {
         <div>{title}</div>
         {/* toggle button */}
         <label className={styles.switch}>
-          <input type="checkbox" onClick={toggle}></input>
+          <input type="checkbox" onClick={() => { title === "주문 목록" ? setTitle("상품/후기 목록") : setTitle("주문 목록") }}></input>
           <span className={styles.slider} id={styles.round}></span>
         </label>
       </header>
@@ -56,12 +43,12 @@ const AdminPage = () => {
       {/* main */}
 
       {/* Order List Page */}
-      <div id="orderlist">
+      <div style={title === "주문 목록" ? { display: "block" } : { display: "none" }}>
         <OrderListPage status={location.state} />
       </div>
 
       {/* Product List Page */}
-      <div id="productlist" style={{display: "none"}}>
+      <div style={title === "상품/후기 목록" ? { display: "block" } : { display: "none" }}>
         <ProductListPage status={location.state} />
       </div>
 

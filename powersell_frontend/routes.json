@@ -8,5 +8,6 @@
 
     "/api/items/:id": "/api_items/:id",
     "/api/admin/feedbacks": "/api_admin_feedbacks",
-    "/api/feedbacks": "/api_feedbacks"
+    "/api/feedbacks": "/api_feedbacks",
+    "/api/check": "/api_check"
 }

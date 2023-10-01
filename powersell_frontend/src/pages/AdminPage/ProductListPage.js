@@ -4,18 +4,12 @@ import axios from "axios";
 
 import hostURL from "../../hostURL";
 
-import styles from "./admin.module.css";
+import styles from "../../css/admin.module.css";
 import spinner from "../../images/icons/spinner.gif";
 import ProductModal from "./ProductModal";
 
 const ProductListPage = (props) => {
   const [feedbacks, setFeedbacks] = useState([]);
-  const [name, setName] = useState("");
-  const [originalPrice, setOriginalPrice] = useState("");
-  const [price, setPrice] = useState("");
-  const [stockQuantity, setStockQuantity] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
   const [isClicked, setIsClicked] = useState(0);
   const [toggleStatus, setToggleStatus] = useState("+");
   const [products, setProducts] = useState([]);
@@ -23,7 +17,28 @@ const ProductListPage = (props) => {
   const [isProductLoading, setIsProductLoading] = useState(true);
   const [isFeedbackLoading, setIsFeedbackLoading] = useState(true);
 
-  // REST API 2-1
+  // 상품명, 원가, 정가, 재고, 오픈 시간, 마감 시간
+  const [inputs, setInputs] = useState({
+    name: "",
+    originalPrice: "",
+    price: "",
+    stockQuantity: "",
+    startDate: "",
+    endDate: "",
+  });
+  
+  const { name, originalPrice, price, stockQuantity, startDate, endDate } = inputs;
+
+  // input 객체 생성
+  const onChange = (e) => {
+    const { value, name } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
+  };
+
+  // REST API 2-1: get all items
   useEffect(() => {
     if (props.status === 200) {
       axios
@@ -38,114 +53,49 @@ const ProductListPage = (props) => {
     }
   }, [props.status, isClicked]);
 
-  // function: toggle button
-  const toggle = () => {
-    const btnElement = document.getElementById("addProductToggle");
-    const form = document.getElementById("form");
-
-    if (btnElement.value === "+") {
-      setToggleStatus("-");
-      form.style.display = "block";
+  // refine date format
+  const refineDate = (date) => {
+    if (date.length === 16) {
+      return date.replace("T", " ") + ":00";
     } else {
-      setToggleStatus("+");
-      form.style.display = "none";
+      return date.replace("T", " ");
     }
   };
 
-  // function: input value update
-  const handleOnChange = (e) => {
-    switch (e.target.name) {
-      case "name":
-        setName(e.target.value);
-        break;
-      case "originalPrice":
-        setOriginalPrice(e.target.value);
-        break;
-      case "price":
-        setPrice(e.target.value);
-        break;
-      case "stockQuantity":
-        setStockQuantity(e.target.value);
-        break;
-      case "startDate":
-        setStartDate(e.target.value);
-        break;
-      case "endDate":
-        setEndDate(e.target.value);
-        break;
-      default:
-        break;
-    }
-  };
-
-  // function: product update
-  const handleProductClick = (product) => {
-    setSelectedProduct(product);
-  };
-  const combinedClickHandler = (product) => {
-    handleProductClick(product);
-  };
-  const handleSave = (updatedProduct) => {
-    if (updatedProduct.name.length === 0 || updatedProduct.startDate.length === 0 || updatedProduct.endDate.length === 0 || updatedProduct.originalPrice.length === 0 || updatedProduct.price.length === 0 || updatedProduct.stockQuantity.length === 0) {
-      alert("모든 항목을 입력해주세요");
-      return;
-    }
-    axios
-      .put(`${hostURL}/api/admin/items/${updatedProduct.itemId}`, updatedProduct)
-      .then((response) => {
-        if (isClicked === 0) {
-          setIsClicked(1);
-        } else {
-          setIsClicked(0);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  // REST API 2-2
+  // REST API 2-2: add product
   const handleClick = () => {
+    // check if all inputs are filled
     if (name.length === 0 || startDate.length === 0 || endDate.length === 0 || originalPrice.length === 0 || price.length === 0 || stockQuantity.length === 0) {
       alert("모든 항목을 입력해주세요");
       return;
     }
 
-    const finalStartDate = () => {
-      if (startDate.length === 16) {
-        return startDate.replace("T", " ") + ":00";
-      } else {
-        return startDate.replace("T", " ");
-      }
-    }
-
-    const finalEndDate = () => {
-      if (endDate.length === 16) {
-        return endDate.replace("T", " ") + ":00";
-      } else {
-        return endDate.replace("T", " ");
-      }
-    }
-
+    // input data for submit
     const inputs = {
       name: name,
       originalPrice: Number(originalPrice),
       price: Number(price),
       stockQuantity: Number(stockQuantity),
-      startDate: finalStartDate(),
-      endDate: finalEndDate(),
+      startDate: refineDate(startDate),
+      endDate: refineDate(endDate),
     };
 
+    // 상품 추가
     axios
       .post(`${hostURL}/api/admin/items`, inputs)
       .then((response) => {
-        setName("");
-        setOriginalPrice("");
-        setPrice("");
-        setStockQuantity("");
-        setStartDate("");
-        setEndDate("");
+        // 상품 form 초기화
+        setInputs({
+          name: "",
+          originalPrice: "",
+          price: "",
+          stockQuantity: "",
+          startDate: "",
+          endDate: "",
+        });
         setToggleStatus("-");
+
+        // 상품 목록 reload
         if (isClicked === 0) {
           setIsClicked(1);
         } else {
@@ -157,7 +107,43 @@ const ProductListPage = (props) => {
       });
   };
 
-  // REST API 3-1
+  // REST API 2-4: update product
+  const handleSave = (updatedProduct) => {
+    // check if all inputs are filled
+    if (updatedProduct.name.length === 0 || updatedProduct.startDate.length === 0 || updatedProduct.endDate.length === 0 || updatedProduct.originalPrice.length === 0 || updatedProduct.price.length === 0 || updatedProduct.stockQuantity.length === 0) {
+      alert("모든 항목을 입력해주세요");
+      return;
+    }
+
+    // input data for submit
+    const inputs = {
+      name: updatedProduct.name,
+      originalPrice: Number(updatedProduct.originalPrice),
+      price: Number(updatedProduct.price),
+      stockQuantity: Number(updatedProduct.stockQuantity),
+      startDate: refineDate(updatedProduct.startDate),
+      endDate: refineDate(updatedProduct.endDate),
+    };
+
+    // 상품 수정
+    axios
+      .put(`${hostURL}/api/admin/items/${updatedProduct.itemId}`, inputs)
+      .then((response) => {
+        // product Modal 닫기
+        setSelectedProduct(null);
+        // 상품 목록 reload
+        if (isClicked === 0) {
+          setIsClicked(1);
+        } else {
+          setIsClicked(0);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  // REST API 3-1: get feedback
   useEffect(() => {
     if (props.status === 200) {
       axios
@@ -174,14 +160,14 @@ const ProductListPage = (props) => {
 
   return (
     <div className={styles.product_main}>
-      {/* 상품 수정 Modal */}
+    {/* 상품 수정 Modal */}
       {selectedProduct && (
         <div className={styles.productUpdate}>
           <ProductModal
             product={selectedProduct}
             onClose={() => setSelectedProduct(null)}
             onSave={handleSave}
-            onChange={handleOnChange}
+            onChange={onChange}
           />
         </div>
       )}
@@ -235,7 +221,7 @@ const ProductListPage = (props) => {
 
           return (
             <div
-              onClick={() => combinedClickHandler(product)}
+              onClick={() => setSelectedProduct(product)}
               key={product.itemId}
             >
               <div className={styles.productStyle}>
@@ -257,17 +243,16 @@ const ProductListPage = (props) => {
         <div>
           <input
             type="button"
-            id="addProductToggle"
             className={styles.addProductToggle}
-            onClick={toggle}
+            onClick={() => { toggleStatus === "+" ? setToggleStatus("-") : setToggleStatus("+") }}
             value={toggleStatus}
           ></input>
-          <div id="form" className={styles.addProduct}>
+          <div className={styles.addProduct} style={toggleStatus === "+" ? { display: "none" } : { display: "block" }}>
             <div>
               <div>ㆍ품명:</div>
               <input
                 name="name"
-                onChange={handleOnChange}
+                onChange={onChange}
                 type="text"
                 placeholder=" ex. 제주 삼다수 2L (6개입)"
                 value={name}
@@ -277,7 +262,7 @@ const ProductListPage = (props) => {
               <div>ㆍ원가:</div>
               <input
                 name="originalPrice"
-                onChange={handleOnChange}
+                onChange={onChange}
                 type="number"
                 placeholder=" ex. 6600"
                 value={originalPrice}
@@ -287,7 +272,7 @@ const ProductListPage = (props) => {
               <div>ㆍ정가:</div>
               <input
                 name="price"
-                onChange={handleOnChange}
+                onChange={onChange}
                 type="number"
                 placeholder=" ex. 1400"
                 value={price}
@@ -297,7 +282,7 @@ const ProductListPage = (props) => {
               <div>ㆍ재고:</div>
               <input
                 name="stockQuantity"
-                onChange={handleOnChange}
+                onChange={onChange}
                 type="number"
                 placeholder=" ex. 25"
                 value={stockQuantity}
@@ -307,7 +292,7 @@ const ProductListPage = (props) => {
               <div>ㆍ오픈:</div>
               <input
                 name="startDate"
-                onChange={handleOnChange}
+                onChange={onChange}
                 type="datetime-local"
                 step="1"
                 value={startDate}
@@ -317,7 +302,7 @@ const ProductListPage = (props) => {
               <div>ㆍ마감:</div>
               <input
                 name="endDate"
-                onChange={handleOnChange}
+                onChange={onChange}
                 type="datetime-local"
                 step="1"
                 value={endDate}
@@ -347,12 +332,12 @@ const ProductListPage = (props) => {
           />
         </div>
       ) : (
-      [...feedbacks].reverse().map((feedback) => (
-        <div key={feedback.id} className={styles.feedbackStyle}>
-          <div>{feedback.id}</div>
-          <div>{feedback.content}</div>
-        </div>
-      )))}
+        [...feedbacks].reverse().map((feedback) => (
+          <div key={feedback.id} className={styles.feedbackStyle}>
+            <div>{feedback.id}</div>
+            <div>{feedback.content}</div>
+          </div>
+        )))}
     </div>
   );
 };

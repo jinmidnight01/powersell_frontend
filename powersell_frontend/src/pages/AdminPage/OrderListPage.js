@@ -5,74 +5,66 @@ import StatusButton from "./StatusButton";
 
 import hostURL from "../../hostURL";
 
-import styles from "./admin.module.css";
+import styles from "../../css/admin.module.css";
 import spinner from "../../images/icons/spinner.gif";
 
 const OrderListPage = (props) => {
   const [result, setResult] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [searchName, setSearchName] = useState("");
-  const [searchNumber, setSearchNumber] = useState("");
+  const [reloadFlag, setReloadFlag] = useState(0);
 
-  // 출시 회차
-  const [testOrderSelected, setTestOrderSelected] = useState("3회차");
-  const testOrderDict = {
-    "4회차": "4회차",
-    "3회차": "3회차",
-    "2회차": "2회차",
-    "1회차": "1회차",
-    전체: "전체",
-  };
-  const testOrderSelect = (e) => {
-    setTestOrderSelected(e.target.value);
-  };
+  // 회차, 배송상태, 상품명, 상품개수, 주문자명, 전화번호
+  const [inputs, setInputs] = useState({
+    testOrderSelected: "전체",
+    statusSelected: "배송상태",
+    productSelected: "상품명",
+    countSelected: "상품개수",
+    searchName: "",
+    searchNumber: "",
+  });
 
-  // 배송 상태
-  const [statusSelected, setStatusSelected] = useState("배송상태");
-  const statusDict = {
-    배송상태: "",
-    입금대기: "WAITING",
-    배송중: "DELIVERING",
-    배송완료: "ARRIVED",
-    주문취소: "CANCELED",
-  };
-  const statusSelect = (e) => {
-    setStatusSelected(e.target.value);
+  const { testOrderSelected, statusSelected, productSelected, countSelected, searchName, searchNumber } = inputs;
+  
+  // input 객체 생성
+  const onChange = (e) => {
+    const { value, name } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
   };
 
-  // 상품명
-  const [productSelected, setProductSelected] = useState("상품명");
-  const productDict = {
-    상품명: "",
-    삼다수: "제주 삼다수 2L (6개입)",
-    햇반: "햇반 백미밥 210g (3개입)",
-    컵밥: "오뚜기 컵밥 오삼불고기덮밥 310g",
-    라면: "농심 신라면 (5개입)",
-    곰곰란: "곰곰 구운란 10구",
-    구운란: "[EEE] 무항생제 맥반석 구운계란 (15구)"
-  };
-  const productSelect = (e) => {
-    setProductSelected(e.target.value);
-  };
-
-  // 상품 개수
-  const [countSelected, setCountSelected] = useState("상품개수");
-  const countDict = {
-    상품개수: "",
-    "1개": 1,
-    "2개": 2,
-  };
-  const countSelect = (e) => {
-    setCountSelected(e.target.value);
-  };
-
-  // search function
-  const onChangeName = (e) => {
-    setSearchName(e.target.value);
-  };
-  const onChangeNumber = (e) => {
-    setSearchNumber(e.target.value);
-  };
+  // filter dictionary
+  const filterDict = {
+    testOrderDict : {
+      "4회차": "4회차",
+      "3회차": "3회차",
+      "2회차": "2회차",
+      "1회차": "1회차",
+      "전체": "전체",
+    },
+    statusDict : {
+      배송상태: "",
+      입금대기: "WAITING",
+      배송중: "DELIVERING",
+      배송완료: "ARRIVED",
+      주문취소: "CANCELED",
+    },
+    productDict : {
+      상품명: "",
+      삼다수: "제주 삼다수 2L (6개입)",
+      햇반: "햇반 백미밥 210g (3개입)",
+      컵밥: "오뚜기 컵밥 오삼불고기덮밥 310g",
+      라면: "농심 신라면 (5개입)",
+      곰곰란: "곰곰 구운란 10구",
+      구운란: "[EEE] 무항생제 맥반석 구운계란 (15구)"
+    },
+    countDict : {
+      상품개수: "",
+      "1개": 1,
+      "2개": 2,
+    }
+  }
 
   // filtered result
   const filteredResult = [...result]
@@ -82,51 +74,48 @@ const OrderListPage = (props) => {
       return 0;
     })
     .filter((order) => {
-      if (testOrderDict[testOrderSelected] === "4회차") {
-        return (
-          order.orderDate >= "2023-09-18T20:59:00" &&
-          order.orderDate <= "2023-09-24T23:59:59"
-        );
-      }
-      else if (testOrderDict[testOrderSelected] === "3회차") {
-        return (
-          order.orderDate >= "2023-09-11T20:59:00" &&
-          order.orderDate <= "2023-09-17T23:59:59"
-        );
-      }
-      else if (testOrderDict[testOrderSelected] === "2회차") {
-        return (
-          order.orderDate >= "2023-09-04T20:59:00" &&
-          order.orderDate <= "2023-09-10T23:59:59"
-        );
-      }
-      else if (testOrderDict[testOrderSelected] === "1회차") {
-        return (
-          order.orderDate >= "2023-08-28T20:59:00" &&
-          order.orderDate <= "2023-09-03T23:59:59"
-        );
-      }
-      else {
-        return true;
+      switch (testOrderSelected) {
+        case "4회차":
+          return (
+            order.orderDate >= "2023-09-18T20:59:00" &&
+            order.orderDate <= "2023-09-24T23:59:59"
+          );
+        case "3회차":
+          return (
+            order.orderDate >= "2023-09-11T20:59:00" &&
+            order.orderDate <= "2023-09-17T23:59:59"
+          );
+        case "2회차":
+          return (
+            order.orderDate >= "2023-09-04T20:59:00" &&
+            order.orderDate <= "2023-09-10T23:59:59"
+          );
+        case "1회차":
+          return (
+            order.orderDate >= "2023-08-28T20:59:00" &&
+            order.orderDate <= "2023-09-03T23:59:59"
+          );
+        default:
+          return true;
       }
     })
     .filter((order) => {
       if (statusSelected === "배송상태") {
         return true;
       }
-      return order.orderStatus === statusDict[statusSelected];
+      return order.orderStatus === filterDict.statusDict[statusSelected];
     })
     .filter((order) => {
       if (productSelected === "상품명") {
         return true;
       }
-      return order.item.name === productDict[productSelected];
+      return order.item.name === filterDict.productDict[productSelected];
     })
     .filter((order) => {
       if (countSelected === "상품개수") {
         return true;
       }
-      return order.count === countDict[countSelected];
+      return order.count === filterDict.countDict[countSelected];
     })
     .filter((order) => {
       if (searchName === "") {
@@ -167,8 +156,7 @@ const OrderListPage = (props) => {
     revenue += filteredResult[i].orderPrice;
   }
 
-  // REST API 1-1
-  const [reloadFlag, setReloadFlag] = useState(0);
+  // REST API 1-1: get all orders
   useEffect(() => {
     if (props.status === 200) {
       axios
@@ -187,22 +175,22 @@ const OrderListPage = (props) => {
     <div className={styles.order_main}>
       {/* first sort selectBox */}
       <div className={styles.firstSelectBox}>
-        <select onChange={testOrderSelect} value={testOrderSelected}>
-          {Object.keys(testOrderDict).map((testOrder) => (
+        <select onChange={onChange} name="testOrderSelected" value={testOrderSelected}>
+          {Object.keys(filterDict.testOrderDict).map((testOrder) => (
             <option value={testOrder} key={testOrder}>
               {testOrder}
             </option>
           ))}
         </select>
-        <select onChange={statusSelect} value={statusSelected}>
-          {Object.keys(statusDict).map((status) => (
+        <select onChange={onChange} name="statusSelected" value={statusSelected}>
+          {Object.keys(filterDict.statusDict).map((status) => (
             <option value={status} key={status}>
               {status}
             </option>
           ))}
         </select>
-        <select onChange={productSelect} value={productSelected}>
-          {Object.keys(productDict).map((product) => (
+        <select onChange={onChange} name="productSelected" value={productSelected}>
+          {Object.keys(filterDict.productDict).map((product) => (
             <option value={product} key={product}>
               {product}
             </option>
@@ -212,13 +200,13 @@ const OrderListPage = (props) => {
 
       {/* second sort selectBox */}
       <div className={styles.secondSelectBox}>
-        <select onChange={countSelect} value={countSelected}>
+        <select onChange={onChange} name="countSelected" value={countSelected}>
           <option value="상품개수">상품개수</option>
           <option value="1개">1개</option>
           <option value="2개">2개</option>
         </select>
-        <input type="text" placeholder="주문자명" onChange={onChangeName} />
-        <input type="text" placeholder="전화번호" onChange={onChangeNumber} />
+        <input type="text" placeholder="주문자명" name="searchName" value={searchName} onChange={onChange} />
+        <input type="text" placeholder="전화번호" name="searchNumber" value={searchNumber} onChange={onChange} />
       </div>
 
       {/* order & payment count */}
