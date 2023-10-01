@@ -101,6 +101,8 @@ function LandingPage() {
       });
   }
 
+  useEffect(() => {document.body.style.overflow = "auto";}, []);
+
   return (
     <div id="pc-width" className="app">
       <div className="wrap">
