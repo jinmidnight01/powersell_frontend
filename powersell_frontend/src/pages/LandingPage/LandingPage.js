@@ -48,7 +48,6 @@ function LandingPage() {
 
   // REST API 2-1: GET all items
   useEffect(() => {
-    alert("서비스 정비 중입니다. 곧 돌아올 예정이니 기다려주세요!")
     async function rendering_item() {
       axios
         .get(`${hostURL}/api/items`)
