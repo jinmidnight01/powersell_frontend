@@ -15,7 +15,7 @@ const OrderListPage = (props) => {
 
   // 회차, 배송상태, 상품명, 상품개수, 주문자명, 전화번호
   const [inputs, setInputs] = useState({
-    testOrderSelected: "전체",
+    testOrderSelected: "BONUS",
     statusSelected: "배송상태",
     productSelected: "상품명",
     countSelected: "상품개수",
@@ -37,6 +37,7 @@ const OrderListPage = (props) => {
   // filter dictionary
   const filterDict = {
     testOrderDict : {
+      "BONUS": "BONUS",
       "4회차": "4회차",
       "3회차": "3회차",
       "2회차": "2회차",
@@ -75,6 +76,11 @@ const OrderListPage = (props) => {
     })
     .filter((order) => {
       switch (testOrderSelected) {
+        case "BONUS":
+          return (
+            order.orderDate >= "2023-11-20T20:59:00" &&
+            order.orderDate <= "2023-11-26T23:59:59"
+          );
         case "4회차":
           return (
             order.orderDate >= "2023-09-18T20:59:00" &&
