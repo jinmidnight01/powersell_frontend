@@ -15,7 +15,7 @@ const OrderListPage = (props) => {
 
   // 회차, 배송상태, 상품명, 상품개수, 주문자명, 전화번호
   const [inputs, setInputs] = useState({
-    testOrderSelected: "BONUS",
+    testOrderSelected: "전체",
     statusSelected: "배송상태",
     productSelected: "상품명",
     countSelected: "상품개수",
