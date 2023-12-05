@@ -64,8 +64,6 @@ function LandingPage() {
   let itemList = []
   for (let i = 0; i < tempList.length; i++) {
     switch (tempList[i].itemId) {
-      case 5:
-        continue;
       case 457:
         continue;
       case 458:

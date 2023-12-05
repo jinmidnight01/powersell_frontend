@@ -29,7 +29,7 @@ function DetailProductPage() {
 
   // REST API 2-3: get item detail
   useEffect(() => {
-    if (productId === "5" || productId === "457" || productId === "458" || productId === "459" || productId === "460" || productId === "461") {
+    if (productId === "457" || productId === "458" || productId === "459" || productId === "460" || productId === "461") {
       navigate("/404");
     }
 
